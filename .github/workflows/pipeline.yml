@@ -1,0 +1,32 @@
+name: Pipeline Mobile
+
+on:
+  pull_request:
+    paths:
+      - 'app/src/main/res/values/colors.xml'
+
+jobs:
+  check_colors:
+    name: Check Colors XML
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+        
+      - name: Build with Gradle
+        run: ./gradlew build
+        
+      - name: Check colors.xml
+        run: |
+          # Install xmllint
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+          
+          # Check colors.xml using xmllint
+          xmllint --noout app/src/main/res/values/colors.xml
