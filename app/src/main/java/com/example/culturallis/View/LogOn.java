@@ -1,4 +1,4 @@
-package com.example.culturallis;
+package com.example.culturallis.View;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.culturallis.R;
 
 public class LogOn extends AppCompatActivity {
 

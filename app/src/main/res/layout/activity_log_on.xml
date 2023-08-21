@@ -5,23 +5,29 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".LogOn" android:gravity="bottom|center" android:padding="8dp">
+        tools:context=".View.LogOn" android:gravity="bottom|center" android:padding="8dp">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="373dp"
             android:layout_height="wrap_content"
-            android:gravity="center" android:paddingBottom="12dp">
+            android:gravity="center"
+            android:paddingBottom="12dp">
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/userNameEdt" android:hint="nome de usuário" android:padding="16sp"
-                android:textColor="@color/gray_typography" android:textColorHint="@color/gray_typography"
+                android:id="@+id/userNameEdt"
+                android:hint="nome de usuário"
+                android:padding="16sp"
+                android:textColor="@color/gray_typography"
+                android:textColorHint="@color/gray_typography"
                 android:textColorLink="@color/gray_typography"
-                android:textColorHighlight="#404040" android:textSize="20sp" android:textStyle="bold"
-                android:background="@drawable/border_edittext" android:layout_marginBottom="32dp"/>
+                android:textColorHighlight="#404040"
+                android:textSize="20sp" android:textStyle="bold"
+                android:background="@drawable/border_edittext"
+                android:layout_marginBottom="32dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
