@@ -57,6 +57,8 @@ public class LogOn extends AppCompatActivity {
 
         setupPasswordVisibilityToggle(edtTxtPassword);
         setupPasswordVisibilityToggle(edtTxtConfirmPassword);
+
+        addTextWatchers();
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -12,6 +12,12 @@
             android:layout_width="373dp"
             android:layout_height="wrap_content"
             android:gravity="center" android:paddingBottom="12dp">
+        <TextView
+                android:text="Cadastre-se"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/titleLogon" android:textColor="@color/black"
+                android:textAlignment="center" android:textSize="32sp" android:layout_marginBottom="8dp"
+        />
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -21,7 +27,7 @@
                 android:textColor="@color/gray_typography" android:textColorHint="@color/gray_typography"
                 android:textColorLink="@color/gray_typography"
                 android:textColorHighlight="#404040" android:textSize="20sp" android:textStyle="bold"
-                android:background="@drawable/border_edittext" android:layout_marginBottom="32dp"/>
+                android:background="@drawable/border_edittext" android:layout_marginBottom="24dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +36,7 @@
                 android:id="@+id/emailEdt" android:hint="e-mail" android:padding="16sp" android:textColor="#707070"
                 android:textColorHint="#707070" android:textColorLink="#707070" android:textColorHighlight="#404040"
                 android:textSize="20sp" android:textStyle="bold" android:background="@drawable/border_edittext"
-                android:layout_marginBottom="32dp"/>
+                android:layout_marginBottom="24dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +45,7 @@
                 android:id="@+id/pswEdt" android:hint="senha" android:padding="16sp" android:textColor="#707070"
                 android:textColorHint="#707070" android:textColorLink="#707070" android:textColorHighlight="#404040"
                 android:textSize="20sp" android:textStyle="bold" android:background="@drawable/border_edittext"
-                android:drawableEnd="@drawable/eye_open" android:layout_marginBottom="32dp"/>
+                android:drawableEnd="@drawable/eye_open" android:layout_marginBottom="24dp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +59,7 @@
                 android:drawableEnd="@drawable/eye_open"/>
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/confirmMatch" android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content" android:id="@+id/confirmMatch" android:layout_marginBottom="8dp"
                 android:textColor="@color/base_red" android:textStyle="bold" android:paddingLeft="16sp"/>
         <LinearLayout
                 android:orientation="horizontal"
@@ -76,7 +82,8 @@
                 android:text="Cadastrar-se"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/btnLogon" android:textSize="20sp"
-                android:padding="12sp" android:textStyle="bold" android:layout_marginBottom="40dp"/>
+                android:padding="12sp" android:textStyle="bold" android:layout_marginBottom="40dp"
+                android:background="@drawable/button_corner"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -84,7 +91,7 @@
             <TextView
                     android:text="Já tem conta?"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/alreadyHasAccount" android:textSize="24sp"
+                    android:layout_height="wrap_content" android:id="@+id/alreadyHasAccount" android:textSize="22sp"
                     android:textColor="@color/black" android:textAlignment="textStart"
                     android:gravity="center_horizontal" android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="2dp"/>
