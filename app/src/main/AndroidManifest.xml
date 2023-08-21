@@ -15,8 +15,11 @@
             android:name=".View.LogIn"
             android:exported="false" />
         <activity
-            android:name=".View.MainActivity"
-            android:exported="true">
+            android:name=".LogOn"
+            android:exported="false"/>
+        <activity
+                android:name=".MainActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
