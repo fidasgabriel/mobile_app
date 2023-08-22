@@ -2,6 +2,7 @@ name: Pipeline Mobile
 
 on:
   pull_request:
+    branches: ["main"]
     paths:
       - 'app/src/main/res/values/colors.xml'
 
