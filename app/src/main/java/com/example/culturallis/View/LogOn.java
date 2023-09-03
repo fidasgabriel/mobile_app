@@ -165,7 +165,6 @@
             } else {
                 btnLogon.setBackground(getDrawable(R.drawable.disabled_button_background));
             }
-
         }
 
         private void verifyPasswords() {
@@ -184,5 +183,6 @@
 
         public void changeToLogin(View view){
             startActivity(new Intent(this, LogIn.class));
+            finish();
         }
     }
