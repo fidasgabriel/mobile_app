@@ -22,7 +22,7 @@ public class LogIn extends AppCompatActivity {
     private EditText edtTxtEmail;
     private Button btnLogin;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -86,8 +86,6 @@ public class LogIn extends AppCompatActivity {
         String email = edtTxtEmail.getText().toString().trim();
 
         boolean fieldsNotEmpty = !password.isEmpty() && !email.isEmpty();
-
-        System.out.println("s" + fieldsNotEmpty);
 
         if (fieldsNotEmpty) {
             btnLogin.setBackground(getDrawable(R.drawable.default_button_background));
