@@ -32,9 +32,6 @@
 
         private Button btnLogon;
 
-        private boolean visiblePassword = false;
-        private boolean visiblePasswordConfirm = false;
-
         @SuppressLint("ClickableViewAccessibility")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -158,14 +155,11 @@
             boolean fieldsNotEmpty = !password.isEmpty() && !confirmPassword.isEmpty() && !email.isEmpty() && !userName.isEmpty();
             boolean passwordsMatch = password.equals(confirmPassword);
 
-            System.out.println("s" + passwordsValid + fieldsNotEmpty + passwordsValid + 'a' + checkBox.isChecked());
-
             if (passwordsValid && fieldsNotEmpty && passwordsMatch && checkBox.isChecked()) {
                 btnLogon.setBackground(getDrawable(R.drawable.default_button_background));
             } else {
                 btnLogon.setBackground(getDrawable(R.drawable.disabled_button_background));
             }
-
         }
 
         private void verifyPasswords() {
@@ -184,5 +178,6 @@
 
         public void changeToLogin(View view){
             startActivity(new Intent(this, LogIn.class));
+            finish();
         }
     }

@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
         handler.postDelayed(new Runnable() {
             @Override
-            public void run() {mostrarTela();}
+            public void run() {show_screen();}
         }, 4000);
     }
 
-    public void mostrarTela(){
+    public void show_screen(){
         Intent intent = new Intent(this, LogIn.class);
         startActivity(intent);
         finish();
