@@ -1,4 +1,4 @@
-package com.example.culturallis.View;
+package com.example.culturallis.View.Entrance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.os.Handler;
 
 import com.example.culturallis.R;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

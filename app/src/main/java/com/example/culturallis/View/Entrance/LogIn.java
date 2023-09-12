@@ -1,9 +1,10 @@
-package com.example.culturallis.View;
+package com.example.culturallis.View.Entrance;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,10 +12,10 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.Security;
 
 public class LogIn extends AppCompatActivity {
 
@@ -95,6 +96,6 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void changeToLogon(View view){
-        startActivity(new Intent(this, LogOn.class));
+        startActivity(new Intent(this, Security.class));
     }
 }
