@@ -2,6 +2,10 @@ package com.example.culturallis.View;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -26,12 +30,19 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        String linkToLogin = "CADASTRAR-SE";
         edtTxtPassword = findViewById(R.id.pswEdt);
+        SpannableString underline = new SpannableString(linkToLogin);
         edtTxtEmail = findViewById(R.id.emailEdt);
         btnLogin = findViewById(R.id.btnLogin);
         setupPasswordVisibilityToggle(edtTxtPassword);
-
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextWatchers();
+
+        TextView linkLogon = findViewById(R.id.linkLogon);
+
+        linkLogon.setText(underline);
     }
 
     @SuppressLint("ClickableViewAccessibility")

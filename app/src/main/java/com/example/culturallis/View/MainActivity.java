@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void show_screen(){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, MainSettingsScreen.class);
         startActivity(intent);
         finish();
     }
