@@ -5,25 +5,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".View.MainSettingsScreen" android:orientation="vertical" android:padding="16dp"
+        tools:context=".View.Configuration.MainSettingsScreen" android:orientation="vertical" android:padding="16dp"
 >
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginBottom="32dp" android:layout_marginTop="32dp">
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="?attr/actionModeCloseDrawable"
-                android:id="@+id/imageButton" android:backgroundTint="#fff"
-                android:scaleX="1.8" android:scaleY="1.8"
-                app:tint="@color/base_black"/>
-        <TextView
-                android:text="Configurações"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" android:id="@+id/titleSettings"
-                android:textColor="@color/base_black" android:gravity="center"
-                android:fontFamily="@font/unbounded_bold" android:textSize="24sp"/>
+        <include
+                android:id="@+id/mytoolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"

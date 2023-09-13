@@ -1,13 +1,16 @@
-package com.example.culturallis.View;
+package com.example.culturallis.View.Configuration;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Entrance.LogIn;
 
 public class MainSettingsScreen extends AppCompatActivity {
 
@@ -15,6 +18,21 @@ public class MainSettingsScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_settings);
+
+        Toolbar toolbar = findViewById(R.id.mytoolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.left_arrow);
+
+        TextView titleTextView = findViewById(R.id.tbTitle);
+        titleTextView.setText("Configurações");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainSettingsScreen.this, LogIn.class));
+            }
+        });
     }
 
     public void exitButton(View view){

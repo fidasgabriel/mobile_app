@@ -1,4 +1,4 @@
-    package com.example.culturallis.View;
+    package com.example.culturallis.View.Entrance;
 
     import android.annotation.SuppressLint;
     import android.content.Intent;

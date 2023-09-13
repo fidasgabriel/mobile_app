@@ -1,4 +1,4 @@
-package com.example.culturallis.View;
+package com.example.culturallis.View.Entrance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.Security;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void show_screen(){
-        Intent intent = new Intent(this, MainSettingsScreen.class);
+        Intent intent = new Intent(this, Security.class);
         startActivity(intent);
         finish();
     }

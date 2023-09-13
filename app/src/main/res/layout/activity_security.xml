@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".View.Configuration.Security">
+    <include
+        android:id="@+id/mytoolbar"
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alterar e-mail"
+                android:fontFamily="@font/unbounded_bold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/chgEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="antigo@email.com"
+                android:inputType="textPersonName"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alterar Telefone"
+            android:fontFamily="@font/unbounded_bold"
+            android:textColor="#000"
+            android:textSize="16dp"/>
+
+        <EditText
+            android:id="@+id/chgTel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_edittext"
+            android:fontFamily="@font/ubounded_regular"
+            android:hint="+55 11 99999-8888"
+            android:inputType="phone"
+            android:padding="16sp"
+            android:textColor="#707070"
+            android:textColorHighlight="#404040"
+            android:textColorHint="#707070"
+            android:textColorLink="#707070"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CPF ou CNPJ"
+                android:fontFamily="@font/unbounded_bold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/chgCPF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="111.111.111-11"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alterar senha"
+                android:fontFamily="@font/unbounded_bold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/lstPsw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="senha antiga"
+                android:inputType="textVisiblePassword|textPersonName|textPassword"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/newPsw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="nova senha"
+                android:inputType="textVisiblePassword|textPersonName|textPassword"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/confirmPsw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="confirmar senha"
+                android:inputType="textVisiblePassword|textPersonName|textPassword"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirmMatch"
+                android:textColor="@color/base_red"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:paddingLeft="16sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ubounded_regular"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/disabled_button_background"
+            android:fontFamily="@font/inter"
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="Salvar"
+            android:textAllCaps="false"
+            android:textColor="@color/white_base"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
