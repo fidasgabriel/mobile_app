@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".View.Configuration.MainSettingsScreen" android:orientation="vertical" android:padding="16dp"
+>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginBottom="32dp" android:layout_marginTop="32dp">
+        <include
+                android:id="@+id/mytoolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginBottom="32dp">
+        <TextView
+                android:text="Conta" android:fontFamily="@font/ubounded_regular"
+                android:layout_width="wrap_content" android:textColor="@color/base_black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"
+                android:layout_marginBottom="16dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="Editar Perfil"
+                android:layout_width="match_parent"
+                android:textColor="@color/base_black"
+                android:fontFamily="@font/ubounded_regular"
+                android:background="@drawable/base_edit_buttons_start"
+                android:layout_height="wrap_content" android:id="@+id/editProfileBtn" android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="16dp"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:letterSpacing="0.1"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/profile_edit_icon" android:layout_marginBottom="8dp"
+        />
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="Segurança"
+                android:layout_width="match_parent"
+                android:textColor="@color/base_black"
+                android:fontFamily="@font/ubounded_regular"
+                android:background="@drawable/base_edt_button_end"
+                android:layout_height="wrap_content" android:id="@+id/editSeguranceBtn" android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="16dp"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:letterSpacing="0.1"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/security"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:text="Sobre" android:fontFamily="@font/ubounded_regular"
+                android:layout_width="wrap_content" android:textColor="@color/base_black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_weight="1"
+                android:layout_marginBottom="16dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="Central de Ajuda"
+                android:layout_width="match_parent"
+                android:textColor="@color/base_black"
+                android:fontFamily="@font/ubounded_regular"
+                android:background="@drawable/base_edit_buttons_start"
+                android:layout_height="wrap_content" android:id="@+id/centralHelpBtn" android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="16dp"
+                android:textSize="16sp"
+                android:letterSpacing="0.1"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:padding="16dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/central_help_icon" android:layout_marginBottom="8dp"
+        />
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="Sobre"
+                android:layout_width="match_parent"
+                android:textColor="@color/base_black"
+                android:fontFamily="@font/ubounded_regular"
+                android:background="@drawable/base_edit_buttons"
+                android:layout_height="wrap_content" android:id="@+id/aboutBtn" android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="16dp"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:letterSpacing="0.1"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:drawableStart="@drawable/about_icon"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="Termos e Privacidade"
+                android:layout_width="match_parent"
+                android:textColor="@color/base_black"
+                android:fontFamily="@font/ubounded_regular"
+                android:background="@drawable/base_edit_buttons"
+                android:layout_height="wrap_content" android:id="@+id/privacyTermsBtn" android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="16dp"
+                android:shadowDx="0"
+
+                android:shadowDy="0"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+
+                android:layout_marginBottom="8dp"
+                android:drawableStart="@drawable/privacy_and_terms"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="Nos avalie"
+                android:layout_width="match_parent"
+                android:textColor="@color/base_black"
+                android:fontFamily="@font/ubounded_regular"
+                android:background="@drawable/base_edt_button_end"
+                android:layout_height="wrap_content" android:id="@+id/rateUsBtn" android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawablePadding="16dp"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:padding="16dp"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:letterSpacing="0.1"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/rate_us"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:gravity="bottom" android:layout_gravity="bottom"
+    >
+        <Button
+                android:text="Sair"
+                app:iconPadding="16dp"
+                android:onClick="exitButton"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ubounded_regular"
+                app:backgroundTint="@color/base_red"
+                android:background="@drawable/exit_button"
+                android:layout_height="wrap_content"
+                android:id="@+id/exitBtn"
+                android:padding="12dp"
+                android:textAllCaps="false"
+                app:iconGravity="textStart"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:icon="@drawable/exit_icon" android:gravity="center" android:layout_gravity="bottom|end">
+        </Button>
+    </LinearLayout>
+</LinearLayout>

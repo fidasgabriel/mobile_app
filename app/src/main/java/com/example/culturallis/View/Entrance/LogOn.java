@@ -46,6 +46,7 @@
             ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.rgb(14, 14, 14));
             ss.setSpan(boldSpan, 42, 55, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ss.setSpan(colorSpan, 42, 55, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(underlineSpan, 42, 55, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             underline.setSpan(underlineSpan, 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             TextView txtTermsOfUse = findViewById(R.id.textTerms);

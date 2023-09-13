@@ -37,6 +37,9 @@ public class Security extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.left_arrow);
 
+        TextView titleTextView = findViewById(R.id.tbTitle);
+        titleTextView.setText("Segurança");
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
