@@ -2,9 +2,12 @@ package com.example.culturallis.View.Entrance;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,7 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.Security;
+import com.example.culturallis.View.Configuration.MainSettingsScreen;
 
 public class LogIn extends AppCompatActivity {
 
@@ -27,12 +30,19 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        String linkToLogin = "CADASTRAR-SE";
         edtTxtPassword = findViewById(R.id.pswEdt);
+        SpannableString underline = new SpannableString(linkToLogin);
         edtTxtEmail = findViewById(R.id.emailEdt);
         btnLogin = findViewById(R.id.btnLogin);
         setupPasswordVisibilityToggle(edtTxtPassword);
-
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         addTextWatchers();
+
+        TextView linkLogon = findViewById(R.id.linkLogon);
+
+        linkLogon.setText(underline);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -96,6 +106,6 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void changeToLogon(View view){
-        startActivity(new Intent(this, Security.class));
+        startActivity(new Intent(this, MainSettingsScreen.class));
     }
 }

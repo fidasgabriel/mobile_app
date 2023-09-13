@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.Security;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public void show_screen(){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, Security.class);
         startActivity(intent);
         finish();
     }
