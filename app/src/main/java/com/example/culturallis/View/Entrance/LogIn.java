@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.PerfilEdit;
 
 public class LogIn extends AppCompatActivity {

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
+import com.example.culturallis.View.Fragments.Loading;
 
 public class Security extends AppCompatActivity {
     private EditText edtTxtEmail;
