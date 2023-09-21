@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".View.Configuration.PerfilEdit">
+
+    <include
+        android:id="@+id/mytoolbar"
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/chgPerfil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_mask"
+            app:srcCompat="@drawable/defaultperfil"
+            android:clipToOutline="true"
+            />
+
+        <TextView
+            android:id="@+id/chgPerfilButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trocar Foto"
+            android:textAlignment="center"
+            android:textColor="#1E84BF" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome de usuário"
+                android:fontFamily="@font/unbounded_bold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/chgUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="\@jefersson"
+                android:inputType="text"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data de Aniversário"
+                android:fontFamily="@font/unbounded_bold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/chgBirthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="01/01/2023"
+                android:inputType="date"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sua Bio"
+                android:fontFamily="@font/unbounded_bold"
+                android:textColor="#000"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/chgBio"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_edittext"
+                android:fontFamily="@font/ubounded_regular"
+                android:hint="(bio atual)"
+                android:inputType="text"
+                android:gravity="start"
+                android:padding="16sp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/disabled_button_background"
+            android:fontFamily="@font/unbounded_bold"
+            android:gravity="center"
+            android:padding="10sp"
+            android:text="Salvar"
+            android:textAllCaps="false"
+            android:textColor="@color/white_base"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>
