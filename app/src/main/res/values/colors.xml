@@ -16,6 +16,7 @@
     <color name="gray_typography">#707070</color>
     <color name="purple_menu">#390F5A</color>
     <color name="white_base">#EFEFEF</color>
+    <color name="base_gray">#CCCCCC</color>
     <color name="blue_button">#1E84BF</color>
     <color name="gray_disabled">#707070</color>
 </resources>

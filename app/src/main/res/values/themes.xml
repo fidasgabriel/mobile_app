@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Culturallis" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/gray_disabled</item>
         <item name="colorPrimaryVariant">@color/base_red</item>
@@ -11,7 +11,13 @@
         <item name="colorSecondaryVariant">@color/base_yellow</item>
         <item name="colorOnSecondary">@color/base_purple</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/white_base</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.Culturallis.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Culturallis.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.Culturallis.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>
