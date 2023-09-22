@@ -12,10 +12,10 @@ import com.example.culturallis.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link not_connected#newInstance} factory method to
+ * Use the {@link AccessDenied#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class not_connected extends Fragment {
+public class AccessDenied extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class not_connected extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public not_connected() {
+    public AccessDenied() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class not_connected extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment not_connected.
+     * @return A new instance of fragment access_denied.
      */
     // TODO: Rename and change types and number of parameters
-    public static not_connected newInstance(String param1, String param2) {
-        not_connected fragment = new not_connected();
+    public static AccessDenied newInstance(String param1, String param2) {
+        AccessDenied fragment = new AccessDenied();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class not_connected extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_not_connected, container, false);
+        return inflater.inflate(R.layout.fragment_access_denied, container, false);
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    tools:context=".View.Fragments.server_error" >
+    tools:context=".View.Fragments.ServerError" >
 
     <ImageView
         android:id="@+id/imageView4"
@@ -15,7 +15,7 @@
         android:src="@drawable/server_error" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/error_oops"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/unbounded_bold"
@@ -24,7 +24,7 @@
         android:textSize="20dp"
         />
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/unbounded_bold"

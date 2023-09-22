@@ -12,10 +12,10 @@ import com.example.culturallis.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link not_found#newInstance} factory method to
+ * Use the {@link NotFound#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class not_found extends Fragment {
+public class NotFound extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class not_found extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public not_found() {
+    public NotFound() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class not_found extends Fragment {
      * @return A new instance of fragment not_found.
      */
     // TODO: Rename and change types and number of parameters
-    public static not_found newInstance(String param1, String param2) {
-        not_found fragment = new not_found();
+    public static NotFound newInstance(String param1, String param2) {
+        NotFound fragment = new NotFound();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

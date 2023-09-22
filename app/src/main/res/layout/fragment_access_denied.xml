@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    tools:context=".View.Fragments.access_denied">
+    tools:context=".View.Fragments.AccessDenied">
 
     <ImageView
         android:id="@+id/imageView"
@@ -16,7 +16,7 @@
         android:src="@drawable/access_denied" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/error_oops"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/unbounded_bold"
@@ -27,7 +27,7 @@
         />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/unbounded_bold"

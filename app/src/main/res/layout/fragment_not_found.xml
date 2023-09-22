@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    tools:context=".View.Fragments.not_found" >
+    tools:context=".View.Fragments.NotFound" >
 
     <ImageView
         android:id="@+id/imageView3"
