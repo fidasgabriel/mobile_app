@@ -29,7 +29,7 @@ public class TermsOfService extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(TermsOfService.this, LogIn.class));
+                startActivity(new Intent(TermsOfService.this, MainSettingsScreen.class));
             }
         });
 
@@ -82,7 +82,7 @@ public class TermsOfService extends AppCompatActivity {
     }
 
     public void complete(View view){
-        startActivity(new Intent(this, LogIn.class));
+        startActivity(new Intent(this, MainSettingsScreen.class));
         finish();
     }
 }

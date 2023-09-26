@@ -44,7 +44,7 @@ public class Security extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Security.this, LogIn.class));
+                startActivity(new Intent(Security.this, MainSettingsScreen.class));
             }
         });
 
