@@ -14,27 +14,34 @@
         <activity
             android:name=".View.Navbar.NavbarCulturallis"
             android:exported="false"/>
+
         <activity
-            android:name=".View.Configuration.TermsOfService"
-            android:exported="false"/>
+                android:name=".View.Configuration.TermsOfService"
+                android:exported="false"/>
+
         <activity
             android:name=".View.Configuration.Security"
             android:exported="false"/>
+
         <activity
             android:name=".View.Entrance.LogIn"
             android:exported="false"/>
         <activity
             android:name=".View.Entrance.LogOn"
             android:exported="false"/>
+
         <activity
             android:name=".View.Configuration.PerfilEdit"
-            android:exported="false"/>
+                android:exported="false"/>
+
         <activity
-            android:name=".View.Configuration.MainSettingsScreen"
-            android:exported="false"/>
+                android:name=".View.Configuration.MainSettingsScreen"
+                android:exported="false"/>
+
         <activity
             android:name=".View.Courses.HomeCourses"
             android:exported="false" />
+
         <activity
             android:name=".View.Entrance.SplashScreen"
             android:exported="true">

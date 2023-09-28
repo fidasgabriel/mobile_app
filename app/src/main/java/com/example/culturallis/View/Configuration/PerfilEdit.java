@@ -13,9 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.culturallis.R;
-import com.example.culturallis.View.Entrance.LogIn;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
-
 
 public class PerfilEdit extends AppCompatActivity {
     private EditText edtTxtUserName;
