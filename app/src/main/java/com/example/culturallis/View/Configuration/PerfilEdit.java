@@ -3,15 +3,16 @@ package com.example.culturallis.View.Configuration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.culturallis.R;
-
 
 public class PerfilEdit extends AppCompatActivity {
     private EditText edtTxtUserName;
@@ -28,6 +29,13 @@ public class PerfilEdit extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.left_arrow);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PerfilEdit.this, MainSettingsScreen.class));
+            }
+        });
 
         TextView titleTextView = findViewById(R.id.tbTitle);
         titleTextView.setText("Editar Perfil");

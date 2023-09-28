@@ -46,7 +46,9 @@
                 android:letterSpacing="0.1"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/profile_edit_icon" android:layout_marginBottom="8dp"
+                android:drawableStart="@drawable/profile_edit_icon"
+                android:layout_marginBottom="8dp"
+                android:onClick="handleClickEditPerfil"
         />
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Segurança"
@@ -65,7 +67,9 @@
                 android:textAllCaps="false"
                 android:letterSpacing="0.1"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/security"/>
+                android:drawableStart="@drawable/security"
+                android:onClick="handleClickSecurity"
+            />
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
@@ -122,7 +126,9 @@
                 android:textColor="@color/base_black"
                 android:fontFamily="@font/ubounded_regular"
                 android:background="@drawable/base_edit_buttons"
-                android:layout_height="wrap_content" android:id="@+id/privacyTermsBtn" android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/privacyTermsBtn"
+                android:layout_weight="1"
                 android:textAlignment="viewStart"
                 android:drawableEnd="@drawable/arrow_right"
                 android:drawablePadding="16dp"
@@ -136,7 +142,8 @@
                 android:letterSpacing="0.1"
 
                 android:layout_marginBottom="8dp"
-                android:drawableStart="@drawable/privacy_and_terms"/>
+                android:drawableStart="@drawable/privacy_and_terms"
+                android:onClick="handleClickServiceTerms"/>
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Nos avalie"
                 android:layout_width="match_parent"
