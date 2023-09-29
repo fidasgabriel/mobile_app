@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
+import com.example.culturallis.View.Fragments.Loading;
 
 public class TermsOfService extends AppCompatActivity {
 
@@ -78,7 +79,6 @@ public class TermsOfService extends AppCompatActivity {
                 "Apoliz\n" +
                 "apoliz.cultura@gmail.com\n" +
                 "[Website - Landing Page]");
-
     }
 
     public void complete(View view){

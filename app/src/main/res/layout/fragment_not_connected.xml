@@ -8,13 +8,6 @@
     android:gravity="center_vertical"
     tools:context=".View.Fragments.NotConnected" >
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/not_connected"
-        android:layout_marginBottom="10dp"
-        />
 
 
     <TextView
@@ -27,6 +20,14 @@
         android:textSize="25dp"
         android:layout_marginBottom="10dp"
         />
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:src="@drawable/not_connected"
+        android:layout_marginBottom="10dp"
+        />
+
 
     <TextView
         android:id="@+id/errorText"

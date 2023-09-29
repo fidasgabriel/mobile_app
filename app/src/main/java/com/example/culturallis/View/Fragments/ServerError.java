@@ -14,9 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +31,7 @@ public class ServerError extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -69,7 +74,19 @@ public class ServerError extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_server_error, container, false);
+        View view = inflater.inflate(R.layout.fragment_server_error, container, false);
+        TextView textView = view.findViewById(R.id.error_oops);
+        List<Integer> listColors = new ArrayList<>();
+        listColors.add(R.color.base_red);
+        listColors.add(R.color.base_orange);
+        listColors.add(R.color.base_yellow);
+        listColors.add(R.color.base_violet);
+        listColors.add(R.color.base_purple);
+        listColors.add(R.color.purple_menu);
+        listColors.add(R.color.base_blue);
+        GlobalUtilization.coloringTexts(textView,"Oops...", listColors);
+
+        return view;
 //    }
 //
 //
@@ -77,37 +94,37 @@ public class ServerError extends Fragment {
 //    public void onCreateColor(Bundle serverError) {
 //        super.onCreate(serverError);
 
-        String text = "Ocorreu um erro no servidor interno";
-        String oops = "Oops...";
-        String correct = "Estamos trabalhando na correção!";
-
-        SpannableString ss = new SpannableString(oops);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorRed = new ForegroundColorSpan(R.color.base_red);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorOrange = new ForegroundColorSpan(R.color.base_orange);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorYellow = new ForegroundColorSpan(R.color.base_yellow);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorViolet = new ForegroundColorSpan(R.color.base_violet);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorPurple = new ForegroundColorSpan(R.color.base_purple);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorPurple2 = new ForegroundColorSpan(R.color.purple_menu);
-        @SuppressLint("ResourceAsColor")
-        ForegroundColorSpan colorBlue = new ForegroundColorSpan(R.color.base_blue);
-
-        ss.setSpan(colorRed,0, 0, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(colorOrange,1, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(colorYellow,2, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(colorViolet,3, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(colorPurple,4, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(colorPurple2,5, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(colorBlue,6, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        TextView errorText = findViewById(R.id.errorText);
-        TextView opsText = findViewById(R.id.error_oops);
-        TextView correctedText = findBy
+//        String text = "Ocorreu um erro no servidor interno";
+//        String oops = "Oops...";
+//        String correct = "Estamos trabalhando na correção!";
+//
+//        SpannableString ss = new SpannableString(oops);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorRed = new ForegroundColorSpan(R.color.base_red);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorOrange = new ForegroundColorSpan(R.color.base_orange);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorYellow = new ForegroundColorSpan(R.color.base_yellow);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorViolet = new ForegroundColorSpan(R.color.base_violet);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorPurple = new ForegroundColorSpan(R.color.base_purple);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorPurple2 = new ForegroundColorSpan(R.color.purple_menu);
+//        @SuppressLint("ResourceAsColor")
+//        ForegroundColorSpan colorBlue = new ForegroundColorSpan(R.color.base_blue);
+//
+//        ss.setSpan(colorRed,0, 0, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(colorOrange,1, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(colorYellow,2, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(colorViolet,3, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(colorPurple,4, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(colorPurple2,5, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(colorBlue,6, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//        TextView errorText = findViewById(R.id.errorText);
+//        TextView opsText = findViewById(R.id.error_oops);
+//        TextView correctedText = findBy
 
 
     }

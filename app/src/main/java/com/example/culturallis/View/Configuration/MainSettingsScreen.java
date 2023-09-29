@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
+import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
 public class MainSettingsScreen extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class MainSettingsScreen extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainSettingsScreen.this, LogIn.class));
+                startActivity(new Intent(MainSettingsScreen.this, NavbarCulturallis.class));
             }
         });
     }
