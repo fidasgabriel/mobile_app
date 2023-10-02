@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Fragments.Loading;
+import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 
 public class NavbarCulturallis extends AppCompatActivity {
 
@@ -73,6 +74,7 @@ public class NavbarCulturallis extends AppCompatActivity {
     }
 
     public void handleClickSettings(View view){
-        startActivity(new Intent(this, MainSettingsScreen.class));
+        startActivity(new Intent(this, SkeletonSelectedItem.class));
     }
+
 }

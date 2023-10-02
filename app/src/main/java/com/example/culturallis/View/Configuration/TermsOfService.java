@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
+import com.example.culturallis.View.Entrance.LogOn;
 import com.example.culturallis.View.Fragments.Loading;
 
 public class TermsOfService extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class TermsOfService extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(TermsOfService.this, LogIn.class));
+                startActivity(new Intent(TermsOfService.this, LogOn.class));
             }
         });
 
@@ -82,7 +83,7 @@ public class TermsOfService extends AppCompatActivity {
     }
 
     public void complete(View view){
-        startActivity(new Intent(this, LogIn.class));
+        startActivity(new Intent(this, LogOn.class));
         finish();
     }
 }

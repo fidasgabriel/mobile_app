@@ -19,6 +19,7 @@
     import android.os.Bundle;
 
     import com.example.culturallis.R;
+    import com.example.culturallis.View.Configuration.TermsOfService;
 
     public class LogOn extends AppCompatActivity {
 
@@ -92,11 +93,13 @@
         }
 
         private void togglePasswordVisibility(EditText editText) {
-            boolean passwordVisible = editText.getTransformationMethod() == null;
-            int drawableId = !passwordVisible ? R.drawable.baseline_visibility_off_24 : R.drawable.eye_open;
-            editText.setTransformationMethod(passwordVisible ? new PasswordTransformationMethod() : null);
-            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, drawableId, 0);
-            editText.setSelection(editText.getText().length());
+            if(edtTxtPassword.getText().toString().trim().length() >0) {
+                boolean passwordVisible = editText.getTransformationMethod() == null;
+                int drawableId = !passwordVisible ? R.drawable.baseline_visibility_off_24 : R.drawable.eye_open;
+                editText.setTransformationMethod(passwordVisible ? new PasswordTransformationMethod() : null);
+                editText.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, drawableId, 0);
+                editText.setSelection(editText.getText().length());
+            }
         }
 
         private void addTextWatchers() {
@@ -179,5 +182,9 @@
         public void changeToLogin(View view){
             startActivity(new Intent(this, LogIn.class));
             finish();
+        }
+
+        public void changeToTerms(View view){
+            startActivity(new Intent(this, TermsOfService.class));
         }
     }
