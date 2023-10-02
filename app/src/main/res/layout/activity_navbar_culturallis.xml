@@ -35,11 +35,14 @@
         />
 
     </LinearLayout>
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/fragmentRender">
 
-    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fragmentRender"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

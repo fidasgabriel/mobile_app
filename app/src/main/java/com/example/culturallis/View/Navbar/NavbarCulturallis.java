@@ -2,15 +2,18 @@ package com.example.culturallis.View.Navbar;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Fragments.Loading;
 import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
+import com.example.culturallis.View.Fragments.CoursesScroll;
 
 public class NavbarCulturallis extends AppCompatActivity {
 
@@ -54,10 +57,16 @@ public class NavbarCulturallis extends AppCompatActivity {
         postsHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         coursesHomeBtn.setTextColor(getResources().getColor(R.color.black));
         profileHomeButton.setTextColor(getResources().getColor(R.color.gray_typography));
-        Loading fragment = new Loading();
+
+        CoursesScroll fragment = new CoursesScroll();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
+
+//        Loading fragment = new Loading();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragmentRender, fragment);
+//        transaction.commit();
     }
 
     public void handleClickProfileHome(View view){
@@ -74,7 +83,7 @@ public class NavbarCulturallis extends AppCompatActivity {
     }
 
     public void handleClickSettings(View view){
-        startActivity(new Intent(this, SkeletonSelectedItem.class));
+        startActivity(new Intent(this, MainSettingsScreen.class));
     }
 
 }

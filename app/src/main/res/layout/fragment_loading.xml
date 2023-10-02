@@ -10,7 +10,7 @@
             android:id="@+id/rotatingImageView"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/loadinglogo"
             android:layout_gravity="center"/>
 
 

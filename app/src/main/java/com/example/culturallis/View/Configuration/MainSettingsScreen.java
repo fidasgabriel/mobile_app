@@ -66,4 +66,15 @@ public class MainSettingsScreen extends AppCompatActivity {
         dialog.show();
     }
 
+    public void handleClickEditPerfil(View view){
+        startActivity(new Intent(this, PerfilEdit.class));
+    }
+
+    public void handleClickSecurity(View view){
+        startActivity(new Intent(this, Security.class));
+    }
+
+    public void handleClickServiceTerms(View view){
+        startActivity(new Intent(this, TermsOfService.class));
+    }
 }
