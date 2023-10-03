@@ -59,6 +59,7 @@
             CourseCard current = courseCard.get(i);
             viewHolder.courseImage.setImageResource(current.getCourseImage());
             viewHolder.perfilImage.setImageResource(current.getPerfilImage());
+
             String title = current.getCourseTitle();
             if (title.length() > 21){
                 title = title.substring(0,21) + "...";

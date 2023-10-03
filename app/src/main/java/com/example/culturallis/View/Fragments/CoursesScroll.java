@@ -1,7 +1,9 @@
     package com.example.culturallis.View.Fragments;
 
+    import android.content.Intent;
     import android.os.Bundle;
 
+    import android.widget.AdapterView;
     import androidx.fragment.app.Fragment;
 
     import android.view.LayoutInflater;
@@ -12,6 +14,9 @@
     import com.example.culturallis.Controller.Adapter.CourseAdapter;
     import com.example.culturallis.Model.Entity.CourseCard;
     import com.example.culturallis.R;
+    import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenNotAdquired;
+    import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
+    import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 
     import java.util.ArrayList;
     import java.util.List;
@@ -74,6 +79,13 @@
             listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
             CourseAdapter courseAdapter = new CourseAdapter(requireContext(),listCourseC);
             courseList.setAdapter(courseAdapter);
+
+            courseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    startActivity(new Intent(getActivity(), SkeletonSelectedItem.class));
+                }
+            });
 
             return view;
         }

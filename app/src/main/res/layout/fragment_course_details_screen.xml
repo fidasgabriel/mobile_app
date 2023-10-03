@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             tools:context=".View.Fragments.DetailsScreen.CourseDetailsScreenNotAdquired"
+             android:id="@+id/teacherCourseName">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:fadeScrollbars="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                          android:orientation="vertical">
+                <ImageView
+                        android:src="@drawable/left_arrow"
+                        android:layout_width="wrap_content"
+                        android:onClick="changeCoursesHome"
+                        android:layout_height="wrap_content" android:id="@+id/backButton"
+                        android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingTop="4dp"/>
+                <LinearLayout
+                        android:paddingTop="8dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:layout_weight="1" android:paddingRight="32dp"
+                        android:paddingLeft="32dp">
+                    <ImageView
+                            android:background="@drawable/border_image_blue"
+                            android:layout_width="match_parent"
+                            android:layout_height="380dp" tools:src="@drawable/logo"
+                            android:id="@+id/courseImage" android:cropToPadding="false" android:padding="4dp"
+                            android:layout_marginBottom="8dp"/>
+                    <TextView
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:background="@color/base_yellow"
+                            android:fontFamily="@font/inter"
+                            android:paddingVertical="4dp"
+                            android:textSize="12sp"
+                            android:paddingHorizontal="8dp"
+                            android:textColor="@color/white_base"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/textCategoryMain"
+                            android:letterSpacing="0.2"
+                            android:textStyle="bold" android:layout_weight="1" android:layout_marginBottom="16dp"/>
+                    <TextView
+                            android:text="TextView"
+                            android:textSize="22sp"
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/unbounded_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/titleCourse"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:layout_marginBottom="16dp">
+                        <TextView
+                                android:text="TextView"
+                                android:fontFamily="@font/ubounded_regular"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="8dp"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/priceCourse"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:text="TextView"
+                                android:fontFamily="@font/ubounded_regular"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/avaliation"
+                                android:layout_weight="1" android:textSize="16sp" android:textAlignment="textEnd"/>
+                        <ImageView
+                                android:src="@drawable/baseline_star_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/imageView6"
+                        />
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginBottom="16dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|center_horizontal|center_vertical">
+                        <androidx.cardview.widget.CardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="16dp"
+                                app:cardCornerRadius="250dp"
+                                android:id="@+id/cardProf"
+                        >
+
+                            <androidx.cardview.widget.CardView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    app:cardCornerRadius="250dp"
+                                    android:layout_gravity="center">
+
+                                <ImageView
+                                        android:padding="4dp"
+                                        android:layout_width="45dp"
+                                        android:layout_height="45dp"
+                                        android:src="@drawable/profile_icon"
+                                        android:scaleType="centerCrop"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                                android:text="TextView"
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter"
+                                android:layout_height="wrap_content" android:id="@+id/useNameTxt"
+                                android:layout_weight="1"/>
+
+                    </LinearLayout>
+                    <TextView
+                            android:text="TextView"
+                            android:fontFamily="@font/inter"
+                            android:paddingVertical="16dp"
+                            android:textSize="16sp"
+                            android:paddingHorizontal="32dp"
+                            android:textColor="@color/white_base"
+                            android:background="@drawable/tag_category_blue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/descriptionCourse"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+                android:elevation="2dp"
+                android:outlineSpotShadowColor="#42000000"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/shadow"
+                android:paddingHorizontal="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="5">
+            <androidx.appcompat.widget.AppCompatButton
+                    android:text="Adquirir agora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBuyCourse"
+                    android:textSize="18sp"
+                    android:paddingHorizontal="8sp"
+                    android:paddingVertical="8dp"
+                    android:textColor="@color/white_base"
+                    android:gravity="center"
+                    android:background="@drawable/default_button_background"
+                    android:fontFamily="@font/ubounded_regular"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:onClick="adquireCourse"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
+import com.example.culturallis.View.Entrance.LogOn;
 import com.example.culturallis.View.Fragments.Loading;
 
 public class TermsOfService extends AppCompatActivity {

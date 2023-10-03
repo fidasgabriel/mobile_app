@@ -19,4 +19,10 @@
     <color name="base_gray">#CCCCCC</color>
     <color name="blue_button">#1E84BF</color>
     <color name="gray_disabled">#707070</color>
+    <color name="base_orange">#F56B28</color>
+    <color name="cian_base">#0F9584</color>
+    <color name="blue_course">#1374ba</color>
+    <color name="purple_course">#7c13ad</color>
+    <color name="yellow_course">#e8bd25</color>
+    <color name="orange_course">#e06f38</color>
 </resources>

@@ -20,7 +20,7 @@ public class SplashScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {show_screen();}
-        }, 4000);
+        }, 2000);
     }
 
     public void show_screen(){
