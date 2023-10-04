@@ -2,8 +2,10 @@ package com.example.culturallis.View.Configuration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,11 +15,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Fragments.Loading;
+import com.example.culturallis.View.Fragments.NotConnected;
 
-public class Security extends AppCompatActivity {
+public class Security extends ModelAppScreens {
     private EditText edtTxtEmail;
     private EditText edtTxtTel;
     private EditText edtTxtCPF;
@@ -43,8 +47,8 @@ public class Security extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Security.this, LogIn.class));
+            public void onClick(View v) {
+                back(v);
             }
         });
 
@@ -56,6 +60,8 @@ public class Security extends AppCompatActivity {
         edtTxtConfirmPassword = findViewById(R.id.confirmPsw);
         btnSave = findViewById(R.id.btnSave);
         addTextWatchers();
+
+        isConnected();
     }
 
     private void addTextWatchers() {
@@ -130,5 +136,27 @@ public class Security extends AppCompatActivity {
         } else {
             btnSave.setBackground(getDrawable(R.drawable.disabled_button_background));
         }
+    }
+
+    public void finishErrorScreen(View view){
+        finish();
+        startActivity(new Intent(this, Security.class));
+        isConnected();
+    }
+
+    public void isConnected(){
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Security.CONNECTIVITY_SERVICE);
+        if (conMgr.getActiveNetworkInfo() != null
+                && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+
+        }
+        else{
+            NotConnected fragment = new NotConnected();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.layout, fragment);
+            transaction.commit();
+        }
+
     }
 }

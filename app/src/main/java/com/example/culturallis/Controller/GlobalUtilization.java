@@ -1,13 +1,16 @@
 package com.example.culturallis.Controller;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.culturallis.R;
+import com.example.culturallis.View.Entrance.LogIn;
 
 import java.util.List;
 

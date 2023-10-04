@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +66,19 @@ public class NotFound extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_not_found, container, false);
+        View view = inflater.inflate(R.layout.fragment_server_error, container, false);
+        TextView textView = view.findViewById(R.id.error_oops);
+        List<Integer> listColors = new ArrayList<>();
+        listColors.add(R.color.base_red);
+        listColors.add(R.color.base_orange);
+        listColors.add(R.color.base_yellow);
+        listColors.add(R.color.base_violet);
+        listColors.add(R.color.base_purple);
+        listColors.add(R.color.purple_menu);
+        listColors.add(R.color.base_blue);
+        GlobalUtilization.coloringTexts(textView,"Oops...", listColors);
+
+        return view;
+
     }
 }

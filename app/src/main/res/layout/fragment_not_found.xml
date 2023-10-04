@@ -8,6 +8,17 @@
     android:gravity="center_vertical"
     tools:context=".View.Fragments.NotFound" >
 
+    <TextView
+        android:id="@+id/error_oops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/unbounded_regular"
+        android:text="Oops..."
+        android:textAlignment="center"
+        android:textSize="45dp"
+        android:layout_marginBottom="10dp"
+        />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
@@ -24,4 +35,13 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:text="Página não encontrada" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="Voltar"
+        android:onClick="finishErrorScreen"
+        android:backgroundTint="@color/base_blue"/>
 </LinearLayout>

@@ -1,14 +1,10 @@
 package com.example.culturallis.View.Fragments;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +12,7 @@ import android.widget.TextView;
 
 import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
-
-import org.w3c.dom.Text;
+import com.example.culturallis.View.Configuration.MainSettingsScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,47 +82,10 @@ public class ServerError extends Fragment {
         GlobalUtilization.coloringTexts(textView,"Oops...", listColors);
 
         return view;
-//    }
-//
-//
-//    @SuppressLint("ClickableViewAccessibility")
-//    public void onCreateColor(Bundle serverError) {
-//        super.onCreate(serverError);
-
-//        String text = "Ocorreu um erro no servidor interno";
-//        String oops = "Oops...";
-//        String correct = "Estamos trabalhando na correção!";
-//
-//        SpannableString ss = new SpannableString(oops);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorRed = new ForegroundColorSpan(R.color.base_red);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorOrange = new ForegroundColorSpan(R.color.base_orange);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorYellow = new ForegroundColorSpan(R.color.base_yellow);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorViolet = new ForegroundColorSpan(R.color.base_violet);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorPurple = new ForegroundColorSpan(R.color.base_purple);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorPurple2 = new ForegroundColorSpan(R.color.purple_menu);
-//        @SuppressLint("ResourceAsColor")
-//        ForegroundColorSpan colorBlue = new ForegroundColorSpan(R.color.base_blue);
-//
-//        ss.setSpan(colorRed,0, 0, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(colorOrange,1, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(colorYellow,2, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(colorViolet,3, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(colorPurple,4, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(colorPurple2,5, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(colorBlue,6, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//
-//        TextView errorText = findViewById(R.id.errorText);
-//        TextView opsText = findViewById(R.id.error_oops);
-//        TextView correctedText = findBy
-
-
     }
 
 
+//    public void back(View view) {
+//        startActivity(new Intent(getContext(), MainSettingsScreen.class));
+//    }
 }
