@@ -18,14 +18,14 @@
                     android:layout_marginBottom="8dp"
                     android:layout_gravity="center"
                     android:textSize="20sp"
-                    android:fontFamily="@font/ubounded_regular"
+                    android:fontFamily="@font/unbounded_regular"
                     android:textColor="@color/base_green"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView6"/>
             <TextView
                     android:layout_marginBottom="16dp"
                     android:text="Módulo concluído!"
-                    android:fontFamily="@font/ubounded_regular"
+                    android:fontFamily="@font/unbounded_regular"
                     android:layout_gravity="center"
                     android:textAlignment="center"
                     android:textSize="22sp"
@@ -43,7 +43,7 @@
                     android:textSize="14sp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/ubounded_regular"
+                    android:fontFamily="@font/unbounded_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView9"/>
         </LinearLayout>
@@ -63,7 +63,7 @@
                     android:textColor="@color/white_base"
                     android:gravity="center"
                     android:background="@drawable/default_button_background"
-                    android:fontFamily="@font/ubounded_regular"
+                    android:fontFamily="@font/unbounded_regular"
                     android:textStyle="bold"
                     android:textAllCaps="false"
                     android:onClick="nextModule"/>

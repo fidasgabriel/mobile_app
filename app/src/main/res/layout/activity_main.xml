@@ -23,6 +23,6 @@
         android:text="CULTURALLIS"
         android:textAlignment="center"
         android:textColor="#000"
-        android:textSize="45dp"
+        android:textSize="39dp"
         android:textStyle="bold" />
 </LinearLayout>

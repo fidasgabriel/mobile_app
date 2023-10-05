@@ -1,4 +1,4 @@
-package com.example.culturallis.View.Configuration;
+        package com.example.culturallis.View.Configuration;
 
 import android.content.Intent;
 import android.view.View;
@@ -6,13 +6,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Entrance.LogOn;
 import com.example.culturallis.View.Fragments.Loading;
 
-public class TermsOfService extends AppCompatActivity {
+public class TermsOfService extends ModelAppScreens {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +31,22 @@ public class TermsOfService extends AppCompatActivity {
         TextView titleTextView = findViewById(R.id.tbTitle);
         titleTextView.setText("Termos de Uso");
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        AppCompatButton btnSave = findViewById(R.id.btnSave);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TermsOfService.this, MainSettingsScreen.class));
+            public void onClick(View v) {
+                back(v);
             }
         });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back(v);
+            }
+        });
+
+
 
         TextView txt = findViewById(R.id.terms);
         txt.setText("Bem-vindo ao Culturallis!\n" +
