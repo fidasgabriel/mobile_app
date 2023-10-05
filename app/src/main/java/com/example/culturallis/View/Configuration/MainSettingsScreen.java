@@ -95,7 +95,7 @@ public class MainSettingsScreen extends ModelAppScreens {
     public void changeToPerfilEdit(View view){
         startActivity(new Intent(this, PerfilEdit.class));
     }
-    public void changeToCentralAjuda(View view){
+    public void changeToHelpCenter(View view){
         Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
     }
     public void changeToLanding(View view){
