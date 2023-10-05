@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".View.Configuration.PerfilEdit">
+    tools:context=".View.Configuration.PerfilEdit"
+    android:id="@+id/layout"
+    >
 
     <include
         android:id="@+id/mytoolbar"
@@ -59,7 +61,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:hint="\@jefersson"
                 android:inputType="text"
                 android:padding="16sp"
@@ -89,7 +91,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:hint="01/01/2023"
                 android:inputType="date"
                 android:padding="16sp"
@@ -119,7 +121,7 @@
                 android:layout_height="120dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:hint="(bio atual)"
                 android:inputType="text"
                 android:gravity="start"

@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.example.culturallis">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,6 +25,8 @@
         <activity
                 android:name=".View.Configuration.Security"
                 android:exported="false"/>
+        <activity android:name=".View.Configuration.TermsOfService"
+            android:exported="false" />
         <activity
                 android:name=".View.Courses.HomeCourses"
                 android:exported="false"/>

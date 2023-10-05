@@ -1,21 +1,32 @@
 package com.example.culturallis.View.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.MainSettingsScreen;
+import com.example.culturallis.View.Navbar.NavbarCulturallis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link not_connected#newInstance} factory method to
+ * Use the {@link NotConnected#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class not_connected extends Fragment {
+public class NotConnected extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +37,7 @@ public class not_connected extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public not_connected() {
+    public NotConnected() {
         // Required empty public constructor
     }
 
@@ -39,13 +50,14 @@ public class not_connected extends Fragment {
      * @return A new instance of fragment not_connected.
      */
     // TODO: Rename and change types and number of parameters
-    public static not_connected newInstance(String param1, String param2) {
-        not_connected fragment = new not_connected();
+    public static NotConnected newInstance(String param1, String param2) {
+        NotConnected fragment = new NotConnected();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
@@ -55,12 +67,28 @@ public class not_connected extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_not_connected, container, false);
+        View view = inflater.inflate(R.layout.fragment_not_connected, container, false);
+        TextView textView = view.findViewById(R.id.error_oops);
+        List<Integer> listColors = new ArrayList<>();
+        listColors.add(R.color.base_red);
+        listColors.add(R.color.base_orange);
+        listColors.add(R.color.base_yellow);
+        listColors.add(R.color.base_violet);
+        listColors.add(R.color.base_purple);
+        listColors.add(R.color.purple_menu);
+        listColors.add(R.color.base_blue);
+        GlobalUtilization.coloringTexts(textView,"Oops...", listColors);
+
+        return view;
+
+
     }
 }

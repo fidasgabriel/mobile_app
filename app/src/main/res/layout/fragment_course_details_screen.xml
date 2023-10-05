@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content" android:layout_marginBottom="16dp">
                         <TextView
                                 android:text="TextView"
-                                android:fontFamily="@font/ubounded_regular"
+                                android:fontFamily="@font/unbounded_regular"
                                 android:textSize="16sp"
                                 android:layout_marginBottom="8dp"
                                 android:textColor="@color/black"
@@ -71,7 +71,7 @@
                                 android:layout_weight="1"/>
                         <TextView
                                 android:text="TextView"
-                                android:fontFamily="@font/ubounded_regular"
+                                android:fontFamily="@font/unbounded_regular"
                                 android:textColor="@color/black"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/avaliation"
@@ -156,7 +156,7 @@
                     android:textColor="@color/white_base"
                     android:gravity="center"
                     android:background="@drawable/default_button_background"
-                    android:fontFamily="@font/ubounded_regular"
+                    android:fontFamily="@font/unbounded_regular"
                     android:textStyle="bold"
                     android:textAllCaps="false"
                     android:onClick="adquireCourse"/>
