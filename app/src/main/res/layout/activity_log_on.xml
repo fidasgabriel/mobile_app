@@ -93,6 +93,7 @@
                 android:fontFamily="@font/unbounded_regular"/>
         <TextView
                 android:layout_width="match_parent"
+                android:textSize="12sp"
                 android:layout_height="wrap_content" android:id="@+id/confirmMatch"
                 android:textColor="@color/base_red" android:textStyle="bold" android:paddingLeft="16sp"
                 android:layout_gravity="center" android:fontFamily="@font/unbounded_regular"/>
@@ -109,6 +110,8 @@
             <TextView
                     android:text="Ao assinalar a caixa você concorda com os Termos de uso"
                     android:layout_width="wrap_content"
+                    android:clickable="true"
+                    android:onClick="changeToTerms"
                     android:layout_height="match_parent" android:id="@+id/textTerms" android:layout_weight="10"
                     android:textSize="16sp" android:textColor="@color/gray_typography"
                     android:textAlignment="textStart" android:fontFamily="@font/unbounded_regular"/>

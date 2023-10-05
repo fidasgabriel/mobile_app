@@ -8,6 +8,5 @@ public abstract class ModelAppScreens extends AppCompatActivity {
 
     public void back(View view) {
         finish();
-
     }
 }

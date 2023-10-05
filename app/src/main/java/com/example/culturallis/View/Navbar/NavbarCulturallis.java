@@ -26,6 +26,8 @@ import com.example.culturallis.View.Fragments.ServerError;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
+import com.example.culturallis.View.Fragments.CoursesScroll;
 
 public class NavbarCulturallis extends AppCompatActivity {
 
@@ -79,7 +81,8 @@ public class NavbarCulturallis extends AppCompatActivity {
         postsHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         coursesHomeBtn.setTextColor(getResources().getColor(R.color.black));
         profileHomeButton.setTextColor(getResources().getColor(R.color.gray_typography));
-        Loading fragment = new Loading();
+
+        CoursesScroll fragment = new CoursesScroll();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
@@ -129,4 +132,5 @@ public class NavbarCulturallis extends AppCompatActivity {
         }
 
     }
+
 }

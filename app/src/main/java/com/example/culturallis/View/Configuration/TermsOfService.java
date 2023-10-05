@@ -1,4 +1,4 @@
-package com.example.culturallis.View.Configuration;
+        package com.example.culturallis.View.Configuration;
 
 import android.content.Intent;
 import android.view.View;
@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
+import com.example.culturallis.View.Entrance.LogOn;
 import com.example.culturallis.View.Fragments.Loading;
 
 public class TermsOfService extends ModelAppScreens {
@@ -95,5 +96,8 @@ public class TermsOfService extends ModelAppScreens {
                 "[Website - Landing Page]");
     }
 
-
+    public void complete(View view){
+        startActivity(new Intent(this, MainSettingsScreen.class));
+        finish();
+    }
 }

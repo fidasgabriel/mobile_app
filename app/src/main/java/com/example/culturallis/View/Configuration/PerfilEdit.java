@@ -36,6 +36,13 @@ public class PerfilEdit extends ModelAppScreens {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.left_arrow);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PerfilEdit.this, MainSettingsScreen.class));
+            }
+        });
+
         TextView titleTextView = findViewById(R.id.tbTitle);
         titleTextView.setText("Editar Perfil");
 

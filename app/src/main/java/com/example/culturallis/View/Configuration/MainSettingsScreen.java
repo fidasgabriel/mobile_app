@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
+import android.net.Uri;
 import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
@@ -87,7 +88,6 @@ public class MainSettingsScreen extends ModelAppScreens {
 
     public void changeToTermsOfService(View view){
         startActivity(new Intent(this, TermsOfService.class));
-
     }
     public void changeToSecurity(View view){
         startActivity(new Intent(this, Security.class));
@@ -101,8 +101,4 @@ public class MainSettingsScreen extends ModelAppScreens {
     public void changeToLanding(View view){
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://culturallis.onrender.com/")));
     }
-
-
-
-
 }

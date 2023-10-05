@@ -32,16 +32,18 @@
                 android:layout_height="36dp"
                 android:onClick="handleClickSettings"
                 app:srcCompat="@drawable/icon_settings_black"
-                android:id="@+id/imageView7"
+                android:id="@+id/settings"
         />
 
     </LinearLayout>
+
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/fragmentRender">
-
-    </FrameLayout>
-
+        android:id="@+id/fragmentRender"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
