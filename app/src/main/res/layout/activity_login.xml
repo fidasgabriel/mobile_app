@@ -51,11 +51,20 @@
             android:layout_height="wrap_content"
             android:inputType="textVisiblePassword|textPersonName|textPassword"
             android:ems="10"
-            android:id="@+id/pswEdt" android:hint="senha" android:padding="16sp" android:textColor="#707070"
-            android:textColorHint="#707070" android:textColorLink="#707070" android:textColorHighlight="#404040"
-            android:textSize="18sp" android:textStyle="bold" android:background="@drawable/border_edittext"
-            android:drawableEnd="@drawable/eye_open" android:layout_marginBottom="16dp"
-            android:layout_gravity="center" android:fontFamily="@font/ubounded_regular"/>
+            android:id="@+id/pswEdt"
+            android:hint="senha"
+            android:padding="16sp"
+            android:textColor="#707070"
+            android:textColorHint="#707070"
+            android:textColorLink="#707070"
+            android:textColorHighlight="#404040"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/border_edittext"
+            android:drawableEnd="@drawable/eye_open"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ubounded_regular"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:text="Entrar"

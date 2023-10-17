@@ -2,20 +2,14 @@ package com.example.culturallis.View.Skeletons;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Fragments.PaymentScreens.PaymentCourse;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
-import com.example.culturallis.View.Navbar.TopNavbar;
 import com.example.culturallis.View.Navbar.TopNavbarNoSettings;
-
-import java.util.Random;
 
 public class SkeletonPaymentCourse extends AppCompatActivity {
 

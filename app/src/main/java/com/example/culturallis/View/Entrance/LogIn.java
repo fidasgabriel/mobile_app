@@ -19,6 +19,8 @@ import android.widget.EditText;
 
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
+import com.example.culturallis.View.Navbar.CourseScreen;
+import com.example.culturallis.View.Navbar.HomeScreen;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
 public class LogIn extends AppCompatActivity {
@@ -107,6 +109,6 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void changeToLogon(View view){
-        startActivity(new Intent(this, NavbarCulturallis.class));
+        startActivity(new Intent(this, HomeScreen.class));
     }
 }

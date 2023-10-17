@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.MainSettingsScreen;
+import com.example.culturallis.View.Configuration.Security;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,15 +16,6 @@ import com.example.culturallis.View.Configuration.MainSettingsScreen;
  * create an instance of this fragment.
  */
 public class TopNavbar extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public TopNavbar() {
         // Required empty public constructor
@@ -41,20 +32,12 @@ public class TopNavbar extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static TopNavbar newInstance(String param1, String param2) {
         TopNavbar fragment = new TopNavbar();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -62,6 +45,13 @@ public class TopNavbar extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_navbar, container, false);
+        ImageView settings = view.findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Security.MainSettingsScreen.class));
+            }
+        });
         return view;
     }
 }

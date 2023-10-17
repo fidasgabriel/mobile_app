@@ -1,16 +1,14 @@
 package com.example.culturallis.View.Skeletons;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.AppCompatButton;
+
 import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.MainSettingsScreen;
+import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenAdquired;
-import com.example.culturallis.View.Fragments.PaymentScreens.PaymentCourse;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbar;
 
@@ -36,7 +34,7 @@ public class SkeletonCourseDetails extends AppCompatActivity {
     }
 
     public void changeMainSettings(View view){
-        startActivity(new Intent(this, MainSettingsScreen.class));
+        startActivity(new Intent(this, Security.MainSettingsScreen.class));
         finish();
     }
 
