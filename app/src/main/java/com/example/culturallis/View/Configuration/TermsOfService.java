@@ -5,10 +5,14 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 
-public class TermsOfService extends AppCompatActivity {
+public class TermsOfService extends ModelAppScreens {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +27,22 @@ public class TermsOfService extends AppCompatActivity {
         TextView titleTextView = findViewById(R.id.tbTitle);
         titleTextView.setText("Termos de Uso");
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        AppCompatButton btnSave = findViewById(R.id.btnSave);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TermsOfService.this, MainSettingsScreen.class));
+            }
+        });
+
+
 
         TextView txt = findViewById(R.id.terms);
         txt.setText("Bem-vindo ao Culturallis!\n" +

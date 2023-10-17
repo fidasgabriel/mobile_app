@@ -23,17 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginBottom="32dp">
         <TextView
-                android:text="Conta" android:fontFamily="@font/ubounded_regular"
+                android:text="Conta" android:fontFamily="@font/unbounded_regular"
                 android:layout_width="wrap_content" android:textColor="@color/base_black"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"
+                android:layout_height="wrap_content" android:layout_weight="1"
                 android:layout_marginBottom="16dp"/>
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Editar Perfil"
                 android:layout_width="match_parent"
                 android:textColor="@color/base_black"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:background="@drawable/base_edit_buttons_start"
                 android:layout_height="wrap_content" android:id="@+id/editProfileBtn" android:layout_weight="1"
                 android:textAlignment="viewStart"
@@ -48,13 +48,13 @@
                 android:textStyle="bold"
                 android:drawableStart="@drawable/profile_edit_icon"
                 android:layout_marginBottom="8dp"
-                android:onClick="handleClickEditPerfil"
+                android:onClick="changeToPerfilEdit"
         />
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Segurança"
                 android:layout_width="match_parent"
                 android:textColor="@color/base_black"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:background="@drawable/base_edt_button_end"
                 android:layout_height="wrap_content" android:id="@+id/editSeguranceBtn" android:layout_weight="1"
                 android:textAlignment="viewStart"
@@ -68,7 +68,7 @@
                 android:letterSpacing="0.1"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/security"
-                android:onClick="handleClickSecurity"
+                android:onClick="changeToSecurity"
             />
     </LinearLayout>
     <LinearLayout
@@ -76,17 +76,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <TextView
-                android:text="Sobre" android:fontFamily="@font/ubounded_regular"
+                android:text="Sobre" android:fontFamily="@font/unbounded_regular"
                 android:layout_width="wrap_content" android:textColor="@color/base_black"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_weight="1"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                />
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Central de Ajuda"
                 android:layout_width="match_parent"
                 android:textColor="@color/base_black"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:background="@drawable/base_edit_buttons_start"
                 android:layout_height="wrap_content" android:id="@+id/centralHelpBtn" android:layout_weight="1"
                 android:textAlignment="viewStart"
@@ -99,32 +100,37 @@
                 android:padding="16dp"
                 android:textAllCaps="false"
                 android:textStyle="bold"
+                android:onClick="changeToHelpCenter"
                 android:drawableStart="@drawable/central_help_icon" android:layout_marginBottom="8dp"
         />
+
         <androidx.appcompat.widget.AppCompatButton
-                android:text="Sobre"
-                android:layout_width="match_parent"
-                android:textColor="@color/base_black"
-                android:fontFamily="@font/ubounded_regular"
-                android:background="@drawable/base_edit_buttons"
-                android:layout_height="wrap_content" android:id="@+id/aboutBtn" android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="16dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:textSize="16sp"
-                android:padding="16dp"
-                android:letterSpacing="0.1"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"
-                android:drawableStart="@drawable/about_icon"/>
+            android:id="@+id/aboutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/base_edit_buttons"
+            android:drawableStart="@drawable/about_icon"
+            android:drawableEnd="@drawable/arrow_right"
+            android:drawablePadding="16dp"
+            android:fontFamily="@font/unbounded_regular"
+            android:letterSpacing="0.1"
+            android:onClick="changeToLanding"
+            android:padding="16dp"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:text="Sobre"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/base_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Termos e Privacidade"
                 android:layout_width="match_parent"
                 android:textColor="@color/base_black"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:background="@drawable/base_edit_buttons"
                 android:layout_height="wrap_content"
                 android:id="@+id/privacyTermsBtn"
@@ -133,22 +139,20 @@
                 android:drawableEnd="@drawable/arrow_right"
                 android:drawablePadding="16dp"
                 android:shadowDx="0"
-
                 android:shadowDy="0"
                 android:textSize="16sp"
                 android:padding="16dp"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:letterSpacing="0.1"
-
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/privacy_and_terms"
-                android:onClick="handleClickServiceTerms"/>
+                android:onClick="changeToTermsOfService"/>
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Nos avalie"
                 android:layout_width="match_parent"
                 android:textColor="@color/base_black"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:background="@drawable/base_edt_button_end"
                 android:layout_height="wrap_content" android:id="@+id/rateUsBtn" android:layout_weight="1"
                 android:textAlignment="viewStart"
@@ -174,7 +178,7 @@
                 android:onClick="exitButton"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 app:backgroundTint="@color/base_red"
                 android:background="@drawable/exit_button"
                 android:layout_height="wrap_content"

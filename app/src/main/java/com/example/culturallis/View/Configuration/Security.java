@@ -3,9 +3,11 @@ package com.example.culturallis.View.Configuration;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,11 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
+import com.example.culturallis.View.Fragments.Loading;
+import com.example.culturallis.View.Fragments.NotConnected;
 
-public class Security extends AppCompatActivity {
+public class Security extends ModelAppScreens {
     private EditText edtTxtEmail;
     private EditText edtTxtTel;
     private EditText edtTxtCPF;
@@ -57,6 +62,8 @@ public class Security extends AppCompatActivity {
         edtTxtConfirmPassword = findViewById(R.id.confirmPsw);
         btnSave = findViewById(R.id.btnSave);
         addTextWatchers();
+
+        isConnected();
     }
 
     private void addTextWatchers() {
@@ -133,69 +140,89 @@ public class Security extends AppCompatActivity {
         }
     }
 
-    public static class MainSettingsScreen extends AppCompatActivity {
+    // public static class MainSettingsScreen extends AppCompatActivity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main_settings);
+    //     @Override
+    //     protected void onCreate(Bundle savedInstanceState) {
+    //         super.onCreate(savedInstanceState);
+    //         setContentView(R.layout.activity_main_settings);
 
-            Toolbar toolbar = findViewById(R.id.mytoolbar);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.drawable.left_arrow);
+    //         Toolbar toolbar = findViewById(R.id.mytoolbar);
+    //         setSupportActionBar(toolbar);
+    //         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    //         toolbar.setNavigationIcon(R.drawable.left_arrow);
 
-            TextView titleTextView = findViewById(R.id.tbTitle);
-            titleTextView.setText("Configurações");
+    //         TextView titleTextView = findViewById(R.id.tbTitle);
+    //         titleTextView.setText("Configurações");
 
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finish();
-                }
-            });
+    //         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    //             @Override
+    //             public void onClick(View view) {
+    //                 finish();
+    //             }
+    //         });
+    //     }
+
+    //     public void exitButton(View view){
+    //         final Context context = this;
+    //         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    //         View dialogView = getLayoutInflater().inflate(R.layout.modal_exit, null);
+    //         builder.setView(dialogView);
+
+    //         Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
+    //         Button btnConfirm = dialogView.findViewById(R.id.btn_confirm);
+
+
+    //         final AlertDialog dialog = builder.create();
+
+    //         btnCancel.setOnClickListener(new View.OnClickListener() {
+    //             @Override
+    //             public void onClick(View v) {
+    //                 dialog.dismiss();
+    //             }
+    //         });
+
+    //         btnConfirm.setOnClickListener(new View.OnClickListener() {
+    //             @Override
+    //             public void onClick(View v) {
+    //                 dialog.dismiss();
+    //                 startActivity(new Intent(context, LogIn.class));
+    //             }
+    //         });
+
+    //         dialog.show();
+    //     }
+
+    //     public void handleClickEditPerfil(View view){
+    //         startActivity(new Intent(this, PerfilEdit.class));
+    //     }
+
+    //     public void handleClickSecurity(View view){
+    //         startActivity(new Intent(this, Security.class));
+    //     }
+
+    //     public void handleClickServiceTerms(View view){
+    //         startActivity(new Intent(this, TermsOfService.class));
+    //     }
+    public void finishErrorScreen(View view){
+        finish();
+        startActivity(new Intent(this, Security.class));
+        isConnected();
+    }
+
+    public void isConnected(){
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Security.CONNECTIVITY_SERVICE);
+        if (conMgr.getActiveNetworkInfo() != null
+                && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+
+        }
+        else{
+            NotConnected fragment = new NotConnected();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.layout, fragment);
+            transaction.commit();
         }
 
-        public void exitButton(View view){
-            final Context context = this;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            View dialogView = getLayoutInflater().inflate(R.layout.modal_exit, null);
-            builder.setView(dialogView);
-
-            Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
-            Button btnConfirm = dialogView.findViewById(R.id.btn_confirm);
-
-
-            final AlertDialog dialog = builder.create();
-
-            btnCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            btnConfirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    startActivity(new Intent(context, LogIn.class));
-                }
-            });
-
-            dialog.show();
-        }
-
-        public void handleClickEditPerfil(View view){
-            startActivity(new Intent(this, PerfilEdit.class));
-        }
-
-        public void handleClickSecurity(View view){
-            startActivity(new Intent(this, Security.class));
-        }
-
-        public void handleClickServiceTerms(View view){
-            startActivity(new Intent(this, TermsOfService.class));
-        }
     }
 }

@@ -2,8 +2,10 @@ package com.example.culturallis.View.Configuration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,9 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Fragments.NotConnected;
+import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
-public class PerfilEdit extends AppCompatActivity {
+
+public class PerfilEdit extends ModelAppScreens {
     private EditText edtTxtUserName;
     private EditText edtTxtBirthdayDay;
     private EditText editTextBio;
@@ -44,6 +50,15 @@ public class PerfilEdit extends AppCompatActivity {
         edtTxtBirthdayDay = findViewById(R.id.chgBirthday);
         editTextBio = findViewById(R.id.chgBio);
         btnSave = findViewById(R.id.btnSave);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back(v);
+            }
+        });
+
+        isConnected();
 
         edtTxtBirthdayDay.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,5 +127,26 @@ public class PerfilEdit extends AppCompatActivity {
         } else {
             btnSave.setBackground(getDrawable(R.drawable.disabled_button_background));
         }
+    }
+    public void finishErrorScreen(View view){
+        finish();
+        startActivity(new Intent(this, PerfilEdit.class));
+        isConnected();
+    }
+
+    public void isConnected(){
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService (PerfilEdit.CONNECTIVITY_SERVICE);
+        if (conMgr.getActiveNetworkInfo() != null
+                && conMgr.getActiveNetworkInfo().isAvailable()
+                && conMgr.getActiveNetworkInfo().isConnected()) {
+
+        }
+        else{
+            NotConnected fragment = new NotConnected();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.layout, fragment);
+            transaction.commit();
+        }
+
     }
 }

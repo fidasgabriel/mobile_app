@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:gravity="bottom"
                 android:text="título super chamativo"
                 android:textColor="#FAFAFA"

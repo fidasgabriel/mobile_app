@@ -1,5 +1,6 @@
 package com.example.culturallis.View.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,18 +8,25 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.MainSettingsScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link not_found#newInstance} factory method to
+ * Use the {@link ServerError#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class not_found extends Fragment {
+public class ServerError extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -26,7 +34,7 @@ public class not_found extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public not_found() {
+    public ServerError() {
         // Required empty public constructor
     }
 
@@ -36,11 +44,11 @@ public class not_found extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment not_found.
+     * @return A new instance of fragment server_error.
      */
     // TODO: Rename and change types and number of parameters
-    public static not_found newInstance(String param1, String param2) {
-        not_found fragment = new not_found();
+    public static ServerError newInstance(String param1, String param2) {
+        ServerError fragment = new ServerError();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +69,23 @@ public class not_found extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_not_found, container, false);
+        View view = inflater.inflate(R.layout.fragment_server_error, container, false);
+        TextView textView = view.findViewById(R.id.error_oops);
+        List<Integer> listColors = new ArrayList<>();
+        listColors.add(R.color.base_red);
+        listColors.add(R.color.base_orange);
+        listColors.add(R.color.base_yellow);
+        listColors.add(R.color.base_violet);
+        listColors.add(R.color.base_purple);
+        listColors.add(R.color.purple_menu);
+        listColors.add(R.color.base_blue);
+        GlobalUtilization.coloringTexts(textView,"Oops...", listColors);
+
+        return view;
     }
+
+
+//    public void back(View view) {
+//        startActivity(new Intent(getContext(), MainSettingsScreen.class));
+//    }
 }
