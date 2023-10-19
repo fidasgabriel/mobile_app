@@ -1,5 +1,8 @@
 package com.example.culturallis.View.Configuration;
 
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,16 +13,25 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.TextView;
 
+import com.example.culturallis.Controller.Mutations.UpdateUser;
+import com.example.culturallis.Controller.Mutations.UpdateUserSensibility;
+import com.example.culturallis.Controller.Queries.GetInfoUserSensibility;
+import com.example.culturallis.Controller.Queries.GetUserInfo;
 import com.example.culturallis.Model.ModelAppScreens;
+import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Fragments.Loading;
+import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Fragments.NotConnected;
+import com.example.culturallis.View.Skeletons.SkeletonBlank;
+import com.squareup.picasso.Picasso;
+import okhttp3.Response;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Security extends ModelAppScreens {
     private EditText edtTxtEmail;
@@ -30,6 +42,9 @@ public class Security extends ModelAppScreens {
     private EditText edtTxtPassword;
     private EditText edtTxtConfirmPassword;
     private Button btnSave;
+    Usuario currentUser;
+    Response responseUpdate;
+    LoadingSettings loadingDialog;
 
 
     @Override
@@ -103,6 +118,16 @@ public class Security extends ModelAppScreens {
         edtTxtConfirmPassword.addTextChangedListener(textWatcher);
         edtTxtConfirmPassword.addTextChangedListener(verificationPsw);
         edtTxtPassword.addTextChangedListener(verificationPsw);
+
+        try {
+            loadingDialog = new LoadingSettings(this);
+            loadingDialog.show();
+            currentUser = new Usuario();
+            currentUser.setEmail("ana.damasceno@gmail.com");
+            new Security.GetUserProfileTask().execute(currentUser.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void verifyPasswords() {
@@ -127,14 +152,56 @@ public class Security extends ModelAppScreens {
         String password = edtTxtPassword.getText().toString().trim();
         String confirmPassword = edtTxtConfirmPassword.getText().toString().trim();
 
-        boolean passwordsValid = (password.equals(confirmPassword) && password.trim().length() >= 8 && password.trim().length() <= 20) || (password.isEmpty() && confirmPassword.isEmpty());
+        boolean passwordsValid = (password.equals(confirmPassword) && password.trim().length() >= 8 && password.trim().length() <= 20);
         boolean fieldsNotEmpty = !lastPassword.isEmpty() && ((!password.isEmpty() && !confirmPassword.isEmpty()) || !email.isEmpty() || !tel.isEmpty() || !cpf.isEmpty());
         boolean passwordsMatch = password.equals(confirmPassword);
 
-        if (passwordsValid && fieldsNotEmpty && passwordsMatch) {
-            btnSave.setBackground(getDrawable(R.drawable.default_button_background));
+        if (!email.isEmpty() && (!tel.isEmpty() || tel.equals(currentUser.getTelefone()) || !cpf.isEmpty() || cpf.equals(currentUser.getCpf())) ) {
+            if(!password.isEmpty() || !lastPassword.isEmpty() || !confirmPassword.isEmpty()){
+                if(!lastPassword.isEmpty() && passwordsValid){
+                    btnSave.setBackground(getDrawable(R.drawable.default_button_background));
+
+                }else{
+                    btnSave.setBackground(getDrawable(R.drawable.disabled_button_background));
+                }
+            }else{
+                btnSave.setBackground(getDrawable(R.drawable.default_button_background));
+            }
         } else {
             btnSave.setBackground(getDrawable(R.drawable.disabled_button_background));
+        }
+    }
+
+    public void updateInfoUserSensibility(View view){
+        if (edtTxtEmail.getText().toString().trim().length() > 0 && (edtTxtCPF.getText().toString().trim().length() > 0 ||  edtTxtTel.getText().toString().trim().length() > 0)) {
+            loadingDialog = new LoadingSettings(this);
+            loadingDialog.show();
+            String lastPassword = edtLastPassword.getText().toString().trim();
+            String password = edtTxtPassword.getText().toString().trim();
+            String confirmPassword = edtTxtConfirmPassword.getText().toString().trim();
+            boolean passwordsValid = (password.equals(confirmPassword) && password.trim().length() >= 8 && password.trim().length() <= 20);
+            if(!lastPassword.isEmpty() && passwordsValid){
+                new Security.UpdateUserInfoSensibility().execute(
+                        edtTxtEmail.getText().toString(),
+                        edtTxtTel.getText().toString(),
+                        edtTxtCPF.getText().toString().replace("-", "").replace("_", "").replace(".", ""),
+                        confirmPassword);
+                if(edtTxtCPF.getText().toString().replace("-", "").replace("_", "").replace(".", "").toString().length() > 11){
+                    Toast.makeText(Security.this, "CPF/CNPJ ultrapassou o limite de caracteres", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                new Security.UpdateUserInfoSensibility().execute(
+                        edtTxtEmail.getText().toString(),
+                        edtTxtTel.getText().toString(),
+                        edtTxtCPF.getText().toString().replace("-", "").replace("_", "").replace(".", ""),
+                        currentUser.getSenha());
+                Toast.makeText(Security.this, "Não é possível aterar sua senha pois não atendeu aos requisitos.", Toast.LENGTH_SHORT).show();
+                if(edtTxtCPF.getText().toString().replace("-", "").replace("_", "").replace(".", "").toString().length() > 11){
+                    Toast.makeText(Security.this, "CPF/CNPJ ultrapassou o limite de caracteres", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }else{
+            Toast.makeText(Security.this, "Preencha ao menos o e-mail", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -157,6 +224,104 @@ public class Security extends ModelAppScreens {
             transaction.replace(R.id.layout, fragment);
             transaction.commit();
         }
+    }
 
+    private class GetUserProfileTask extends AsyncTask<String, Void, Usuario> {
+        @Override
+        protected Usuario doInBackground(String... params) {
+            if (params.length == 1) {
+                String email = params[0];
+                try {
+                    return new GetInfoUserSensibility().getInfoUser(email);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Usuario user) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+
+            if (user != null) {
+                currentUser = user;
+                if (currentUser.getEmail() != null) {
+                    edtTxtEmail.setText(currentUser.getEmail());
+                } else {
+                    edtTxtEmail.setText("");
+                }
+
+                if (currentUser.getTelefone() != null && !currentUser.getTelefone().equals("null")) {
+                    edtTxtTel.setText(currentUser.getTelefone());
+                } else {
+                    edtTxtTel.setText("");
+                }
+
+                if (currentUser.getCpf() != null && !currentUser.getCpf().equals("null")) {
+                    edtTxtCPF.setText(currentUser.getCpf());
+                } else {
+                    edtTxtCPF.setText("");
+                }
+
+
+            }else{
+                startActivity(new Intent(Security.this, SkeletonBlank.class));
+                Toast.makeText(Security.this, "Ocorreu um erro ao pegar seus dados", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class UpdateUserInfoSensibility extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... params) {
+            if (params.length != 4) {
+                return false;
+            }
+
+            String email = params[0];
+            String tel = params[1];
+            String cpf = params[2];
+            String password = params[3];
+
+            try {
+                Usuario userUpdated =  new Usuario();
+                userUpdated.setEmail(email);
+                userUpdated.setTelefone(tel);
+                userUpdated.setCpf(cpf);
+
+                if(currentUser.getSenha().equals(edtLastPassword.getText().toString())){
+                    userUpdated.setSenha(password);
+                }else{
+                    userUpdated.setSenha(currentUser.getSenha());
+                }
+
+                responseUpdate = new UpdateUserSensibility().updateUserSensibility(currentUser.getEmail(), userUpdated);
+                if (responseUpdate != null) {
+                    if (responseUpdate.isSuccessful()) {
+                        return true;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+            if (success) {
+                Toast.makeText(Security.this, "Informações alteradas!", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(Security.this, "Ocorreu um erro ao alterar suas informações", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

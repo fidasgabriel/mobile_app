@@ -9,7 +9,6 @@
         android:padding="16dp"
         android:orientation="vertical"
         android:gravity="start">
-
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -113,15 +112,16 @@
                     android:clickable="true"
                     android:onClick="changeToTerms"
                     android:layout_height="match_parent" android:id="@+id/textTerms" android:layout_weight="10"
-                    android:textSize="16sp" android:textColor="@color/gray_typography"
-                    android:textAlignment="textStart" android:fontFamily="@font/unbounded_regular"/>
+                    android:textSize="12sp" android:textColor="@color/gray_typography"
+                    android:textAlignment="textStart" android:fontFamily="@font/unbounded_regular"
+                    android:gravity="center"/>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
                 android:text="Cadastrar-se"
-                android:layout_width="wrap_content"
+                android:layout_width="224dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnLogon"
-                android:textSize="28sp"
+                android:textSize="22sp"
                 android:padding="10sp"
                 android:textColor="@color/white_base"
                 android:gravity="center"
@@ -130,7 +130,8 @@
                 android:fontFamily="@font/inter"
                 android:textStyle="bold"
                 android:textAllCaps="false"
-            />
+                android:onClick="logon"
+        />
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
