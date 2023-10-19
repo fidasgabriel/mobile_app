@@ -14,7 +14,7 @@ public class Usuario {
 
     private String nome_completo;
 
-    private Date data_nascimento;
+    private Date dataNasc;
 
     private String bio;
 
@@ -26,11 +26,11 @@ public class Usuario {
 
     private String senha;
 
-    private Date data_criacao;
+    private Date dataCriacao;
 
-    private Date data_mudanca;
+    private Date dataMudanca;
 
-    private Date data_desativacao;
+    private Date dataDesativacao;
 
     public Usuario(){}
 
@@ -40,21 +40,28 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Usuario(long pk_id, String cpf, long fk_cul_generos, String nome_usuario, String nome_completo, Date data_nascimento, String bio, String url_foto, String email, String telefone, String senha, Date data_criacao, Date data_mudanca, Date data_desativacao) {
+    public Usuario(String url_foto, String nome_usuario, Date dataNasc, String bio){
+        this.url_foto = url_foto;
+        this.nome_usuario = nome_usuario;
+        this.dataNasc = dataNasc;
+        this.bio = bio;
+    }
+
+    public Usuario(long pk_id, String cpf, long fk_cul_generos, String nome_usuario, String nome_completo, Date dataNasc, String bio, String url_foto, String email, String telefone, String senha, Date dataCriacao, Date dataMudanca, Date dataDesativacao) {
         this.pk_id = pk_id;
         this.cpf = cpf;
         this.fk_cul_generos = fk_cul_generos;
         this.nome_usuario = nome_usuario;
         this.nome_completo = nome_completo;
-        this.data_nascimento = data_nascimento;
+        this.dataNasc = dataNasc;
         this.bio = bio;
         this.url_foto = url_foto;
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-        this.data_criacao = data_criacao;
-        this.data_mudanca = data_mudanca;
-        this.data_desativacao = data_desativacao;
+        this.dataCriacao = dataCriacao;
+        this.dataMudanca = dataMudanca;
+        this.dataDesativacao = dataDesativacao;
     }
 
     public long getPk_id() {
@@ -98,11 +105,11 @@ public class Usuario {
     }
 
     public Date getData_nascimento() {
-        return data_nascimento;
+        return dataNasc;
     }
 
-    public void setData_nascimento(Date data_nascimento) {
-        this.data_nascimento = data_nascimento;
+    public void setData_nascimento(Date dataNasc) {
+        this.dataNasc = dataNasc;
     }
 
     public String getBio() {
@@ -146,26 +153,46 @@ public class Usuario {
     }
 
     public Date getData_criacao() {
-        return data_criacao;
+        return dataCriacao;
     }
 
-    public void setData_criacao(Date data_criacao) {
-        this.data_criacao = data_criacao;
+    public void setData_criacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public Date getData_mudanca() {
-        return data_mudanca;
+        return dataMudanca;
     }
 
-    public void setData_mudanca(Date data_mudanca) {
-        this.data_mudanca = data_mudanca;
+    public void setData_mudanca(Date dataMudanca) {
+        this.dataMudanca = dataMudanca;
     }
 
     public Date getData_desativacao() {
-        return data_desativacao;
+        return dataDesativacao;
     }
 
-    public void setData_desativacao(Date data_desativacao) {
-        this.data_desativacao = data_desativacao;
+    public void setData_desativacao(Date dataDesativacao) {
+        this.dataDesativacao = dataDesativacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "pk_id=" + pk_id +
+                ", cpf='" + cpf + '\'' +
+                ", fk_cul_generos=" + fk_cul_generos +
+                ", nome_usuario='" + nome_usuario + '\'' +
+                ", nome_completo='" + nome_completo + '\'' +
+                ", dataNasc=" + dataNasc +
+                ", bio='" + bio + '\'' +
+                ", url_foto='" + url_foto + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", senha='" + senha + '\'' +
+                ", dataCriacao=" + dataCriacao +
+                ", dataMudanca=" + dataMudanca +
+                ", dataDesativacao=" + dataDesativacao +
+                '}';
     }
 }
