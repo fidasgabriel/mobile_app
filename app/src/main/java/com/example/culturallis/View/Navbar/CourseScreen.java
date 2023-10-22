@@ -45,9 +45,9 @@ public class CourseScreen extends AppCompatActivity {
         rv.addItemDecoration(itemDecorator);
         rv.setLayoutManager(linearLayoutManager);
 
-        CourseAdapter courseAdapter = new CourseAdapter();
+        CourseAdapter courseAdapter = new CourseAdapter(this);
 
-        courseAdapter.setData(listCourseC);
+        courseAdapter.setData(listCourseC, true);
         rv.setAdapter(courseAdapter);
 
 

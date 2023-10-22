@@ -10,29 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Model.Entity.CourseCard;
-import com.example.culturallis.Model.Entity.CourseList;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Fragments.CoursesScroll;
 import com.example.culturallis.View.Fragments.FilterPerfil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class PerfilScreen extends AppCompatActivity{
+public class PerfilFriendScreen extends AppCompatActivity {
     private ImageView perfilHome;
     private ImageView perfilCourse;
-    private ImageView perfilSaved;
     private RecyclerView rv;
     private FragmentTransaction transaction;
     public List<CourseCard> listCourseC;
@@ -41,7 +33,8 @@ public class PerfilScreen extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_screen);
+        setContentView(R.layout.activity_perfil_friend_screen);
+
 
         Random rand = new Random();
 
@@ -75,18 +68,15 @@ public class PerfilScreen extends AppCompatActivity{
         perfilHome = findViewById(R.id.perfilHome);
         perfilHome.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
         perfilCourse = findViewById(R.id.perfilCourse);
-        perfilSaved = findViewById(R.id.perfilSaved);
 
         perfilHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 perfilHome.setBackgroundResource(R.drawable.perfil_option_selected);
                 perfilCourse.setBackgroundResource(0);
-                perfilSaved.setBackgroundResource(0);
 
                 perfilHome.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
                 perfilCourse.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
-                perfilSaved.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
 
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
@@ -103,18 +93,16 @@ public class PerfilScreen extends AppCompatActivity{
             public void onClick(View v) {
                 perfilHome.setBackgroundResource(0);
                 perfilCourse.setBackgroundResource(R.drawable.perfil_option_selected);
-                perfilSaved.setBackgroundResource(0);
 
                 perfilHome.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
                 perfilCourse.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
-                perfilSaved.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
 
                 listCourseC = new ArrayList<>();
                 listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
                 listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
                 listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
 
-                CourseAdapter courseAdapter = new CourseAdapter(PerfilScreen.this);
+                CourseAdapter courseAdapter = new CourseAdapter(PerfilFriendScreen.this);
 
                 courseAdapter.setData(listCourseC, false);
                 rv.setAdapter(courseAdapter);
@@ -126,27 +114,6 @@ public class PerfilScreen extends AppCompatActivity{
 //                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
 //                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);
 //                perfilCourseTransaction.commit();
-            }
-        });
-
-        perfilSaved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                perfilHome.setBackgroundResource(0);
-                perfilCourse.setBackgroundResource(0);
-                perfilSaved.setBackgroundResource(R.drawable.perfil_option_selected);
-
-                perfilHome.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
-                perfilCourse.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
-                perfilSaved.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
-
-                Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
-
-                if(fragment != null) {
-                    transaction = fragmentManager.beginTransaction();
-                    transaction.remove(fragment);
-                    transaction.commit();
-                }
             }
         });
 
@@ -162,30 +129,23 @@ public class PerfilScreen extends AppCompatActivity{
     }
 
     public void addFilterRecycleView(int type, int option){
-        switch (type){
-            case 1: //Para cursos assitidos
-                if (option == 0 && !isListCourseCReversed){
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                    linearLayoutManager.setReverseLayout(true);
-                    linearLayoutManager.setStackFromEnd(true);
-                    rv.setLayoutManager(linearLayoutManager);
-                    isListCourseCReversed = true;
+        if(type <= 2) {
+            if (option == 0 && !isListCourseCReversed) {
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                rv.setLayoutManager(linearLayoutManager);
+                isListCourseCReversed = true;
 
-                }else if(option == 1 && isListCourseCReversed){
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                    linearLayoutManager.setReverseLayout(false);
-                    linearLayoutManager.setStackFromEnd(false);
-                    rv.setLayoutManager(linearLayoutManager);
-                    isListCourseCReversed = false;
-                }
-                break;
-            case 2: // para cursos criados
+            } else if (option == 1 && isListCourseCReversed) {
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                linearLayoutManager.setReverseLayout(false);
+                linearLayoutManager.setStackFromEnd(false);
+                rv.setLayoutManager(linearLayoutManager);
+                isListCourseCReversed = false;
+            }
+        }else{
 
-                break;
-
-            case 3: //para conteúdo salvo
-
-                break;
         }
     }
 }

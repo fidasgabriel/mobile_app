@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,19 +16,27 @@
         android:theme="@style/Theme.Culturallis"
         tools:targetApi="31">
         <activity
+            android:name=".View.Navbar.PerfilFriendScreen"
+            android:exported="false"
+            android:launchMode="singleInstancePerTask" />
+        <activity
+            android:name=".View.Navbar.PerfilCourseCreatorScreen"
+            android:exported="false"
+            android:launchMode="singleInstancePerTask" />
+        <activity
             android:name=".View.Navbar.PerfilScreen"
-            android:launchMode="singleInstancePerTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstancePerTask" />
         <activity
             android:name=".View.Navbar.CourseScreen"
-            android:launchMode="singleInstancePerTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstancePerTask" />
         <activity
             android:name=".View.Navbar.HomeScreen"
-            android:launchMode="singleInstancePerTask"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstancePerTask" />
         <activity
-            android:name=".View.Configuration.Security$MainSettingsScreen"
+            android:name=".View.Configuration.MainSettingsScreen"
             android:exported="false" />
         <activity
             android:name=".View.Configuration.PerfilEdit"

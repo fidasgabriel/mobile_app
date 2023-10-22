@@ -65,7 +65,7 @@
             android:drawableEnd="@drawable/eye_open"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center"
-            android:fontFamily="@font/ubounded_regular"/>
+            android:fontFamily="@font/unbounded_regular"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:text="Entrar"

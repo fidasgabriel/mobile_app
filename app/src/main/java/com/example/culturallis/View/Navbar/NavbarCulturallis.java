@@ -89,7 +89,6 @@ public class NavbarCulturallis extends AppCompatActivity {
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
         isConnected();
-
     }
 
     public void handleClickProfileHome(View view){

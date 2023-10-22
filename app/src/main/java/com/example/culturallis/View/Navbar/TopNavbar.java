@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
 
 /**
@@ -49,7 +50,15 @@ public class TopNavbar extends Fragment {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), Security.MainSettingsScreen.class));
+                startActivity(new Intent(getContext(), MainSettingsScreen.class));
+            }
+        });
+
+        ImageView logo = view.findViewById(R.id.logoTypeNavbar);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), HomeScreen.class));
             }
         });
         return view;

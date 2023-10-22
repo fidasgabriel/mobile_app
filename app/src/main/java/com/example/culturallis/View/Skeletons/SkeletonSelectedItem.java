@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenNotAdquired;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
@@ -95,7 +96,7 @@ public class SkeletonSelectedItem extends AppCompatActivity {
     }
 
     public void changeMainSettings(View view){
-        startActivity(new Intent(this, Security.MainSettingsScreen.class));
+        startActivity(new Intent(this, MainSettingsScreen.class));
         finish();
     }
 

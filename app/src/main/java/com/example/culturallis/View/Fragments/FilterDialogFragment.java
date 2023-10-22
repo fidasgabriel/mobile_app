@@ -3,12 +3,17 @@ package com.example.culturallis.View.Fragments;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.example.culturallis.Model.Entity.CourseCard;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Navbar.PerfilScreen;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FilterDialogFragment extends DialogFragment {
@@ -33,25 +38,7 @@ public class FilterDialogFragment extends DialogFragment {
         builder.setTitle("Filtrar Por:")
                 .setItems(listItems, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (type){
-                            case 1: //Para cursos assitidos
-                                if (which == 0){
-
-                                }else if(which == 1){
-
-                                }else{
-
-                                }
-                                break;
-
-                            case 2: // para cursos criados
-
-                                break;
-
-                            case 3: //para conteúdo salvo
-
-                                break;
-                        }
+                        ((PerfilScreen) getActivity()).addFilterRecycleView(type, which);
                     }
                 });
         return builder.create();

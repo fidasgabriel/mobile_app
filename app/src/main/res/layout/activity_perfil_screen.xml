@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textSize="10dp"
-            android:fontFamily="@font/ubounded_regular"
+            android:fontFamily="@font/unbounded_regular"
             android:text="200k seguidores  *  20k seguindo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

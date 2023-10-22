@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/rvCardView"
     app:cardCornerRadius="12dp"
     app:layout_goneMarginBottom="20dp">
 
@@ -23,6 +24,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
             android:layout_width="42dp"
             android:layout_height="42dp"
             app:cardCornerRadius="21dp"
