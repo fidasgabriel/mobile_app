@@ -28,6 +28,7 @@ import com.example.culturallis.View.Fragments.ServerError;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.culturallis.View.Post.PostPublication;
 
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
