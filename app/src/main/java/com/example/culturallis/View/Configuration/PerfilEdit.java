@@ -1,8 +1,17 @@
 package com.example.culturallis.View.Configuration;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.*;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -15,6 +24,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.Queries.GetUserInfo;
@@ -30,7 +40,9 @@ import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 import okhttp3.Response;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -42,10 +54,12 @@ public class PerfilEdit extends ModelAppScreens {
     private Button btnSave;
     private ImageView imgUser;
     LoadingSettings loadingDialog;
-
     Usuario currentUser;
-
     Response responseUpdate;
+    private static final int GALLERY_REQUEST_CODE = 1;
+    private String selectedImagePath;
+    private TextView txtChangePhotoProfile;
+    String base64Image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +86,7 @@ public class PerfilEdit extends ModelAppScreens {
         editTextBio = findViewById(R.id.chgBio);
         btnSave = findViewById(R.id.btnSave);
         imgUser = findViewById(R.id.chgPerfil);
+        txtChangePhotoProfile = findViewById(R.id.chgPerfilButton);
 
         Picasso.with(this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
 
@@ -127,7 +142,39 @@ public class PerfilEdit extends ModelAppScreens {
                 }
             }
         });
+
+        txtChangePhotoProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+            }
+        });
         addTextWatchers();
+    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+
+            String[] projection = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(imageUri, projection, null, null, null);
+
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                    selectedImagePath = cursor.getString(columnIndex);
+                }
+                cursor.close();
+            }
+
+            if (selectedImagePath != null) {
+                Glide.with(this)
+                        .load(selectedImagePath)
+                        .into(imgUser);
+            }
+        }
     }
 
     private void addTextWatchers() {
@@ -187,8 +234,13 @@ public class PerfilEdit extends ModelAppScreens {
         if (edtTxtUserName.getText().toString().trim().length() > 0 && (editTextBio.getText().toString().trim().length() > 0 ||  edtTxtBirthdayDay.getText().toString().trim().length() > 0)) {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
+            if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
+                base64Image = encodeImage(selectedImagePath);
+            }else{
+                base64Image = currentUser.getUrl_foto();
+            }
             new UpdateUserInfoBasic().execute(
-                    imgUser.getDrawable().toString(),
+                    base64Image,
                     edtTxtUserName.getText().toString(),
                     edtTxtBirthdayDay.getText().toString(),
                     editTextBio.getText().toString());
@@ -219,15 +271,20 @@ public class PerfilEdit extends ModelAppScreens {
             }
 
             if (user != null) {
-                currentUser.setUrl_foto(user.getUrl_foto());
                 if(user.getNome_usuario() != null){
                     edtTxtUserName.setText(user.getNome_usuario().toString());
 
                 }else{
                     edtTxtUserName.setText("");
                 }
-                if(user.getUrl_foto().toString() != null){
-                    Picasso.with(PerfilEdit.this).load(user.getUrl_foto()).into(imgUser);
+                if(user.getUrl_foto()!= null && !user.getUrl_foto().isEmpty()){
+                    byte[] decodedImage = Base64.decode(user.getUrl_foto(), Base64.DEFAULT);
+
+                    Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
+
+                    Glide.with(PerfilEdit.this)
+                            .load(imageBitmap)
+                            .into(imgUser);
                 }else{
                     Picasso.with(PerfilEdit.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
                 }
@@ -269,17 +326,18 @@ public class PerfilEdit extends ModelAppScreens {
             String bio = params[3];
 
             try {
-                currentUser.setBio(bio);
-                currentUser.setNome_usuario(username);
-                currentUser.setUrl_foto(currentUser.getUrl_foto());
+                Usuario usuarioAtt = new Usuario();
+                usuarioAtt.setBio(bio);
+                usuarioAtt.setNome_usuario(username);
+                usuarioAtt.setUrl_foto(urlPhoto);
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date birthDate = dateFormat.parse(birthDateStr);
 
-                currentUser.setData_nascimento(birthDate);
+                usuarioAtt.setData_nascimento(birthDate);
 
 
-                responseUpdate = new UpdateUser().updateUsuario(currentUser.getEmail(), currentUser);
+                responseUpdate = new UpdateUser().updateUsuario(currentUser.getEmail(), usuarioAtt);
                 if (responseUpdate != null) {
                     if (responseUpdate.isSuccessful()) {
                         return true;
@@ -305,6 +363,30 @@ public class PerfilEdit extends ModelAppScreens {
         }
     }
 
+    private String encodeImage(String imagePath) {
+        try {
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+            int maxWidth = 200;
+            int maxHeight = 200;
+            if (bitmap.getWidth() > maxWidth || bitmap.getHeight() > maxHeight) {
+                float scale = Math.min(((float) maxWidth / bitmap.getWidth()), ((float) maxHeight / bitmap.getHeight()));
+                Matrix matrix = new Matrix();
+                matrix.postScale(scale, scale);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            }
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Foto muito grande", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+    }
 
 
 }
