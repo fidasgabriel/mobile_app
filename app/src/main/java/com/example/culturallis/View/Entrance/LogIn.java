@@ -25,6 +25,7 @@ import com.example.culturallis.Controller.Queries.LoginUser;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Navbar.HomeScreen;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import okhttp3.Response;

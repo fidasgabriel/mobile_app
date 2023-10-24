@@ -3,7 +3,6 @@ package com.example.culturallis.View.Configuration;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,6 +12,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.Mutations.UpdateUserSensibility;
@@ -21,12 +23,9 @@ import com.example.culturallis.Controller.Queries.GetUserInfo;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Entrance.LogIn;
-import com.example.culturallis.View.Fragments.Loading;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
-import com.squareup.picasso.Picasso;
 import okhttp3.Response;
 
 import java.text.SimpleDateFormat;
@@ -62,8 +61,8 @@ public class Security extends ModelAppScreens {
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                back(v);
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -123,7 +122,7 @@ public class Security extends ModelAppScreens {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
+            currentUser.setEmail("");
             new Security.GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();

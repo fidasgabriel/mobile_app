@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Fragments.AccessDenied;
 import com.example.culturallis.View.Fragments.Loading;
@@ -31,9 +32,9 @@ import com.example.culturallis.View.Fragments.CoursesScroll;
 
 public class NavbarCulturallis extends AppCompatActivity {
 
-    private AppCompatButton postsHomeBtn;
-    private AppCompatButton coursesHomeBtn;
-    private AppCompatButton profileHomeButton;
+    protected AppCompatButton postsHomeBtn;
+    protected AppCompatButton coursesHomeBtn;
+    protected AppCompatButton profileHomeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class NavbarCulturallis extends AppCompatActivity {
         postsHomeBtn.setTextColor(getResources().getColor(R.color.black));
         coursesHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         profileHomeButton.setTextColor(getResources().getColor(R.color.gray_typography));
+
         Loading fragment = new Loading();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
@@ -87,7 +89,6 @@ public class NavbarCulturallis extends AppCompatActivity {
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
         isConnected();
-
     }
 
     public void handleClickProfileHome(View view){
@@ -97,6 +98,7 @@ public class NavbarCulturallis extends AppCompatActivity {
         postsHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         coursesHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         profileHomeButton.setTextColor(getResources().getColor(R.color.black));
+
         Loading fragment = new Loading();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
