@@ -38,7 +38,7 @@
         @NonNull
         @Override
         public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_list_view, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_course, parent, false);
             return new CourseViewHolder(view);
         }
 

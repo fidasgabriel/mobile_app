@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/rvCardView"
     app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="#1A1A1A"
     app:layout_goneMarginBottom="20dp">
 
     <ImageView
@@ -19,7 +20,6 @@
         android:layout_marginTop="200dp"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#1A1A1A"
         android:gravity="center"
         android:orientation="horizontal">
 
