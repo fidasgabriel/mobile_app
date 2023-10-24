@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".View.Configuration.MainSettingsScreen" android:orientation="vertical" android:padding="16dp"
+        tools:context=".View.Configuration.Security$MainSettingsScreen" android:orientation="vertical" android:padding="16dp"
 >
 
     <LinearLayout

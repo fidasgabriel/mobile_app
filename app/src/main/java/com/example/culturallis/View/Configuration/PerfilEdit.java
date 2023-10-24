@@ -14,7 +14,6 @@ import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -74,7 +73,7 @@ public class PerfilEdit extends ModelAppScreens {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PerfilEdit.this, MainSettingsScreen.class));
+                finish();
             }
         });
 
