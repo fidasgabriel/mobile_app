@@ -2,10 +2,13 @@ package com.example.culturallis.View.Entrance;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -17,17 +20,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.culturallis.Controller.Mutations.LogonUser;
+import com.example.culturallis.Controller.Queries.LoginUser;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
+<<<<<<< HEAD
 import com.example.culturallis.View.Navbar.CourseScreen;
 import com.example.culturallis.View.Navbar.HomeScreen;
+=======
+import com.example.culturallis.View.Fragments.LoadingSettings;
+>>>>>>> f69c8867cf338df29f320155186b24e2575761eb
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
+import com.example.culturallis.View.Skeletons.SkeletonBlank;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class LogIn extends AppCompatActivity {
 
     private EditText edtTxtPassword;
     private EditText edtTxtEmail;
     private Button btnLogin;
+    LoadingSettings loadingDialog;
+
+    Response responseLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -108,7 +124,55 @@ public class LogIn extends AppCompatActivity {
         }
     }
 
+        public void login(View view) {
+            String password = edtTxtPassword.getText().toString().trim();
+            String email = edtTxtEmail.getText().toString().trim();
+            if (password.length() > 0 && email.length() > 0) {
+                loadingDialog = new LoadingSettings(this);
+                loadingDialog.show();
+                new LoginUserGet().execute(email, password);
+            }else{
+                Toast.makeText(LogIn.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        private class LoginUserGet extends AsyncTask<String, Void, Boolean> {
+            @Override
+            protected Boolean doInBackground(String... params) {
+                if (params.length != 2) {
+                    return false;
+                }
+
+                String email = params[0];
+                String password = params[1];
+
+                try {
+                    LoginUser queries = new LoginUser();
+                    responseLogin = queries.loginUser(email, password);
+                    return responseLogin.isSuccessful();
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                if (loadingDialog.isShowing()) {
+                    loadingDialog.dismiss();
+                }
+                if (success) {
+                        Toast.makeText(LogIn.this, "Você está logado!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LogIn.this, NavbarCulturallis.class));
+                        finish();
+                } else {
+                    edtTxtPassword.setText("");
+                    Toast.makeText(LogIn.this, "Não foi possível logar sua conta, tente novamente.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
     public void changeToLogon(View view){
-        startActivity(new Intent(this, HomeScreen.class));
+        startActivity(new Intent(this, LogOn.class));
     }
 }

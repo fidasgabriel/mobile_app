@@ -68,21 +68,21 @@
             android:fontFamily="@font/unbounded_regular"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:text="Entrar"
-            android:layout_width="224dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLogin"
-            android:textSize="28sp"
-            android:padding="10sp"
-            android:textColor="@color/white_base"
-            android:gravity="center"
-            android:background="@drawable/disabled_button_background"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/inter"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            />
+                android:text="Entrar"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnLogin"
+                android:textSize="22sp"
+                android:padding="10sp"
+                android:textColor="@color/white_base"
+                android:gravity="center"
+                android:background="@drawable/disabled_button_background"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:onClick="login"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
