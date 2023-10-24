@@ -7,6 +7,7 @@
     <color name="teal_700">#0A9337</color>
     <color name="black">#131313</color>
     <color name="base_black">#090909</color>
+    <color name="light_black">#1A1A1A</color>
     <color name="white">#FFFFFFFF</color>
     <color name="base_green">#0A9337</color>
     <color name="base_red">#E72929</color>
@@ -26,4 +27,9 @@
     <color name="purple_course">#7c13ad</color>
     <color name="yellow_course">#e8bd25</color>
     <color name="orange_course">#e06f38</color>
+    <color name="cian_perfil">#0F9584</color>
+    <color name="yellow_perfil">#F4B413</color>
+    <color name="violet_perfil">#982EAC</color>
+    <color name="blue_perfil">#1E84BF</color>
+
 </resources>
