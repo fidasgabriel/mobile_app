@@ -1,29 +1,20 @@
 package com.example.culturallis.View.Configuration;
 
-<<<<<<< HEAD
-import androidx.appcompat.app.AlertDialog;
-=======
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.*;
->>>>>>> f69c8867cf338df29f320155186b24e2575761eb
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-=======
->>>>>>> f69c8867cf338df29f320155186b24e2575761eb
 
 import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.Mutations.UpdateUserSensibility;
@@ -32,13 +23,9 @@ import com.example.culturallis.Controller.Queries.GetUserInfo;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Entrance.LogIn;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
-import com.example.culturallis.View.Fragments.Loading;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
-import com.squareup.picasso.Picasso;
 import okhttp3.Response;
 
 import java.text.SimpleDateFormat;
@@ -135,7 +122,7 @@ public class Security extends ModelAppScreens {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
+            currentUser.setEmail("");
             new Security.GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,72 +171,6 @@ public class Security extends ModelAppScreens {
         }
     }
 
-<<<<<<< HEAD
-    // public static class MainSettingsScreen extends AppCompatActivity {
-
-    //     @Override
-    //     protected void onCreate(Bundle savedInstanceState) {
-    //         super.onCreate(savedInstanceState);
-    //         setContentView(R.layout.activity_main_settings);
-
-    //         Toolbar toolbar = findViewById(R.id.mytoolbar);
-    //         setSupportActionBar(toolbar);
-    //         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    //         toolbar.setNavigationIcon(R.drawable.left_arrow);
-
-    //         TextView titleTextView = findViewById(R.id.tbTitle);
-    //         titleTextView.setText("Configurações");
-
-    //         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-    //             @Override
-    //             public void onClick(View view) {
-    //                 finish();
-    //             }
-    //         });
-    //     }
-
-    //     public void exitButton(View view){
-    //         final Context context = this;
-    //         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    //         View dialogView = getLayoutInflater().inflate(R.layout.modal_exit, null);
-    //         builder.setView(dialogView);
-
-    //         Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
-    //         Button btnConfirm = dialogView.findViewById(R.id.btn_confirm);
-
-
-    //         final AlertDialog dialog = builder.create();
-
-    //         btnCancel.setOnClickListener(new View.OnClickListener() {
-    //             @Override
-    //             public void onClick(View v) {
-    //                 dialog.dismiss();
-    //             }
-    //         });
-
-    //         btnConfirm.setOnClickListener(new View.OnClickListener() {
-    //             @Override
-    //             public void onClick(View v) {
-    //                 dialog.dismiss();
-    //                 startActivity(new Intent(context, LogIn.class));
-    //             }
-    //         });
-
-    //         dialog.show();
-    //     }
-
-    //     public void handleClickEditPerfil(View view){
-    //         startActivity(new Intent(this, PerfilEdit.class));
-    //     }
-
-    //     public void handleClickSecurity(View view){
-    //         startActivity(new Intent(this, Security.class));
-    //     }
-
-    //     public void handleClickServiceTerms(View view){
-    //         startActivity(new Intent(this, TermsOfService.class));
-    //     }
-=======
     public void updateInfoUserSensibility(View view){
         if (edtTxtEmail.getText().toString().trim().length() > 0 && (edtTxtCPF.getText().toString().trim().length() > 0 ||  edtTxtTel.getText().toString().trim().length() > 0)) {
             loadingDialog = new LoadingSettings(this);
@@ -283,7 +204,6 @@ public class Security extends ModelAppScreens {
         }
     }
 
->>>>>>> f69c8867cf338df29f320155186b24e2575761eb
     public void finishErrorScreen(View view){
         finish();
         startActivity(new Intent(this, Security.class));

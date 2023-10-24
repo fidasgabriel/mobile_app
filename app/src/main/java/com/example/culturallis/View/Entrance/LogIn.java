@@ -24,12 +24,8 @@ import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Queries.LoginUser;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
-<<<<<<< HEAD
-import com.example.culturallis.View.Navbar.CourseScreen;
-import com.example.culturallis.View.Navbar.HomeScreen;
-=======
 import com.example.culturallis.View.Fragments.LoadingSettings;
->>>>>>> f69c8867cf338df29f320155186b24e2575761eb
+import com.example.culturallis.View.Navbar.HomeScreen;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import okhttp3.Response;
