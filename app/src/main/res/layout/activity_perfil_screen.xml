@@ -147,7 +147,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:paddingTop="12dp"
+                    android:paddingTop="6dp"
                     app:srcCompat="@drawable/perfil_saved_icon" />
             </LinearLayout>
         </LinearLayout>
