@@ -21,7 +21,7 @@ public class PostCourse extends AppCompatActivity {
     private LinearLayout moduleContainer;
     private Button addButton;
     private Button modulo1;
-    private int maxModules = 7;
+    private int maxModules = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
