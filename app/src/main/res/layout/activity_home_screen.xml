@@ -17,11 +17,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="96dp"
+            android:clickable="true"
+            app:backgroundTint="@color/base_blue"
+            app:srcCompat="@drawable/add_icon"
+            app:tint="@color/white" />
+
         <LinearLayout
             android:id="@+id/downNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 </LinearLayout>

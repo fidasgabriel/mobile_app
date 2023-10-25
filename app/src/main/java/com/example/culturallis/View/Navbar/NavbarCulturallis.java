@@ -33,6 +33,7 @@ import com.example.culturallis.View.Post.PostPublication;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 import com.example.culturallis.View.Fragments.CoursesScroll;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NavbarCulturallis extends AppCompatActivity {
 
@@ -59,6 +60,8 @@ public class NavbarCulturallis extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
+
+
 
         isConnected();
     }

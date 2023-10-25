@@ -122,7 +122,7 @@ public class Security extends ModelAppScreens {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("");
+            currentUser.setEmail("ana.damasceno@gmail.com");
             new Security.GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
