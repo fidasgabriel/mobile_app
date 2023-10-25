@@ -169,7 +169,6 @@ public class LogIn extends AppCompatActivity {
         }
 
     public void changeToLogon(View view){
-//        startActivity(new Intent(this, LogOn.class));
         startActivity(new Intent(this, LogOn.class));
     }
 }
