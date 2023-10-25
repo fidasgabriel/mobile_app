@@ -4,6 +4,7 @@
     import android.content.Intent;
     import android.graphics.Color;
     import android.graphics.Typeface;
+    import android.os.AsyncTask;
     import android.text.Editable;
     import android.text.SpannableString;
     import android.text.Spanned;
@@ -18,8 +19,12 @@
     import androidx.appcompat.app.AppCompatActivity;
     import android.os.Bundle;
 
+    import com.example.culturallis.Controller.Mutations.LogonUser;
     import com.example.culturallis.R;
     import com.example.culturallis.View.Configuration.TermsOfService;
+    import com.example.culturallis.View.Fragments.LoadingSettings;
+    import com.example.culturallis.View.Skeletons.SkeletonBlank;
+    import okhttp3.Response;
 
     public class LogOn extends AppCompatActivity {
 
@@ -32,11 +37,15 @@
 
         private Button btnLogon;
 
+        LoadingSettings loadingDialog;
+
+
         @SuppressLint("ClickableViewAccessibility")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_log_on);
+
 
             String text = "Ao assinalar a caixa você concorda com os Termos de uso";
             String linkToLogin = "ENTRE";
@@ -182,6 +191,62 @@
         public void changeToLogin(View view){
             startActivity(new Intent(this, LogIn.class));
             finish();
+        }
+
+        public void logon(View view) {
+            String password = edtTxtPassword.getText().toString().trim();
+            String confirmPassword = edtTxtConfirmPassword.getText().toString().trim();
+            String email = edtTxtEmail.getText().toString().trim();
+            String userName = edtTxtUserName.getText().toString().trim();
+
+            boolean passwordsValid = password.length() >= 8 && password.length() <= 20 && password.equals(confirmPassword);
+            boolean fieldsNotEmpty = !password.isEmpty() && !confirmPassword.isEmpty() && !email.isEmpty() && !userName.isEmpty();
+            boolean passwordsMatch = password.equals(confirmPassword);
+
+            if (passwordsValid && fieldsNotEmpty && passwordsMatch && checkBox.isChecked()) {
+                loadingDialog = new LoadingSettings(this);
+                loadingDialog.show();
+                new AddUsuarioPost().execute(userName, email, password);
+            } else {
+                Toast.makeText(this, "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        private class AddUsuarioPost extends AsyncTask<String, Void, Boolean> {
+            @Override
+            protected Boolean doInBackground(String... params) {
+                if (params.length != 3) {
+                    return false;
+                }
+
+                String userName = params[0];
+                String email = params[1];
+                String password = params[2];
+
+                try {
+                    LogonUser mutations = new LogonUser();
+                    Response response = mutations.addUsuario(userName, email, password);
+                    return response.isSuccessful();
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                if (loadingDialog.isShowing()) {
+                    loadingDialog.dismiss();
+                }
+
+                if (success) {
+                    Toast.makeText(LogOn.this, "Usuário inserido", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LogOn.this, LogIn.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(LogOn.this, SkeletonBlank.class));
+                    Toast.makeText(LogOn.this, "Ocorreu um erro ao registrar o usuário", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
 
         public void changeToTerms(View view){

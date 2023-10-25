@@ -7,299 +7,247 @@
     android:orientation="vertical"
     tools:context=".View.Post.PostCourse">
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="3"-->
-<!--        android:background="@color/base_black"-->
-<!--        android:backgroundTint="@color/base_black">-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/photo"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="1.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.0"-->
-<!--            tools:srcCompat="@tools:sample/avatars" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/icon"-->
-<!--            android:layout_width="312dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/course" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imagem2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:paddingLeft="10dp"-->
-<!--            android:paddingTop="25dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/left_arrow_white" />-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="460dp">
-
-<!--        <TextView-->
-<!--            android:id="@+id/titleView"-->
-<!--            android:layout_width="360dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="Título *"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="20dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:textColor="@color/base_black" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/title"-->
-<!--            android:layout_width="364dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:background="@drawable/border_edittext"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/unbounded_regular"-->
-<!--            android:gravity="start"-->
-<!--            android:padding="16sp"-->
-<!--            android:textColor="#707070"-->
-<!--            android:textColorHighlight="#404040"-->
-<!--            android:textColorHint="#707070"-->
-<!--            android:textColorLink="#707070"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/description"-->
-<!--            android:layout_width="360dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="Descrição *"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="20dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:textColor="@color/base_black" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/desc"-->
-<!--            android:layout_width="364dp"-->
-<!--            android:layout_height="110dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:background="@drawable/border_edittext"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/unbounded_regular"-->
-<!--            android:gravity="start"-->
-<!--            android:padding="16sp"-->
-<!--            android:textColor="#707070"-->
-<!--            android:textColorHighlight="#404040"-->
-<!--            android:textColorHint="#707070"-->
-<!--            android:textColorLink="#707070"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/category"-->
-<!--            android:layout_width="360dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="Categoria *"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="20dp"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:textColor="@color/base_black" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/cate"-->
-<!--            android:layout_width="364dp"-->
-<!--            android:layout_height="42dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:background="@drawable/border_edittext"-->
-<!--            android:ems="10"-->
-<!--            android:fontFamily="@font/unbounded_regular"-->
-<!--            android:gravity="start"-->
-<!--            android:padding="16sp"-->
-<!--            android:textColor="#707070"-->
-<!--            android:textColorHighlight="#404040"-->
-<!--            android:textColorHint="#707070"-->
-<!--            android:textColorLink="#707070"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold" />-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/moduleContainer">
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Módulo 1"
-                android:contentDescription=" "
-                android:layout_width="match_parent"
-                android:elevation="4dp"
-                android:layout_marginBottom="2dp"
-                android:shadowColor="@color/white_base"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/unbounded_regular"
-                android:background="@drawable/tag_category_blue"
-                android:layout_height="wrap_content" android:id="@+id/modulo1" android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="16dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:letterSpacing="0.1"
-                android:textStyle="bold"
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Módulo 2"
-                android:contentDescription=" "
-                android:layout_marginBottom="2dp"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/unbounded_regular"
-                android:background="@drawable/tag_category_blue"
-                android:layout_height="wrap_content" android:id="@+id/modulo2" android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="16dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:letterSpacing="0.1"
-                android:textStyle="bold"
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Módulo 3"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:layout_marginBottom="2dp"
-                android:fontFamily="@font/unbounded_regular"
-                android:background="@drawable/tag_category_blue"
-                android:layout_height="wrap_content" android:id="@+id/modulo3" android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="16dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:contentDescription=" "
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:letterSpacing="0.1"
-                android:textStyle="bold"
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Módulo 4"
-                android:layout_width="match_parent"
-                android:elevation="4dp"
-                android:contentDescription=" "
-                android:layout_marginBottom="2dp"
-                android:shadowColor="@color/white_base"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/unbounded_regular"
-                android:background="@drawable/tag_category_blue"
-                android:layout_height="wrap_content" android:id="@+id/modulo4" android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="16dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:letterSpacing="0.1"
-                android:textStyle="bold"
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Módulo 5"
-                android:contentDescription=" "
-                android:layout_marginBottom="2dp"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/unbounded_regular"
-                android:background="@drawable/tag_category_blue"
-                android:layout_height="wrap_content"
-                android:id="@+id/modulo5"
-                android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="16dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:letterSpacing="0.1"
-                android:textStyle="bold"
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Adicionar "
-                android:contentDescription="lastModule"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:layout_marginBottom="2dp"
-                android:fontFamily="@font/unbounded_regular"
-                android:background="@drawable/tag_category_blue"
-                android:layout_height="wrap_content"
-                android:id="@+id/modulo6"
-                android:layout_weight="1"
-                android:textAlignment="viewStart"
-                android:drawableEnd="@drawable/add_icon"
-                android:drawablePadding="17dp"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:letterSpacing="0.1"
-                android:textStyle="bold"
-                />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:text="Postar"
-                android:layout_width="364dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnBuyCourse"
-                android:textSize="18sp"
-                android:paddingHorizontal="8sp"
-                android:paddingVertical="8dp"
-                android:textColor="@color/white_base"
-                android:gravity="center"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/modules_button_blue"
-                android:fontFamily="@font/unbounded_regular"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:layout_gravity="center" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/base_black"
+                android:backgroundTint="@color/base_black">
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="312dp"
+                    android:padding="45dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/course" />
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="24dp"
+                    android:paddingTop="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/left_arrow_white" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="409dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="460dp">
+
+                <TextView
+                    android:id="@+id/titleView"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Título *"
+                    android:textColor="@color/base_black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="364dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/border_edittext"
+                    android:ems="10"
+                    android:fontFamily="@font/unbounded_regular"
+                    android:gravity="start"
+                    android:padding="16sp"
+                    android:textColor="#707070"
+                    android:textColorHighlight="#404040"
+                    android:textColorHint="#707070"
+                    android:textColorLink="#707070"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Descrição *"
+                    android:textColor="@color/base_black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/desc"
+                    android:layout_width="364dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/border_edittext"
+                    android:ems="10"
+                    android:fontFamily="@font/unbounded_regular"
+                    android:gravity="start"
+                    android:padding="16sp"
+                    android:textColor="#707070"
+                    android:textColorHighlight="#404040"
+                    android:textColorHint="#707070"
+                    android:textColorLink="#707070"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Categoria *"
+                    android:textColor="@color/base_black"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/cate"
+                    android:layout_width="364dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/border_edittext"
+                    android:ems="10"
+                    android:fontFamily="@font/unbounded_regular"
+                    android:gravity="start"
+                    android:layout_marginBottom="10dp"
+                    android:padding="16sp"
+                    android:textColor="#707070"
+                    android:textColorHighlight="#404040"
+                    android:textColorHint="#707070"
+                    android:textColorLink="#707070"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/moduleContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Model"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Conteúdo *"
+                        android:textColor="@color/base_black"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/modulo1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/tag_category_blue"
+                        android:contentDescription=" "
+                        android:drawablePadding="16dp"
+                        android:drawableTint="@color/white"
+                        android:elevation="4dp"
+                        android:fontFamily="@font/unbounded_regular"
+                        android:letterSpacing="0.1"
+                        android:paddingVertical="16dp"
+                        android:paddingLeft="10dp"
+                        android:shadowColor="@color/white_base"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:text="Módulo 1"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/addButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/tag_category_blue"
+                        android:contentDescription="lastModule"
+                        android:drawableEnd="@drawable/add_icon"
+                        android:drawablePadding="17dp"
+                        android:drawableTint="@color/white"
+                        android:fontFamily="@font/unbounded_regular"
+                        android:letterSpacing="0.1"
+                        android:padding="16dp"
+                        android:paddingLeft="1000dp"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:text="Adicionar "
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnBuyCourse"
+                        android:layout_width="364dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="70dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/modules_button_blue"
+                        android:fontFamily="@font/inter"
+                        android:gravity="center"
+                        android:paddingHorizontal="8sp"
+                        android:paddingVertical="8dp"
+                        android:text="Postar"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_base"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

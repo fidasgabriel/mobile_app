@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Fragments.AccessDenied;
 import com.example.culturallis.View.Fragments.Loading;
@@ -27,14 +29,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.culturallis.View.Post.PostPublication;
+
+import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 import com.example.culturallis.View.Fragments.CoursesScroll;
 
 public class NavbarCulturallis extends AppCompatActivity {
 
-    private AppCompatButton postsHomeBtn;
-    private AppCompatButton coursesHomeBtn;
-    private AppCompatButton profileHomeButton;
+    protected AppCompatButton postsHomeBtn;
+    protected AppCompatButton coursesHomeBtn;
+    protected AppCompatButton profileHomeButton;
+
+    Fragment fragment;
+
+    private FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +54,11 @@ public class NavbarCulturallis extends AppCompatActivity {
         profileHomeButton = findViewById(R.id.btnHomeProfile);
         postsHomeBtn.setBackgroundResource(R.drawable.selected_tab);
 
-//        ServerError fragment = new ServerError();
-//        NotConnected fragment = new NotConnected();
-//        NotFound fragment = new NotFound();
-//        AccessDenied fragment = new AccessDenied();
-          Loading fragment = new Loading();
+        fragment = new Fragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
-
 
         isConnected();
     }
@@ -67,8 +70,8 @@ public class NavbarCulturallis extends AppCompatActivity {
         postsHomeBtn.setTextColor(getResources().getColor(R.color.black));
         coursesHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         profileHomeButton.setTextColor(getResources().getColor(R.color.gray_typography));
-        Loading fragment = new Loading();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
         isConnected();
@@ -84,11 +87,10 @@ public class NavbarCulturallis extends AppCompatActivity {
         profileHomeButton.setTextColor(getResources().getColor(R.color.gray_typography));
 
         CoursesScroll fragment = new CoursesScroll();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
         isConnected();
-
     }
 
     public void handleClickProfileHome(View view){
@@ -98,8 +100,8 @@ public class NavbarCulturallis extends AppCompatActivity {
         postsHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         coursesHomeBtn.setTextColor(getResources().getColor(R.color.gray_typography));
         profileHomeButton.setTextColor(getResources().getColor(R.color.black));
-        Loading fragment = new Loading();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentRender, fragment);
         transaction.commit();
         isConnected();
@@ -109,7 +111,6 @@ public class NavbarCulturallis extends AppCompatActivity {
     public void handleClickSettings(View view){
         startActivity(new Intent(this, MainSettingsScreen.class));
         isConnected();
-
     }
 
     public void finishErrorScreen(View view){
@@ -123,7 +124,6 @@ public class NavbarCulturallis extends AppCompatActivity {
         if (conMgr.getActiveNetworkInfo() != null
                 && conMgr.getActiveNetworkInfo().isAvailable()
                 && conMgr.getActiveNetworkInfo().isConnected()) {
-
         }
         else{
             NotConnected fragment = new NotConnected();
