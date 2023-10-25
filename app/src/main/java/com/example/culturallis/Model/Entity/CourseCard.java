@@ -8,7 +8,6 @@ public class CourseCard {
     private String courseTitle;
     private String courseAuthor;
     private int viewsCount;
-    private AnimatedVectorDrawable likeDrawable;
     private boolean liked;
     public CourseCard(int courseImage, int perfilImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked) {
         this.courseImage = courseImage;
@@ -39,16 +38,10 @@ public class CourseCard {
         return viewsCount;
     }
 
-    public AnimatedVectorDrawable getLikeDrawable() {
-        return likeDrawable;
-    }
     public boolean isLiked() {
         return liked;
     }
 
-    public void setLikeDrawable(AnimatedVectorDrawable likeDrawable) {
-        this.likeDrawable = likeDrawable;
-    }
     public void setLiked() {
         this.liked = !this.liked;
     }
