@@ -159,7 +159,7 @@ public class LogIn extends AppCompatActivity {
                 }
                 if (success) {
                         Toast.makeText(LogIn.this, "Você está logado!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LogIn.this, NavbarCulturallis.class));
+                        startActivity(new Intent(LogIn.this, HomeScreen.class));
                         finish();
                 } else {
                     edtTxtPassword.setText("");

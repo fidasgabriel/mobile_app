@@ -7,247 +7,225 @@
     android:orientation="vertical"
     tools:context=".View.Post.PostCourse">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_black"
+            android:backgroundTint="@color/base_black">
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="76dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/course" />
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="24dp"
+                android:paddingTop="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/left_arrow_white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_margin="10dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@color/base_black"
-                android:backgroundTint="@color/base_black">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/unbounded_bold"
+                android:layout_marginBottom="5dp"
+                android:text="Título *"
+                android:textColor="@color/base_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:srcCompat="@tools:sample/avatars" />
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border_edittext"
+                android:ems="10"
+                android:padding="16dp"
+                android:fontFamily="@font/unbounded_regular"
+                android:gravity="start"
+                android:minHeight="110dp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="312dp"
-                    android:padding="45dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/course" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/unbounded_bold"
+                android:layout_marginBottom="5dp"
+                android:text="Descrição *"
+                android:textColor="@color/base_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="24dp"
-                    android:paddingTop="25dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/left_arrow_white" />
+            <EditText
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border_edittext"
+                android:ems="10"
+                android:fontFamily="@font/unbounded_regular"
+                android:gravity="start"
+                android:minHeight="110dp"
+                android:padding="16dp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/unbounded_bold"
+                android:layout_marginBottom="5dp"
+                android:text="Categoria *"
+                android:textColor="@color/base_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="409dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="460dp">
-
-                <TextView
-                    android:id="@+id/titleView"
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Título *"
-                    android:textColor="@color/base_black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/title"
-                    android:layout_width="364dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/border_edittext"
-                    android:ems="10"
-                    android:fontFamily="@font/unbounded_regular"
-                    android:gravity="start"
-                    android:padding="16sp"
-                    android:textColor="#707070"
-                    android:textColorHighlight="#404040"
-                    android:textColorHint="#707070"
-                    android:textColorLink="#707070"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Descrição *"
-                    android:textColor="@color/base_black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/desc"
-                    android:layout_width="364dp"
-                    android:layout_height="110dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/border_edittext"
-                    android:ems="10"
-                    android:fontFamily="@font/unbounded_regular"
-                    android:gravity="start"
-                    android:padding="16sp"
-                    android:textColor="#707070"
-                    android:textColorHighlight="#404040"
-                    android:textColorHint="#707070"
-                    android:textColorLink="#707070"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/category"
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Categoria *"
-                    android:textColor="@color/base_black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/cate"
-                    android:layout_width="364dp"
-                    android:layout_height="42dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/border_edittext"
-                    android:ems="10"
-                    android:fontFamily="@font/unbounded_regular"
-                    android:gravity="start"
-                    android:layout_marginBottom="10dp"
-                    android:padding="16sp"
-                    android:textColor="#707070"
-                    android:textColorHighlight="#404040"
-                    android:textColorHint="#707070"
-                    android:textColorLink="#707070"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:id="@+id/moduleContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/Model"
-                        android:layout_width="360dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="Conteúdo *"
-                        android:textColor="@color/base_black"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/modulo1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/tag_category_blue"
-                        android:contentDescription=" "
-                        android:drawablePadding="16dp"
-                        android:drawableTint="@color/white"
-                        android:elevation="4dp"
-                        android:fontFamily="@font/unbounded_regular"
-                        android:letterSpacing="0.1"
-                        android:paddingVertical="16dp"
-                        android:paddingLeft="10dp"
-                        android:shadowColor="@color/white_base"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:text="Módulo 1"
-                        android:textAlignment="viewStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/addButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="2dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/tag_category_blue"
-                        android:contentDescription="lastModule"
-                        android:drawableEnd="@drawable/add_icon"
-                        android:drawablePadding="17dp"
-                        android:drawableTint="@color/white"
-                        android:fontFamily="@font/unbounded_regular"
-                        android:letterSpacing="0.1"
-                        android:padding="16dp"
-                        android:paddingLeft="1000dp"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:text="Adicionar "
-                        android:textAlignment="viewStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnBuyCourse"
-                        android:layout_width="364dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="70dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@drawable/modules_button_blue"
-                        android:fontFamily="@font/inter"
-                        android:gravity="center"
-                        android:paddingHorizontal="8sp"
-                        android:paddingVertical="8dp"
-                        android:text="Postar"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white_base"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
+            <EditText
+                android:id="@+id/cate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border_edittext"
+                android:ems="10"
+                android:fontFamily="@font/unbounded_regular"
+                android:gravity="start"
+                android:minHeight="110dp"
+                android:padding="16dp"
+                android:textColor="#707070"
+                android:textColorHighlight="#404040"
+                android:textColorHint="#707070"
+                android:textColorLink="#707070"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
-    </ScrollView>
 
+        <LinearLayout
+            android:id="@id/moduleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/conteudos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/unbounded_bold"
+                android:layout_marginBottom="5dp"
+                android:text="Conteudos *"
+                android:textColor="@color/base_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/tag_category_blue"
+                android:contentDescription="lastModule"
+                android:drawableEnd="@drawable/add_icon"
+                android:drawablePadding="17dp"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/unbounded_regular"
+                android:letterSpacing="0.1"
+                android:padding="16dp"
+                android:text="Adicionar "
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPostPublication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/disabled_button_background"
+                android:fontFamily="@font/unbounded_regular"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                android:text="Postar"
+                android:textAllCaps="false"
+                android:textColor="@color/white_base"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
+

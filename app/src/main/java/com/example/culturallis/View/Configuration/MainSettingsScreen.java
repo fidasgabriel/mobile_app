@@ -98,7 +98,9 @@ public class MainSettingsScreen extends ModelAppScreens {
         startActivity(new Intent(this, PerfilEdit.class));
     }
     public void changeToHelpCenter(View view){
-        Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, PostCourse.class);
+        startActivity(intent);
+//        Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
     }
     public void changeToLanding(View view){
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://culturallis.onrender.com/")));

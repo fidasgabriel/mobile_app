@@ -284,7 +284,9 @@ public class PerfilEdit extends ModelAppScreens {
                     Glide.with(PerfilEdit.this)
                             .load(imageBitmap)
                             .into(imgUser);
-                }else{
+                }
+                else{
+                    android.widget.Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
                     Picasso.with(PerfilEdit.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
                 }
                 if(user.getBio() != null){

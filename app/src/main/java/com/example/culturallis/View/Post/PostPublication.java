@@ -31,7 +31,6 @@ public class PostPublication extends ModelAppScreens {
     private static final int PERMISSAO_REQUEST = 1;
     private static final int REQUEST_CODE = 1;
     private ImageView icon;
-    
 
     private View layout;
     private ImageView img;
