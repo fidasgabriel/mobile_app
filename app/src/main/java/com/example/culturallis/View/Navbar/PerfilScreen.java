@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
@@ -39,6 +43,7 @@ public class PerfilScreen extends AppCompatActivity{
     private FragmentTransaction transaction;
     public List<CourseCard> listCourseC;
     private boolean isListCourseCReversed = false;
+    private boolean savedIsPost = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +54,27 @@ public class PerfilScreen extends AppCompatActivity{
 
         DownNavbar downNav = new DownNavbar().newInstance(3);
         TopNavbar topNav = new TopNavbar();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.topNav, topNav);
         transaction.replace(R.id.downNav, downNav);
         transaction.commit();
+
+        SpannableString underline = new SpannableString("Carregar mais");
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView linkLogon = findViewById(R.id.linkCarregar);
+        linkLogon.setText(underline);
+
+        linkLogon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Colocar aqui a lógica para carregar mais 5 cards
+            }
+        });
+
 
         ImageView left_arrow = findViewById(R.id.leftArrow);
         left_arrow.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +91,16 @@ public class PerfilScreen extends AppCompatActivity{
         rv.setLayoutManager(linearLayoutManager);
         rv.setFocusable(false);
         rv.setNestedScrollingEnabled(false);
+
+        List<PostCard> listPostC = new ArrayList<>();
+        listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+        listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+        listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+
+        PostAdapter postAdapter = new PostAdapter(PerfilScreen.this);
+
+        postAdapter.setData(listPostC, false);
+        rv.setAdapter(postAdapter);
 
         int cianColor = ContextCompat.getColor(getApplicationContext(), R.color.cian_perfil);
         int blackColor = ContextCompat.getColor(getApplicationContext(), R.color.light_black);
@@ -102,7 +133,6 @@ public class PerfilScreen extends AppCompatActivity{
                 postAdapter.setData(listPostC, false);
                 rv.setAdapter(postAdapter);
 
-
                 if(fragment != null) {
                     transaction = fragmentManager.beginTransaction();
                     transaction.remove(fragment);
@@ -132,10 +162,13 @@ public class PerfilScreen extends AppCompatActivity{
                 courseAdapter.setData(listCourseC, false);
                 rv.setAdapter(courseAdapter);
 
-                transaction = fragmentManager.beginTransaction();
-                transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
-                transaction.commit();
+                Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
+                if (fragment == null) {
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
+                    transaction.commit();
+                }
 //                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
 //                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);
 //                perfilCourseTransaction.commit();
@@ -153,11 +186,32 @@ public class PerfilScreen extends AppCompatActivity{
                 perfilCourse.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
                 perfilSaved.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
 
+                if(savedIsPost){
+                    List<PostCard> listPostC = new ArrayList<>();
+                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+
+                    PostAdapter postAdapter = new PostAdapter(PerfilScreen.this);
+
+                    postAdapter.setData(listPostC, true);
+                    rv.setAdapter(postAdapter);
+                }else{
+                    listCourseC = new ArrayList<>();
+                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
+                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
+                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
+
+                    CourseAdapter courseAdapter = new CourseAdapter(PerfilScreen.this);
+
+                    courseAdapter.setData(listCourseC, false);
+                    rv.setAdapter(courseAdapter);
+                }
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
-                if(fragment != null) {
+                if (fragment == null) {
                     transaction = fragmentManager.beginTransaction();
-                    transaction.remove(fragment);
+                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(3));
                     transaction.commit();
                 }
             }
@@ -175,30 +229,45 @@ public class PerfilScreen extends AppCompatActivity{
     }
 
     public void addFilterRecycleView(int type, int option){
-        switch (type){
-            case 1: //Para cursos assitidos
-                if (option == 0 && !isListCourseCReversed){
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                    linearLayoutManager.setReverseLayout(true);
-                    linearLayoutManager.setStackFromEnd(true);
-                    rv.setLayoutManager(linearLayoutManager);
-                    isListCourseCReversed = true;
+        if(type <= 2) {//Para cursos assitidos e criados
+            if (option == 0 && !isListCourseCReversed) {
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                rv.setLayoutManager(linearLayoutManager);
+                isListCourseCReversed = true;
 
-                }else if(option == 1 && isListCourseCReversed){
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                    linearLayoutManager.setReverseLayout(false);
-                    linearLayoutManager.setStackFromEnd(false);
-                    rv.setLayoutManager(linearLayoutManager);
-                    isListCourseCReversed = false;
-                }
-                break;
-            case 2: // para cursos criados
+            } else if (option == 1 && isListCourseCReversed) {
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                linearLayoutManager.setReverseLayout(false);
+                linearLayoutManager.setStackFromEnd(false);
+                rv.setLayoutManager(linearLayoutManager);
+                isListCourseCReversed = false;
+            }
+        }else if (type == 3){ // Para conteúdo Salvo
+            if (option == 0 && !savedIsPost){
+                List<PostCard> listPostC = new ArrayList<>();
+                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
 
-                break;
+                PostAdapter postAdapter = new PostAdapter(PerfilScreen.this);
 
-            case 3: //para conteúdo salvo
+                postAdapter.setData(listPostC, true);
+                rv.setAdapter(postAdapter);
+                savedIsPost = true;
+            }else if(option == 1 && savedIsPost){
+                listCourseC = new ArrayList<>();
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
 
-                break;
+                CourseAdapter courseAdapter = new CourseAdapter(PerfilScreen.this);
+
+                courseAdapter.setData(listCourseC, false);
+                rv.setAdapter(courseAdapter);
+                savedIsPost = false;
+            }
         }
     }
 }

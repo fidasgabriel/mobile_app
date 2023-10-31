@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
@@ -35,6 +39,7 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
     public List<CourseCard> listCourseC;
     public List<CourseCard> listCreatedCourseC;
     private boolean isListCourseCReversed = false;
+    private boolean savedIsPost = true;
 
 
     @Override
@@ -52,6 +57,20 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
         transaction.replace(R.id.topNav, topNav);
         transaction.replace(R.id.downNav, downNav);
         transaction.commit();
+
+        SpannableString underline = new SpannableString("Carregar mais");
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView linkLogon = findViewById(R.id.linkCarregar);
+        linkLogon.setText(underline);
+
+        linkLogon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Colocar aqui a lógica para carregar mais 5 cards
+            }
+        });
 
         ImageView left_arrow = findViewById(R.id.leftArrow);
         left_arrow.setOnClickListener(new View.OnClickListener() {
@@ -125,20 +144,23 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 perfilCourseCreated.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
                 perfilSaved.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
 
-//                listCourseC = new ArrayList<>();
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
-//
-//                CourseAdapter courseAdapter = new CourseAdapter();
-//
-//                courseAdapter.setData(listCourseC, true);
-//                rv.setAdapter(courseAdapter);
-//
-//                transaction = fragmentManager.beginTransaction();
-//                transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
-//                transaction.commit();
+                listCourseC = new ArrayList<>();
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
 
+                CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
+
+                courseAdapter.setData(listCourseC, false);
+                rv.setAdapter(courseAdapter);
+
+                Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
+
+                if (fragment == null) {
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
+                    transaction.commit();
+                }
 //                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
 //                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);
 //                perfilCourseTransaction.commit();
@@ -148,7 +170,6 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
         perfilCourseCreated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PerfilCourseCreatorScreen.this, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", Toast.LENGTH_SHORT).show();
                 perfilHome.setBackgroundResource(0);
                 perfilCourse.setBackgroundResource(0);
                 perfilCourseCreated.setBackgroundResource(R.drawable.perfil_option_selected);
@@ -176,9 +197,13 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 courseAdapter.setData(listCreatedCourseC, false);
                 rv.setAdapter(courseAdapter);
 
-                transaction = fragmentManager.beginTransaction();
-                transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(3));
-                transaction.commit();
+                Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
+
+                if (fragment == null) {
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(2));
+                    transaction.commit();
+                }
 
 //                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
 //                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);
@@ -199,11 +224,33 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 perfilCourseCreated.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
                 perfilSaved.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
 
+                if(savedIsPost){
+                    List<PostCard> listPostC = new ArrayList<>();
+                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+
+                    PostAdapter postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
+
+                    postAdapter.setData(listPostC, true);
+                    rv.setAdapter(postAdapter);
+                }else{
+                    listCourseC = new ArrayList<>();
+                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
+                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
+                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
+
+                    CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
+
+                    courseAdapter.setData(listCourseC, false);
+                    rv.setAdapter(courseAdapter);
+                }
+
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
-                if(fragment != null) {
+                if (fragment == null) {
                     transaction = fragmentManager.beginTransaction();
-                    transaction.remove(fragment);
+                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(3));
                     transaction.commit();
                 }
             }
@@ -236,8 +283,30 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 rv.setLayoutManager(linearLayoutManager);
                 isListCourseCReversed = false;
             }
-        }else{
+        }else if (type == 3){ // Para conteúdo Salvo
+            if (option == 0 && !savedIsPost){
+                List<PostCard> listPostC = new ArrayList<>();
+                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
 
+                PostAdapter postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
+
+                postAdapter.setData(listPostC, true);
+                rv.setAdapter(postAdapter);
+                savedIsPost = true;
+            }else if(option == 1 && savedIsPost){
+                listCourseC = new ArrayList<>();
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
+                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
+
+                CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
+
+                courseAdapter.setData(listCourseC, false);
+                rv.setAdapter(courseAdapter);
+                savedIsPost = false;
+            }
         }
     }
 }
