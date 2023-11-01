@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Controller.Adapter.PostAdapter;
@@ -31,6 +36,21 @@ public class HomeScreen extends AppCompatActivity {
         transaction.replace(R.id.downNav, downNav);
         transaction.commit();
 
+        SpannableString underline = new SpannableString("Carregar mais");
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView linkLogon = findViewById(R.id.linkCarregar);
+        linkLogon.setText(underline);
+
+        linkLogon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Colocar aqui a lógica para carregar mais 5 cards
+            }
+        });
+
+
         rv = findViewById(R.id.recycleView);
         List<PostCard> listPostC = new ArrayList<>();
         listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
@@ -41,6 +61,8 @@ public class HomeScreen extends AppCompatActivity {
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(64);
         rv.addItemDecoration(itemDecorator);
         rv.setLayoutManager(linearLayoutManager);
+        rv.setFocusable(false);
+        rv.setNestedScrollingEnabled(false);
 
         PostAdapter postAdapter = new PostAdapter(this);
 

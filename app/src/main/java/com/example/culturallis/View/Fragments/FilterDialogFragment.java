@@ -1,3 +1,4 @@
+
 package com.example.culturallis.View.Fragments;
 
 import android.app.AlertDialog;
@@ -22,13 +23,10 @@ public class FilterDialogFragment extends DialogFragment {
 
     public FilterDialogFragment(Integer type){
         this.type = type;
-        switch (type){
-            case 1:
-                listItems = new String[]{"mais antigo", "mais recente"};
-                break;
-            case 3:
-                listItems = new String[]{"post salvos", "cursos salvos", "posts e cursos salvos"};
-                break;
+        if (type == 1 || type == 2) {
+            listItems = new String[]{"mais antigo", "mais recente"};
+        }else if(type == 3){
+            listItems = new String[]{"post salvos", "cursos salvos"};
         }
     }
 

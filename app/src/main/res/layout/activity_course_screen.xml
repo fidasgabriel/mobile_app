@@ -16,14 +16,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="24dp"
-                android:paddingBottom="64dp"/>
+                android:paddingHorizontal="24dp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/linkCarregar"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:layout_height="wrap_content"
+                android:text="Carregar Mais"
+                android:layout_marginBottom="64dp"
+                android:textColor="@color/base_blue"
+                />
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
                 android:id="@+id/downNav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
