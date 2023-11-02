@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,23 +20,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Queries.LoginUser;
+import com.example.culturallis.Controller.SqLite.SaveLoginDialog;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.PerfilEdit;
+import com.example.culturallis.View.Fragments.FilterDialogFragment;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Navbar.HomeScreen;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
-import com.example.culturallis.View.Skeletons.SkeletonBlank;
+
+import java.util.Objects;
+
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class LogIn extends AppCompatActivity {
 
     private EditText edtTxtPassword;
     private EditText edtTxtEmail;
     private Button btnLogin;
+    private UserDAO userDAO = new UserDAO(this);
     LoadingSettings loadingDialog;
+    private String email;
+    private String password;
+    private boolean autoLogin = false;
 
     Response responseLogin;
 
@@ -58,6 +64,17 @@ public class LogIn extends AppCompatActivity {
         TextView linkLogon = findViewById(R.id.linkLogon);
 
         linkLogon.setText(underline);
+
+        LoginUserEntity user = userDAO.getLogin();
+        if(user != null && !Objects.equals(user.getPassword(), "<NOT_SAVED>")){
+            String savedEmail = user.getEmail();
+            String savedPassword = user.getPassword();
+            edtTxtEmail.setBackgroundResource(R.drawable.auto_login_edittext);
+            edtTxtPassword.setBackgroundResource(R.drawable.auto_login_edittext);
+            edtTxtEmail.setText(savedEmail);
+            edtTxtPassword.setText(savedPassword);
+            autoLogin = true;
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -92,7 +109,13 @@ public class LogIn extends AppCompatActivity {
     private void addTextWatchers() {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (autoLogin){
+                    edtTxtEmail.setBackgroundResource(R.drawable.border_edittext);
+                    edtTxtPassword.setBackgroundResource(R.drawable.border_edittext);
+                    autoLogin = false;
+                }
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -140,8 +163,8 @@ public class LogIn extends AppCompatActivity {
                     return false;
                 }
 
-                String email = params[0];
-                String password = params[1];
+                email = params[0];
+                password = params[1];
 
                 try {
                     LoginUser queries = new LoginUser();
@@ -158,9 +181,24 @@ public class LogIn extends AppCompatActivity {
                     loadingDialog.dismiss();
                 }
                 if (success) {
-                        Toast.makeText(LogIn.this, "Você está logado!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LogIn.this, HomeScreen.class));
-                        finish();
+                    LoginUserEntity user = userDAO.getLogin();
+                    if(user == null){
+                        SaveLoginDialog dialogFragment = new SaveLoginDialog();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        dialogFragment.show(fragmentManager, "SaveLoginDialog");
+                    } else{
+                        enterToApplcation();
+                    }
+
+//                    boolean saveLogin = true;
+//                        if(saveLogin){
+//                            userDAO.salvar(new LoginUserEntity("notSaved", "notSaved"));
+//                        }else{
+//                            userDAO.salvar(new LoginUserEntity("notSaved", "notSaved"));
+//                        }
+//                    Toast.makeText(LogIn.this, "Você está logado!", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(LogIn.this, HomeScreen.class));
+//                        finish();
                 } else {
                     edtTxtPassword.setText("");
                     Toast.makeText(LogIn.this, "Não foi possível logar sua conta, tente novamente.", Toast.LENGTH_SHORT).show();
@@ -170,5 +208,21 @@ public class LogIn extends AppCompatActivity {
 
     public void changeToLogon(View view){
         startActivity(new Intent(this, LogOn.class));
+    }
+
+    public void saveAplication(Integer type){
+        if(type == 1){
+            userDAO.salvar(new LoginUserEntity(email, password));
+        } else if (type == 2) {
+            userDAO.salvar(new LoginUserEntity(email, "<NOT_SAVED>"));
+        }
+
+        enterToApplcation();
+    }
+
+    public void enterToApplcation(){
+        Toast.makeText(LogIn.this, "Você está logado!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(LogIn.this, HomeScreen.class));
+        finish();
     }
 }

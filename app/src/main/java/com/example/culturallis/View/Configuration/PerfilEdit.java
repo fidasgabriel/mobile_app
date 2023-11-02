@@ -27,6 +27,9 @@ import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.Queries.GetUserInfo;
+import com.example.culturallis.Controller.Queries.LoginUser;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
@@ -52,6 +55,7 @@ public class PerfilEdit extends ModelAppScreens {
     private Button btnSave;
     private ImageView imgUser;
     LoadingSettings loadingDialog;
+    private UserDAO userDAO = new UserDAO(this);
     Usuario currentUser;
     Response responseUpdate;
     private static final int GALLERY_REQUEST_CODE = 1;
@@ -88,11 +92,12 @@ public class PerfilEdit extends ModelAppScreens {
 
         Picasso.with(this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
 
+        LoginUserEntity user = userDAO.getLogin();
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
+            currentUser.setEmail(user.getEmail());
             new GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();

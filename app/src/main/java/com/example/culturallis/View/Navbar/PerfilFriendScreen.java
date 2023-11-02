@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Controller.Adapter.PostAdapter;
@@ -47,6 +51,20 @@ public class PerfilFriendScreen extends AppCompatActivity {
         transaction.replace(R.id.topNav, topNav);
         transaction.replace(R.id.downNav, downNav);
         transaction.commit();
+
+        SpannableString underline = new SpannableString("Carregar mais");
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView linkLogon = findViewById(R.id.linkCarregar);
+        linkLogon.setText(underline);
+
+        linkLogon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Colocar aqui a lógica para carregar mais 5 cards
+            }
+        });
 
         ImageView left_arrow = findViewById(R.id.leftArrow);
         left_arrow.setOnClickListener(new View.OnClickListener() {
@@ -116,9 +134,13 @@ public class PerfilFriendScreen extends AppCompatActivity {
                 courseAdapter.setData(listCourseC, false);
                 rv.setAdapter(courseAdapter);
 
-                transaction = fragmentManager.beginTransaction();
-                transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
-                transaction.commit();
+                Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
+
+                if (fragment == null) {
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
+                    transaction.commit();
+                }
 
 //                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
 //                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);

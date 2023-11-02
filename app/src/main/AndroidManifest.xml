@@ -85,6 +85,9 @@
             android:name=".View.Skeletons.SkeletonSuccessModuleComplete"
             android:exported="false" />
         <activity
+            android:name=".View.Skeletons.SkeletonBlank"
+            android:exported="false" />
+        <activity
                 android:name=".View.Entrance.SplashScreen"
                 android:exported="true">
             <intent-filter>

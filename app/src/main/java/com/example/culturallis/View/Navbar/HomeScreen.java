@@ -34,6 +34,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.culturallis.Controller.Adapter.CourseAdapter;
+import com.example.culturallis.Controller.Adapter.PostAdapter;
+import com.example.culturallis.Model.Entity.CourseCard;
+import com.example.culturallis.Model.Entity.PostCard;
+import com.example.culturallis.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeScreen extends ModelAppScreens {
     RecyclerView rv;
@@ -75,6 +89,19 @@ public class HomeScreen extends ModelAppScreens {
 
         rv = findViewById(R.id.recycleView);
         listPostC = new ArrayList<>();
+        SpannableString underline = new SpannableString("Carregar mais");
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView linkLogon = findViewById(R.id.linkCarregar);
+        linkLogon.setText(underline);
+
+        linkLogon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Colocar aqui a lógica para carregar mais 5 cards
+            }
+        });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(64);
@@ -82,9 +109,12 @@ public class HomeScreen extends ModelAppScreens {
         rv.setLayoutManager(linearLayoutManager);
 
         postAdapter = new PostAdapter(this);
+        rv.setFocusable(false);
+        rv.setNestedScrollingEnabled(false);
 
         postAdapter.setData(listPostC, true);
         rv.setAdapter(postAdapter);
+
     }
 
     private class GetPostsHomeScreen extends AsyncTask<String, Void, List<PostsHome>> {
@@ -110,11 +140,12 @@ public class HomeScreen extends ModelAppScreens {
             }
 
             if (postsHome != null) {
-                for(PostsHome pthm : postsHome){
-                    listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(), pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getCurtido(), pthm.getDescricao()));
+                for (PostsHome pthm : postsHome) {
+                    listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(),
+                            pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getCurtido(), pthm.getDescricao()));
                     postAdapter.notifyDataSetChanged();
                 }
-            }else{
+            } else {
                 startActivity(new Intent(HomeScreen.this, SkeletonBlank.class));
                 Toast.makeText(HomeScreen.this, "Ocorreu um erro ao pegar os posts", Toast.LENGTH_SHORT).show();
             }

@@ -20,6 +20,8 @@ import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.Mutations.UpdateUserSensibility;
 import com.example.culturallis.Controller.Queries.GetInfoUserSensibility;
 import com.example.culturallis.Controller.Queries.GetUserInfo;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
@@ -37,7 +39,7 @@ public class Security extends ModelAppScreens {
     private EditText edtTxtTel;
     private EditText edtTxtCPF;
     private EditText edtLastPassword;
-
+    private UserDAO userDAO = new UserDAO(this);
     private EditText edtTxtPassword;
     private EditText edtTxtConfirmPassword;
     private Button btnSave;
@@ -118,11 +120,12 @@ public class Security extends ModelAppScreens {
         edtTxtConfirmPassword.addTextChangedListener(verificationPsw);
         edtTxtPassword.addTextChangedListener(verificationPsw);
 
+        LoginUserEntity user = userDAO.getLogin();
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
+            currentUser.setEmail(user.getEmail());
             new Security.GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
