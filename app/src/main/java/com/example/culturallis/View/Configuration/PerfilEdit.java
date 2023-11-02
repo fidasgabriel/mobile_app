@@ -27,7 +27,6 @@ import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.Queries.GetUserInfo;
-import com.example.culturallis.Controller.Queries.LoginUser;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;

@@ -30,6 +30,12 @@
             app:backgroundTint="@color/base_blue"
             app:srcCompat="@drawable/add_icon"
             app:tint="@color/white" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="64dp"/>
 
         <LinearLayout
             android:id="@+id/downNav"

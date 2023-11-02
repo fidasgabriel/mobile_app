@@ -8,9 +8,10 @@
     app:cardCornerRadius="12dp"
     app:layout_goneMarginBottom="20dp">
     <ImageView
-        android:id="@+id/courseImage"
+        android:id="@+id/postImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:minHeight="300dp"
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -23,7 +24,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#1A1A1A"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -45,12 +45,12 @@
 
 
         <TextView
-            android:id="@+id/courseDescription"
+            android:id="@+id/postAuthor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:paddingTop="2dp"
-            android:paddingLeft="8dp"
+            android:paddingLeft="14dp"
             android:gravity="center_vertical"
             android:text="Dr. coach "
             android:textColor="#FAFAFA"
@@ -62,10 +62,16 @@
             android:layout_height="100dp"
             app:srcCompat="@drawable/avd_heart_empty" />
 
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/post_save_icon_empty" />
+
     </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/postDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"

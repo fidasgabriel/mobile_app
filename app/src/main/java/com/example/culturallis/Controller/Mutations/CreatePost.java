@@ -2,6 +2,8 @@ package com.example.culturallis.Controller.Mutations;
 
 import android.util.Log;
 
+import com.example.culturallis.Model.Global.Global;
+
 import org.json.JSONObject;
 
 import okhttp3.MediaType;
@@ -14,20 +16,20 @@ public class CreatePost {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private OkHttpClient client = new OkHttpClient();
 
-    String baseurl = "https://api-culturallis.onrender.com/api/culturallis";
+    Global global = new Global();
 
     public Response createPost(String email, String urlPhoto, String desc) throws Exception {
-        String url = baseurl + "/criarPost";
+        String url = global.getBaseUrl() + "/criarPost/";
 
 
         JSONObject json = new JSONObject();
         json.put("url_midia", urlPhoto);
-        json.put("fk_cul_usuarios_id", Integer.parseInt(String.valueOf(email)));
         json.put("descricao", desc);
+
 
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
-                .url(url)
+                .url(url + email)
                 .post(body)
                 .build();
 

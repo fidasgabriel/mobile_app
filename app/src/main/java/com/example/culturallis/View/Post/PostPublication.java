@@ -23,6 +23,7 @@ import android.text.Editable;
 import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -106,7 +107,7 @@ public class PostPublication extends ModelAppScreens {
                     loadingDialog.show();
                     if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
                         base64Image = encodeImage(selectedImagePath);
-                        if (base64Image.length() > 30000){
+                        if (base64Image.length() > 60000){
                             Toast.makeText(PostPublication.this, "Foto muito grande", Toast.LENGTH_SHORT).show();
                         }
                     }else{
@@ -114,8 +115,8 @@ public class PostPublication extends ModelAppScreens {
                     }
                     currentUser.setEmail("ana.damasceno@gmail.com");
                     new CreatePostUser().execute(
+                            currentUser.getEmail(),
                             base64Image,
-                            "7",
                             txtDesc
                     );
                 }
@@ -189,8 +190,8 @@ public class PostPublication extends ModelAppScreens {
         try {
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
 
-            int maxWidth = 400;
-            int maxHeight = 400;
+            int maxWidth = 480;
+            int maxHeight = 500;
             if (bitmap.getWidth() > maxWidth || bitmap.getHeight() > maxHeight) {
                 float scale = Math.min(((float) maxWidth / bitmap.getWidth()), ((float) maxHeight / bitmap.getHeight()));
                 Matrix matrix = new Matrix();
@@ -223,7 +224,7 @@ public class PostPublication extends ModelAppScreens {
 
             try {
                 CreatePost mutations = new CreatePost();
-                Response response = mutations.createPost(urlPhoto, email, desc);
+                Response response = mutations.createPost(email, urlPhoto, desc);
                 return response.isSuccessful();
             } catch (Exception e) {
                 return false;

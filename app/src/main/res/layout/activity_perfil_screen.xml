@@ -83,29 +83,16 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textSize="10dp"
-            android:fontFamily="@font/unbounded_regular"
-            android:text="200k seguidores  *  20k seguindo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userName" />
-
-        <TextView
             android:id="@+id/textView13"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:textSize="12dp"
+            android:layout_marginTop="32dp"
             android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/userName" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -147,7 +134,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:paddingTop="12dp"
+                    android:paddingTop="6dp"
                     app:srcCompat="@drawable/perfil_saved_icon" />
             </LinearLayout>
         </LinearLayout>

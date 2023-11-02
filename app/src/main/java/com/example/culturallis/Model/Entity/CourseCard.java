@@ -1,16 +1,27 @@
 package com.example.culturallis.Model.Entity;
 
-import android.graphics.drawable.AnimatedVectorDrawable;
 
 public class CourseCard {
-    private int perfilImage;
-    private int courseImage;
+
+    private Long pk_id;
+    private String perfilImage;
+    private String courseImage;
     private String courseTitle;
     private String courseAuthor;
     private int viewsCount;
-    private AnimatedVectorDrawable likeDrawable;
     private boolean liked;
-    public CourseCard(int courseImage, int perfilImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked) {
+
+    public CourseCard(Long pk_id, String perfilImage, String courseImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked) {
+        this.pk_id = pk_id;
+        this.perfilImage = perfilImage;
+        this.courseImage = courseImage;
+        this.courseTitle = courseTitle;
+        this.courseAuthor = courseAuthor;
+        this.viewsCount = viewsCount;
+        this.liked = liked;
+    }
+
+    public CourseCard(String courseImage, String perfilImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked) {
         this.courseImage = courseImage;
         this.perfilImage = perfilImage;
         this.courseTitle = courseTitle;
@@ -19,11 +30,23 @@ public class CourseCard {
         this.liked = liked;
     }
 
-    public int getPerfilImage() {
+    public Long getPk_id() {
+        return pk_id;
+    }
+
+    public void setPk_id(Long pk_id) {
+        this.pk_id = pk_id;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    public String getPerfilImage() {
         return perfilImage;
     }
 
-    public int getCourseImage() {
+    public String getCourseImage() {
         return courseImage;
     }
 
@@ -39,25 +62,19 @@ public class CourseCard {
         return viewsCount;
     }
 
-    public AnimatedVectorDrawable getLikeDrawable() {
-        return likeDrawable;
-    }
     public boolean isLiked() {
         return liked;
     }
 
-    public void setLikeDrawable(AnimatedVectorDrawable likeDrawable) {
-        this.likeDrawable = likeDrawable;
-    }
     public void setLiked() {
         this.liked = !this.liked;
     }
 
-    public void setPerfilImage(int perfilImage) {
+    public void setPerfilImage(String perfilImage) {
         this.perfilImage = perfilImage;
     }
 
-    public void setCourseImage(int courseImage) {
+    public void setCourseImage(String courseImage) {
         this.courseImage = courseImage;
     }
 

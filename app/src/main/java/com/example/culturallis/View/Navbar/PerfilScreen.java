@@ -18,8 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
+import com.example.culturallis.Controller.Adapter.PostAdapter;
 import com.example.culturallis.Model.Entity.CourseCard;
 import com.example.culturallis.Model.Entity.CourseList;
+import com.example.culturallis.Model.Entity.PostCard;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.CoursesScroll;
 import com.example.culturallis.View.Fragments.FilterPerfil;
@@ -90,6 +92,17 @@ public class PerfilScreen extends AppCompatActivity{
 
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
+                List<PostCard> listPostC = new ArrayList<>();
+//                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+//                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+//                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+
+                PostAdapter postAdapter = new PostAdapter(PerfilScreen.this);
+
+                postAdapter.setData(listPostC, false);
+                rv.setAdapter(postAdapter);
+
+
                 if(fragment != null) {
                     transaction = fragmentManager.beginTransaction();
                     transaction.remove(fragment);
@@ -110,9 +123,6 @@ public class PerfilScreen extends AppCompatActivity{
                 perfilSaved.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
 
                 listCourseC = new ArrayList<>();
-                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
-                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
-                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
 
                 CourseAdapter courseAdapter = new CourseAdapter(PerfilScreen.this);
 
