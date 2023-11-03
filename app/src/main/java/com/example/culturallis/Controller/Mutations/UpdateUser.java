@@ -1,6 +1,8 @@
 package com.example.culturallis.Controller.Mutations;
 
 import android.util.Log;
+
+import com.example.culturallis.Model.Global.Global;
 import com.example.culturallis.Model.Usuario.Usuario;
 import okhttp3.*;
 import org.json.JSONObject;
@@ -13,10 +15,10 @@ public class UpdateUser {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private OkHttpClient client = new OkHttpClient();
 
-    String baseurl = "https://api-culturallis.onrender.com/api/culturallis";
+    Global global = new Global();
 
     public Response updateUsuario(String email, Usuario userUpdated) throws Exception {
-        String url = baseurl + "/alterarUsuarios/" + email;
+        String url = global.getBaseUrl() + "/alterarUsuarios/" + email;
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

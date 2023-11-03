@@ -13,59 +13,41 @@
         android:background="@color/white_base"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/btnHomePosts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:backgroundTint="@color/base_gray"
+            android:paddingVertical="12dp"
             android:background="@drawable/unselected_tab"
-            android:drawableTop="@drawable/home_icon"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/unbounded_regular"
+            android:src="@drawable/home_posts_icon"
             android:gravity="center"
-            android:padding="4sp"
-            android:text="Posts"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_typography"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/btnHomeCourses"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:paddingVertical="12dp"
             android:background="@drawable/unselected_tab"
-            android:drawableTop="@drawable/courses_icon"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/unbounded_regular"
+            android:src="@drawable/home_courses_icon"
             android:gravity="center"
-            android:padding="4sp"
-            android:text="Cursos"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_typography"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/btnHomeProfile"
             android:layout_width="match_parent"
-
             android:layout_height="match_parent"
+            android:paddingVertical="6dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/unselected_tab"
-            android:drawableTop="@drawable/profile_icon"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/unbounded_regular"
+            android:src="@drawable/home_profile_icon"
             android:gravity="center"
-            android:padding="4sp"
-            android:text="Perfil"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_typography"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            />
     </LinearLayout>
 </LinearLayout>

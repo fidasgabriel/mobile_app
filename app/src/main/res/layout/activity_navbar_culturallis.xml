@@ -9,31 +9,32 @@
 
 
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:padding="16dp"
-            android:backgroundTint="@color/white_base"
-            android:background="@color/white_base">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_base"
+        android:backgroundTint="@color/white_base"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
         <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                app:srcCompat="@drawable/logo"
-                android:id="@+id/logotypeNavbar"
-        />
+            android:id="@+id/logotypeNavbar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:srcCompat="@drawable/logo" />
+
         <ImageView
-                android:layout_width="0dp"
-                android:layout_gravity="start"
-                android:layout_weight="2"
-                android:layout_height="36dp"
-                android:id="@+id/spacing"
-        />
+            android:id="@+id/spacing"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_gravity="start"
+            android:layout_weight="2" />
+
         <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:onClick="handleClickSettings"
-                app:srcCompat="@drawable/icon_settings_black"
-                android:id="@+id/settings"
-        />
+            android:id="@+id/settings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:onClick="handleClickSettings"
+            app:srcCompat="@drawable/icon_settings_black" />
 
     </LinearLayout>
 
@@ -43,7 +44,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:paddingLeft="32dp"
-        android:paddingRight="32dp"/>
+        android:paddingRight="32dp">
+
+    </FrameLayout>
 
     <LinearLayout
             android:orientation="horizontal"
@@ -61,12 +64,10 @@
                 android:gravity="center"
                 android:padding="4sp"
                 android:drawableTop="@drawable/home_icon"
-                android:text="Posts"
                 android:onClick="handleClickPostsHome"
                 android:textAllCaps="false"
                 android:drawableTint="@color/black"
                 android:textColor="@color/black"
-                android:textSize="10sp"
                 android:textStyle="bold"/>
         <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnHomeCourses"
@@ -80,7 +81,6 @@
                 android:gravity="center"
                 android:padding="4sp"
                 android:onClick="handleClickCoursesHome"
-                android:text="Cursos"
                 android:textAllCaps="false"
                 android:textColor="@color/gray_typography"
                 android:drawableTint="@color/black"
@@ -89,7 +89,6 @@
         <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnHomeProfile"
                 android:layout_weight="1"
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -100,7 +99,6 @@
                 android:onClick="handleClickProfileHome"
                 android:drawableTint="@color/black"
                 android:padding="4sp"
-                android:text="Perfil"
                 android:textAllCaps="false"
                 android:textColor="@color/gray_typography"
                 android:textSize="10sp"

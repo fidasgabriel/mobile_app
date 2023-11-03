@@ -1,26 +1,30 @@
-package com.example.culturallis.Controller.Queries;
-
-import android.util.Log;
+package com.example.culturallis.Controller.Mutations;
 
 import com.example.culturallis.Model.Global.Global;
 
-import okhttp3.*;
 import org.json.JSONObject;
 
-public class LoginUser {
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+public class ToggleLikeCourse {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private OkHttpClient client = new OkHttpClient();
+
     Global global = new Global();
-    public Response loginUser(String email, String password) throws Exception {
-        String url = global.getBaseUrl() + "/login";
+
+    public Response toggleLikeCourse(Long pk_id_course, String email) throws Exception {
+        String url = global.getBaseUrl() + "/salvarCurso/";
+
 
         JSONObject json = new JSONObject();
-        json.put("email", email);
-        json.put("senha", password);
 
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
-                .url(url)
+                .url(url + pk_id_course + "/" + email)
                 .post(body)
                 .build();
 
