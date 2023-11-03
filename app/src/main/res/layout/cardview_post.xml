@@ -11,6 +11,7 @@
         android:id="@+id/postImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:minHeight="300dp"
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -44,7 +45,7 @@
 
 
         <TextView
-            android:id="@+id/courseAuthor"
+            android:id="@+id/postAuthor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
