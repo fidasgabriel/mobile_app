@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Fragments.Loading;
 import com.example.culturallis.View.Fragments.ServerError;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
 public class SkeletonBlank extends AppCompatActivity {
 

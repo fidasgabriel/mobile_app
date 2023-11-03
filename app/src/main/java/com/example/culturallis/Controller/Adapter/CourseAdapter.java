@@ -67,13 +67,14 @@
 
             if (course.isLiked()){
                 animate(false, holder.likeButton, holder.itemView.getContext());
+                course.setLiked(true);
             }
 
             holder.likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     animate(course.isLiked(), holder.likeButton,holder.itemView.getContext());
-                    course.setLiked();
+                    course.setLiked(!course.isLiked());
                 }
             });
 
@@ -89,6 +90,15 @@
                 public void onClick(View v) {
                     Intent intent = new Intent(context, SkeletonCourseDetails.class);
                     context.startActivity(intent);
+                }
+            });
+
+            holder.courseImage.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    animate(false, holder.likeButton, holder.itemView.getContext());
+                    course.setLiked(true);
+                    return false;
                 }
             });
         }

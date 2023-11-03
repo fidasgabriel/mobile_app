@@ -190,15 +190,6 @@ public class LogIn extends AppCompatActivity {
                         enterToApplcation();
                     }
 
-//                    boolean saveLogin = true;
-//                        if(saveLogin){
-//                            userDAO.salvar(new LoginUserEntity("notSaved", "notSaved"));
-//                        }else{
-//                            userDAO.salvar(new LoginUserEntity("notSaved", "notSaved"));
-//                        }
-//                    Toast.makeText(LogIn.this, "Você está logado!", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(LogIn.this, HomeScreen.class));
-//                        finish();
                 } else {
                     edtTxtPassword.setText("");
                     Toast.makeText(LogIn.this, "Não foi possível logar sua conta, tente novamente.", Toast.LENGTH_SHORT).show();

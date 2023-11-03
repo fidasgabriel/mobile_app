@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.SuccessScreens.CompleteModuleSuccess;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
+import com.example.culturallis.View.Navbar.HomeScreen;
 import com.example.culturallis.View.Navbar.TopNavbarNoSettings;
 
 public class SkeletonSuccessModuleComplete extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class SkeletonSuccessModuleComplete extends AppCompatActivity {
     }
 
     public void changeCoursesHome(View view){
-        startActivity(new Intent(this, NavbarCulturallis.class));
+        startActivity(new Intent(this, HomeScreen.class));
         finish();
     }
 

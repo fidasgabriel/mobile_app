@@ -53,7 +53,7 @@ public class HomeScreen extends AppCompatActivity {
 
         rv = findViewById(R.id.recycleView);
         List<PostCard> listPostC = new ArrayList<>();
-        listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+        listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
         listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
         listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
 

@@ -42,8 +42,8 @@ public class CourseCard {
         return liked;
     }
 
-    public void setLiked() {
-        this.liked = !this.liked;
+    public void setLiked(boolean option) {
+        this.liked = option;
     }
 
     public void setPerfilImage(int perfilImage) {

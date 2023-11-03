@@ -54,16 +54,16 @@ public class PostCard {
         this.saved = saved;
     }
 
-    public void setLiked() {
-        this.liked = !liked;
+    public void setLiked(boolean option) {
+        this.liked = option;
     }
 
     public boolean isSaved() {
         return saved;
     }
 
-    public void setSaved() {
-        this.saved = !saved;
+    public void setSaved(boolean option) {
+        this.saved = option;
     }
 
     private boolean saved;

@@ -63,9 +63,6 @@
             android:name=".View.Entrance.LogOn"
             android:exported="false" />
         <activity
-            android:name=".View.Navbar.NavbarCulturallis"
-            android:exported="false" />
-        <activity
             android:name=".View.Skeletons.SkeletonCourseConcluded"
             android:exported="false" />
         <activity

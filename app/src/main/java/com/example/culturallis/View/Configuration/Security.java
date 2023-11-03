@@ -47,7 +47,6 @@ public class Security extends ModelAppScreens {
     Response responseUpdate;
     LoadingSettings loadingDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

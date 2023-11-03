@@ -29,6 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private List<PostCard> postsCards;
     private boolean havePerfilImage;
     private Context context;
+    private boolean isLarger;
 
     public PostAdapter(Context context){
         this.context = context;
@@ -55,21 +56,42 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
         holder.postImage.setImageResource(post.getPostImage());
         holder.perfilImage.setImageResource(post.getPerfilImage());
-        holder.postDescription.setText(post.getDescription());
+        String description = post.getDescription();
+        if (description.length() > 162){
+            String largerDescription = description;
+            String reducedDescription = description.substring(0,162) + "...";
+            description = reducedDescription;
+            holder.postDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String desc = largerDescription;
+                    if(isLarger) {
+                        desc = reducedDescription;
+                        isLarger = false;
+                    }else{
+                        isLarger = true;
+                    }
+                    holder.postDescription.setText(desc);
+                }
+            });
+        }
+        holder.postDescription.setText(description);
 
         if (post.isLiked()){
             animate(false, holder.likeButton, holder.itemView.getContext());
+            post.setLiked(true);
         }
 
         if(post.isSaved()){
             toSave(true, holder.saveButton,holder.itemView.getContext());
+            post.setSaved(true);
         }
 
         holder.likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 animate(post.isLiked(), holder.likeButton,holder.itemView.getContext());
-                post.setLiked();
+                post.setLiked(!post.isLiked());
             }
         });
 
@@ -77,7 +99,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             @Override
             public void onClick(View view) {
                 toSave(post.isSaved(), holder.saveButton,holder.itemView.getContext());
-                post.setSaved();
+                post.setSaved(!post.isSaved());
+            }
+        });
+
+        holder.postImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                animate(false, holder.likeButton, holder.itemView.getContext());
+                post.setLiked(true);
+                return false;
             }
         });
 

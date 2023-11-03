@@ -10,7 +10,6 @@ import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenAdquired;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbar;
 
 public class SkeletonCourseDetails extends AppCompatActivity {

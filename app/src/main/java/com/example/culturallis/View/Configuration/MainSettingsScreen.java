@@ -2,13 +2,11 @@ package com.example.culturallis.View.Configuration;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,9 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
-import android.net.Uri;
 import com.example.culturallis.View.Entrance.LogIn;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
+import com.example.culturallis.View.Navbar.HomeScreen;
 
 public class MainSettingsScreen extends ModelAppScreens {
 
@@ -42,7 +39,7 @@ public class MainSettingsScreen extends ModelAppScreens {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainSettingsScreen.this, NavbarCulturallis.class));
+                startActivity(new Intent(MainSettingsScreen.this, HomeScreen.class));
             }
         });
 
@@ -52,9 +49,6 @@ public class MainSettingsScreen extends ModelAppScreens {
                 back(v);
             }
             });
-
-
-
     }
 
     public void exitButton(View view){

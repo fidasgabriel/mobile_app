@@ -33,20 +33,16 @@ import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Fragments.NotConnected;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 import okhttp3.Response;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class PerfilEdit extends ModelAppScreens {
     private EditText edtTxtUserName;
