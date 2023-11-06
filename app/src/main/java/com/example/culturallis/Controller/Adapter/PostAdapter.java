@@ -92,7 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     .into(holder.postImage);
 
         }else{
-            Picasso.with(holder.postImage.getContext()).load(post.getPostImage()).into(holder.postImage);
+            Picasso.get().load(post.getPostImage()).into(holder.postImage);
         }
 
         if(!post.getPerfilImage().startsWith("http")){
@@ -103,7 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     .load(imageBitmapProfileOwner)
                     .into(holder.perfilImage);
         }else{
-            Picasso.with(holder.perfilImage.getContext()).load(post.getPerfilImage()).into(holder.perfilImage);
+            Picasso.get().load(post.getPerfilImage()).into(holder.perfilImage);
         }
 
         holder.postDescription.setText(post.getDescription());
