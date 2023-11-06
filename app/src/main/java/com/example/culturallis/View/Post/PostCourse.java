@@ -1,12 +1,7 @@
 package com.example.culturallis.View.Post;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.content.ContextCompat;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,9 +14,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 
-public class PostCourse extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class PostCourse extends ModelAppScreens {
     private int lastModule = 0;
     private LinearLayout moduleContainer;
     private Button addButton;
@@ -38,6 +44,9 @@ public class PostCourse extends AppCompatActivity {
     private Button post;
     private EditText desc;
     private boolean isPhotoLoaded = false;
+
+    private List<String> moduleTextsList = new ArrayList<>();
+    private EditText[] moduleEditTexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +65,8 @@ public class PostCourse extends AppCompatActivity {
         desc = findViewById(R.id.desc);
         post = findViewById(R.id.btnPostPublication);
 
+        moduleEditTexts = new EditText[maxModules];
+
         Toast.makeText(this, "*Só é possível inserir 7 módulos por curso*", Toast.LENGTH_LONG).show();
         addTextWatchers();
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +74,18 @@ public class PostCourse extends AppCompatActivity {
             public void onClick(View view) {
                 if (lastModule <= maxModules) {
                     lastModule++;
-                    addModelButton("Módulo " + lastModule);
+                    addModelButton("Módulo " + lastModule, lastModule - 1);
                     verifyFields();
                 } else {
                     addButton.setEnabled(false);
                     addButton.setBackground(getDrawable(R.drawable.disabled_button_background));
                 }
+            }
+        });
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back(v);
             }
         });
 
@@ -84,7 +101,8 @@ public class PostCourse extends AppCompatActivity {
     private void addTextWatchers() {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -92,7 +110,8 @@ public class PostCourse extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         };
 
         category.addTextChangedListener(textWatcher);
@@ -109,13 +128,13 @@ public class PostCourse extends AppCompatActivity {
         boolean atLeastOneModuleAdded = lastModule > 0;
 
         if (fieldsNotEmpty && isPhotoLoaded && atLeastOneModuleAdded) {
-            post.setBackground(getDrawable(R.drawable.tag_category_blue ));
+            post.setBackground(getDrawable(R.drawable.tag_category_blue));
         } else {
             post.setBackground(getDrawable(R.drawable.disabled_button_background));
         }
     }
 
-    private void addModelButton(String text) {
+    private void addModelButton(String text, Integer index) {
         AppCompatButton modelButton = new AppCompatButton(this);
         modelButton.setText(text);
 
@@ -138,12 +157,21 @@ public class PostCourse extends AppCompatActivity {
         Drawable[] drawables = modelButton.getCompoundDrawables();
         modelButton.setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3]);
 
+        modelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ModalButton(view, index);
+            }
+        });
+
         moduleContainer.addView(modelButton, moduleContainer.indexOfChild(addButton));
 
         if (lastModule >= maxModules) {
             addButton.setEnabled(false);
             addButton.setBackground(getDrawable(R.drawable.disabled_button_background));
         }
+
+        moduleEditTexts[lastModule - 1] = new EditText(this);
     }
 
     @Override
@@ -157,5 +185,45 @@ public class PostCourse extends AppCompatActivity {
             isPhotoLoaded = true;
             verifyFields();
         }
+    }
+
+    public void ModalButton(View view, Integer index) {
+        final Context context = this;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.modal_course, null);
+        builder.setView(dialogView);
+
+        Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
+        Button btnConfirm = dialogView.findViewById(R.id.btn_confirm);
+        EditText editTextInModal = dialogView.findViewById(R.id.editTextURL);
+
+        if (lastModule > 0 && lastModule <= maxModules) {
+            editTextInModal.setText(moduleEditTexts[index].getText().toString());
+        }
+
+        final AlertDialog dialog = builder.create();
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = editTextInModal.getText().toString();
+
+                if (lastModule > 0 && lastModule <= maxModules) {
+                    moduleEditTexts[index].setText(text);
+//                    Toast.makeText(context, "Texto salvo: " + text, Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+                Toast.makeText(context, "" + index, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
     }
 }

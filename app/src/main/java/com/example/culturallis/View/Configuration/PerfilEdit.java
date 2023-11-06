@@ -87,7 +87,7 @@ public class PerfilEdit extends ModelAppScreens {
         imgUser = findViewById(R.id.chgPerfil);
         txtChangePhotoProfile = findViewById(R.id.chgPerfilButton);
 
-        Picasso.with(this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
+        Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
 
         try {
             loadingDialog = new LoadingSettings(this);
@@ -286,8 +286,8 @@ public class PerfilEdit extends ModelAppScreens {
                             .into(imgUser);
                 }
                 else{
-                    android.widget.Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
-                    Picasso.with(PerfilEdit.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
+                    android.widget.Toast.makeText(PerfilEdit.this, "ok", Toast.LENGTH_SHORT).show();
+                    Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
                 }
                 if(user.getBio() != null){
                     editTextBio.setText(user.getBio().toString());

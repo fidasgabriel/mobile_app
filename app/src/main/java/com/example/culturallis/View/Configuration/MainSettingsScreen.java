@@ -38,9 +38,6 @@ public class MainSettingsScreen extends ModelAppScreens {
         titleTextView.setText("Configurações");
 
 
-
-
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
