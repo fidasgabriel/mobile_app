@@ -38,7 +38,7 @@ public class TermsOfService extends ModelAppScreens {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(TermsOfService.this, MainSettingsScreen.class));
+                finish();
             }
         });
 
