@@ -5,12 +5,14 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.Loading;
 import com.example.culturallis.View.Fragments.ServerError;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
-public class SkeletonBlank extends AppCompatActivity {
+public class SkeletonBlank extends ModelAppScreens {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,8 @@ public class SkeletonBlank extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void finishErrorScreen(View view){
-        finish();
+    public void finishErrorScreen(View v){
+        back(v);
     }
 
 }
