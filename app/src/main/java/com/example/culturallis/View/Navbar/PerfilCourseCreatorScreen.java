@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -43,6 +44,7 @@ import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
 import com.example.culturallis.View.Fragments.FilterPerfil;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 
@@ -135,7 +137,7 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
         listPostC = new ArrayList<>();
 
-        Picasso.with(imgUserPhoto.getContext()).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
+        Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
 
         try {
             loadingDialog = new LoadingSettings(PerfilCourseCreatorScreen.this);
@@ -432,7 +434,7 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                             .load(imageBitmap)
                             .into(imgUserPhoto);
                 }else{
-                    Picasso.with(PerfilCourseCreatorScreen.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
+                    Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
                 }
                 if(user.getBio() != null){
                     txtUserBio.setText(user.getBio().toString());
@@ -447,4 +449,5 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
             }
         }
     }
+
 }

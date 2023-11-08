@@ -267,7 +267,7 @@ public class SkeletonSelectedItem extends AppCompatActivity {
                             .into(imgProfile);
 
                 }else{
-                    Picasso.with(SkeletonSelectedItem.this).load(courseSelected.getCourseOwnerFoto()).into(imgProfile);
+                    Picasso.get().load(courseSelected.getCourseOwnerFoto()).into(imgProfile);
                 }
 
                 price = courseSelected.getPreco();
@@ -285,7 +285,7 @@ public class SkeletonSelectedItem extends AppCompatActivity {
                             .into(imgView);
 
                 }else{
-                    Picasso.with(SkeletonSelectedItem.this).load(courseSelected.getUrl_midia()).into(imgView);
+                    Picasso.get().load(courseSelected.getUrl_midia()).into(imgView);
                 }
             }
         }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -28,9 +29,13 @@ import com.example.culturallis.Model.Entity.PostCard;
 import com.example.culturallis.Model.PostsHome.PostsHome;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Configuration.PerfilEdit;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Fragments.NotConnected;
+import com.example.culturallis.View.Post.PostCourse;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +51,12 @@ public class CourseScreen extends AppCompatActivity {
 
     private UserDAO userDAO = new UserDAO(this);
 
+    protected FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_screen);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
 
         SpannableString underline = new SpannableString("Carregar mais");
         UnderlineSpan underlineSpan = new UnderlineSpan();
@@ -57,6 +64,13 @@ public class CourseScreen extends AppCompatActivity {
 
         TextView linkLogon = findViewById(R.id.linkCarregar);
         linkLogon.setText(underline);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CourseScreen.this, PostCourse.class));
+            }
+        });
 
         linkLogon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +115,7 @@ public class CourseScreen extends AppCompatActivity {
 //                startActivity(new Intent(CourseScreen.this, SkeletonSelectedItem.class));
 //            }
 //        });
+
     }
 
     private class GetCoursesRandonly extends AsyncTask<String, Void, List<CoursesHome>> {
@@ -136,4 +151,5 @@ public class CourseScreen extends AppCompatActivity {
             }
         }
     }
+
 }

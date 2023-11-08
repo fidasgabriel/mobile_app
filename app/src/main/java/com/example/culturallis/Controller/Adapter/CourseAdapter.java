@@ -90,7 +90,7 @@
                         .into(holder.courseImage);
 
             }else{
-                Picasso.with(holder.courseImage.getContext()).load(course.getCourseImage()).into(holder.courseImage);
+                Picasso.get().load(course.getCourseImage()).into(holder.courseImage);
             }
 
             if(!course.getPerfilImage().startsWith("http")){
@@ -102,7 +102,7 @@
                         .into(holder.perfilImage);
 
             }else{
-                Picasso.with(holder.perfilImage.getContext()).load(course.getPerfilImage()).into(holder.perfilImage);
+                Picasso.get().load(course.getPerfilImage()).into(holder.perfilImage);
             }
 
             String title = course.getCourseTitle();

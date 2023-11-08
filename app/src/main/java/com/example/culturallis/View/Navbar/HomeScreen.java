@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -26,6 +27,7 @@ import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Post.PostPublication;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -117,7 +119,6 @@ public class HomeScreen extends ModelAppScreens {
 
         postAdapter.setData(listPostC, true);
         rv.setAdapter(postAdapter);
-
     }
 
     private class GetPostsHomeScreen extends AsyncTask<String, Void, List<PostsHome>> {

@@ -34,6 +34,8 @@ import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Mutations.CreatePost;
 import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Mutations.UpdateUser;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
@@ -69,6 +71,10 @@ public class PostPublication extends ModelAppScreens {
 
     Response responseCreatePost;
 
+    private UserDAO userDAO = new UserDAO(this);
+
+    private LoginUserEntity user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +86,8 @@ public class PostPublication extends ModelAppScreens {
         txtDescription = findViewById(R.id.desc);
         btn = findViewById(R.id.btnPostPublication);
         currentUser = new Usuario();
+
+        user = userDAO.getLogin();
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +121,7 @@ public class PostPublication extends ModelAppScreens {
                     }else{
                         base64Image = currentUser.getUrl_foto();
                     }
-                    currentUser.setEmail("ana.damasceno@gmail.com");
+                    currentUser.setEmail(user.getEmail());
                     new CreatePostUser().execute(
                             currentUser.getEmail(),
                             base64Image,

@@ -21,8 +21,15 @@ public class SkeletonPaymentCourse extends AppCompatActivity {
         TopNavbarNoSettings topNavbar = new TopNavbarNoSettings();
         PaymentCourse paymentCourse = new PaymentCourse();
 
+        Bundle bundle = new Bundle();
+        Bundle b = getIntent().getExtras();
+
+        bundle.putDouble("preco", b.getDouble("preco"));
+        bundle.putInt("curso", b.getInt("curso"));
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.navbar, topNavbar);
+        paymentCourse.setArguments(bundle);
         transaction.replace(R.id.content, paymentCourse);
         transaction.commit();
     }

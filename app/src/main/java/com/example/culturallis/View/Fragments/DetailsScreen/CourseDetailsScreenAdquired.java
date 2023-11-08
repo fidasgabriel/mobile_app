@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
@@ -18,10 +19,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.culturallis.Controller.Adapter.ListModulesAdapter;
 import com.example.culturallis.Controller.Queries.GetCourseInfo;
 import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.CourseDetails.CourseDetails;
 import com.example.culturallis.Model.Entity.LoginUserEntity;
+import com.example.culturallis.Model.Modules.Modules;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.LoadingSettings;
@@ -31,6 +34,8 @@ import com.example.culturallis.View.Skeletons.SkeletonSuccessModuleComplete;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -88,7 +93,7 @@ public class CourseDetailsScreenAdquired extends Fragment {
     TextView textView;
     TextView txtUser;
     ImageView img;
-
+    ListView listView;
     ImageView imgUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,17 +114,13 @@ public class CourseDetailsScreenAdquired extends Fragment {
             e.printStackTrace();
         }
 
+        listView = view.findViewById(R.id.listModules);
+
         textView = view.findViewById(R.id.titleCourse);
         img = view.findViewById(R.id.courseMainImage);
         txtUser = view.findViewById(R.id.useNameTxt);
         CardView cardView = view.findViewById(R.id.cardProf);
         imgUser = view.findViewById(R.id.perfilImage);
-        AppCompatButton txtModule1Title = view.findViewById(R.id.modulo1);
-        AppCompatButton txtModule2Title = view.findViewById(R.id.modulo2);
-        AppCompatButton txtModule3Title = view.findViewById(R.id.modulo3);
-        AppCompatButton txtModule4Title = view.findViewById(R.id.modulo4);
-        AppCompatButton txtModule5Title = view.findViewById(R.id.modulo5);
-        AppCompatButton txtModule6Title = view.findViewById(R.id.modulo6);
 
         int[] colorBorderSelected = {
                 R.drawable.border_image_blue,
@@ -152,12 +153,6 @@ public class CourseDetailsScreenAdquired extends Fragment {
 
         img.setBackground(getResources().getDrawable(randomBorderSelected));
         cardView.setCardBackgroundColor(getResources().getColor(randomAvatarBorder));
-        txtModule1Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule2Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule3Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule4Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule5Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule6Title.setBackground(getResources().getDrawable(randomTagColor));
 
         return view;
     }
@@ -207,7 +202,7 @@ public class CourseDetailsScreenAdquired extends Fragment {
                             .into(imgUser);
 
                 }else{
-                    Picasso.with(getContext()).load(courseSelected.getCourseOwnerFoto()).into(imgUser);
+                    Picasso.get().load(courseSelected.getCourseOwnerFoto()).into(imgUser);
                 }
                 if(!courseSelected.getUrl_midia().startsWith("http")){
                     byte[] decodedImagePost = Base64.decode(courseSelected.getUrl_midia(), Base64.DEFAULT);
@@ -218,8 +213,18 @@ public class CourseDetailsScreenAdquired extends Fragment {
                             .into(img);
 
                 }else{
-                    Picasso.with(getContext()).load(courseSelected.getUrl_midia()).into(img);
+                    Picasso.get().load(courseSelected.getUrl_midia()).into(img);
                 }
+
+                List<String> ls = new ArrayList<>();
+
+                for(Modules modules : courseSelected.getModulos()){
+                    ls.add(modules.getUrl_material());
+                }
+
+                ListModulesAdapter listModulesAdapter = new ListModulesAdapter(requireContext(), R.layout.activity_layout_modules_list, ls);
+                listView.setAdapter(listModulesAdapter);
+
             }
         }
     }
