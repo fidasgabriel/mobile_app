@@ -22,6 +22,8 @@ import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Post.PostCourse;
 import com.example.culturallis.View.Post.PostPublication;
 
+import java.net.URI;
+
 public class MainSettingsScreen extends ModelAppScreens {
 
     @Override
@@ -95,9 +97,9 @@ public class MainSettingsScreen extends ModelAppScreens {
         startActivity(new Intent(this, PerfilEdit.class));
     }
     public void changeToHelpCenter(View view){
-        Intent intent = new Intent(this, PostCourse.class);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("mailto:" + "apoliz.cultura@gmail.com"));
         startActivity(intent);
-//        Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
     }
     public void changeToLanding(View view){
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://culturallis.onrender.com/")));

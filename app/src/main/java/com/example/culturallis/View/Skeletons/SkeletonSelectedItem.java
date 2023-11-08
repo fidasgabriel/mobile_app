@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
@@ -18,7 +20,7 @@ import com.example.culturallis.View.Navbar.TopNavbar;
 
 import java.util.Random;
 
-public class SkeletonSelectedItem extends AppCompatActivity {
+public class SkeletonSelectedItem extends ModelAppScreens {
 
 
     @Override
@@ -95,18 +97,18 @@ public class SkeletonSelectedItem extends AppCompatActivity {
         txtDescriptionCourse.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.");
     }
 
-    public void changeMainSettings(View view){
+    public void changeMainSettings(View v){
         startActivity(new Intent(this, MainSettingsScreen.class));
-        finish();
+        back(v);
     }
 
-    public void changeCoursesHome(View view){
+    public void changeCoursesHome(View v){
         startActivity(new Intent(this, NavbarCulturallis.class));
-        finish();
+        back(v);
     }
 
-    public void adquireCourse(View view){
+    public void adquireCourse(View v){
         startActivity(new Intent(this, SkeletonPaymentCourse.class));
-        finish();
+        back(v);
     }
 }

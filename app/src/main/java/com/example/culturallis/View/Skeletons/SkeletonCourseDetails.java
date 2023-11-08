@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
@@ -13,7 +15,7 @@ import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenA
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbar;
 
-public class SkeletonCourseDetails extends AppCompatActivity {
+public class SkeletonCourseDetails extends ModelAppScreens {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,9 @@ public class SkeletonCourseDetails extends AppCompatActivity {
         finish();
     }
 
-    public void changeMainSettings(View view){
+    public void changeMainSettings(View v){
         startActivity(new Intent(this, MainSettingsScreen.class));
-        finish();
+        back(v);
     }
 
     public void concludeModule(View view) {
