@@ -43,7 +43,6 @@ public class LogIn extends AppCompatActivity {
     private String email;
     private String password;
     private boolean autoLogin = false;
-
     Response responseLogin;
 
     @Override
@@ -64,17 +63,6 @@ public class LogIn extends AppCompatActivity {
         TextView linkLogon = findViewById(R.id.linkLogon);
 
         linkLogon.setText(underline);
-
-        LoginUserEntity user = userDAO.getLogin();
-        if(user != null && !Objects.equals(user.getPassword(), "<NOT_SAVED>")){
-            String savedEmail = user.getEmail();
-            String savedPassword = user.getPassword();
-            edtTxtEmail.setBackgroundResource(R.drawable.auto_login_edittext);
-            edtTxtPassword.setBackgroundResource(R.drawable.auto_login_edittext);
-            edtTxtEmail.setText(savedEmail);
-            edtTxtPassword.setText(savedPassword);
-            autoLogin = true;
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -144,12 +132,18 @@ public class LogIn extends AppCompatActivity {
     }
 
         public void login(View view) {
-            String password = edtTxtPassword.getText().toString().trim();
-            String email = edtTxtEmail.getText().toString().trim();
+            password = edtTxtPassword.getText().toString().trim();
+            email = edtTxtEmail.getText().toString().trim();
             if (password.length() > 0 && email.length() > 0) {
-                loadingDialog = new LoadingSettings(this);
-                loadingDialog.show();
-                new LoginUserGet().execute(email, password);
+                boolean isInSQLite = userDAO.validateLogin(email,password);
+                if(isInSQLite){
+                    userDAO.setCurrentUser(email);
+                    enterToApplcation();
+                }else {
+                    loadingDialog = new LoadingSettings(this);
+                    loadingDialog.show();
+                    new LoginUserGet().execute(email, password);
+                }
             }else{
                 Toast.makeText(LogIn.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             }
@@ -181,15 +175,9 @@ public class LogIn extends AppCompatActivity {
                     loadingDialog.dismiss();
                 }
                 if (success) {
-                    LoginUserEntity user = userDAO.getLogin();
-                    if(user == null){
-                        SaveLoginDialog dialogFragment = new SaveLoginDialog();
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        dialogFragment.show(fragmentManager, "SaveLoginDialog");
-                    } else{
-                        enterToApplcation();
-                    }
-
+                    userDAO.salvar(new LoginUserEntity(email, password));
+                    userDAO.setCurrentUser(email);
+                    enterToApplcation();
                 } else {
                     edtTxtPassword.setText("");
                     Toast.makeText(LogIn.this, "Não foi possível logar sua conta, tente novamente.", Toast.LENGTH_SHORT).show();

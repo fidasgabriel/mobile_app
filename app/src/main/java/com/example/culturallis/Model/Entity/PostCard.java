@@ -1,7 +1,4 @@
 package com.example.culturallis.Model.Entity;
-
-import android.graphics.drawable.AnimatedVectorDrawable;
-
 public class PostCard {
 
     private Long pk_id;
@@ -88,10 +85,6 @@ public class PostCard {
 
     public boolean isSaved() {
         return saved;
-    }
-
-    public void setSaved(boolean option) {
-        this.saved = option;
     }
 
     private boolean saved;

@@ -46,6 +46,7 @@ public class Security extends ModelAppScreens {
     Usuario currentUser;
     Response responseUpdate;
     LoadingSettings loadingDialog;
+    String currentEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,10 @@ public class Security extends ModelAppScreens {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.left_arrow);
 
+        currentEmail = userDAO.getCurrentEmail();
+
         TextView titleTextView = findViewById(R.id.tbTitle);
-        titleTextView.setText("Segurança");
+        titleTextView.setText("Dados Pessoais");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,12 +122,11 @@ public class Security extends ModelAppScreens {
         edtTxtConfirmPassword.addTextChangedListener(verificationPsw);
         edtTxtPassword.addTextChangedListener(verificationPsw);
 
-        LoginUserEntity user = userDAO.getLogin();
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail(user.getEmail());
+            currentUser.setEmail(currentEmail);
             new Security.GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
@@ -182,6 +184,7 @@ public class Security extends ModelAppScreens {
             String confirmPassword = edtTxtConfirmPassword.getText().toString().trim();
             boolean passwordsValid = (password.equals(confirmPassword) && password.trim().length() >= 8 && password.trim().length() <= 20);
             if(!lastPassword.isEmpty() && passwordsValid){
+                userDAO.changePassword(currentEmail,confirmPassword);
                 new Security.UpdateUserInfoSensibility().execute(
                         edtTxtEmail.getText().toString(),
                         edtTxtTel.getText().toString(),
@@ -196,7 +199,7 @@ public class Security extends ModelAppScreens {
                         edtTxtTel.getText().toString(),
                         edtTxtCPF.getText().toString().replace("-", "").replace("_", "").replace(".", ""),
                         currentUser.getSenha());
-                Toast.makeText(Security.this, "Não é possível aterar sua senha pois não atendeu aos requisitos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Security.this, "Não é possível alterar sua senha pois não atendeu aos requisitos.", Toast.LENGTH_SHORT).show();
                 if(edtTxtCPF.getText().toString().replace("-", "").replace("_", "").replace(".", "").toString().length() > 11){
                     Toast.makeText(Security.this, "CPF/CNPJ ultrapassou o limite de caracteres", Toast.LENGTH_SHORT).show();
                 }

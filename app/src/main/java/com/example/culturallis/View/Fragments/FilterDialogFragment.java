@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.culturallis.Model.Entity.CourseCard;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Navbar.PerfilCourseCreatorScreen;
 import com.example.culturallis.View.Navbar.PerfilScreen;
 
 import java.lang.reflect.Array;
@@ -36,7 +37,7 @@ public class FilterDialogFragment extends DialogFragment {
         builder.setTitle("Filtrar Por:")
                 .setItems(listItems, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        ((PerfilScreen) getActivity()).addFilterRecycleView(type, which);
+                        ((PerfilCourseCreatorScreen) getActivity()).addFilterRecycleView(type, which);
                     }
                 });
         return builder.create();

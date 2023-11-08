@@ -1,24 +1,18 @@
 package com.example.culturallis.Controller.Adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.telecom.InCallService;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -27,24 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Mutations.ToggleLikePost;
-import com.example.culturallis.Controller.Mutations.UpdateUser;
-import com.example.culturallis.Model.Entity.CourseCard;
+import com.example.culturallis.Controller.Mutations.ToggleSavePost;
+import com.example.culturallis.Controller.Mutations.ToggleUnSavePost;
+import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.Entity.PostCard;
-import com.example.culturallis.Model.LikePostsAndCourses;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.PerfilEdit;
-import com.example.culturallis.View.Fragments.LoadingSettings;
-import com.example.culturallis.View.Navbar.HomeScreen;
-import com.example.culturallis.View.Navbar.PerfilCourseCreatorScreen;
-import com.example.culturallis.View.Skeletons.SkeletonBlank;
-import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
-import com.squareup.picasso.Downloader;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import okhttp3.Response;
@@ -55,18 +39,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private boolean havePerfilImage;
     private Context context;
     private boolean isLarger;
-
-    LoadingSettings loadingDialog;
     Usuario currentUser;
+    private UserDAO userDAO;
 
     public PostAdapter(Context context){
         this.context = context;
+        userDAO = new UserDAO(context);
     }
 
     public void setData(List<PostCard> postsCards, boolean havePerfilImage) {
         this.postsCards = postsCards;
         this.havePerfilImage = havePerfilImage;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -131,13 +114,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         if (post.isLiked()){
             animate(false, holder.likeButton, holder.itemView.getContext());
-            post.setLiked(true);
         }
 
         if(post.isSaved()){
-            toSave(true, holder.saveButton,holder.itemView.getContext());
-            post.setSaved(true);
+            toSave(false, holder.saveButton,holder.itemView.getContext());
         }
+
+        String currentEmail = userDAO.getCurrentEmail();
 
         holder.likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +130,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
                 try {
                     currentUser = new Usuario();
-                    currentUser.setEmail("ana.damasceno@gmail.com");
+                    currentUser.setEmail(currentEmail);
                     new PostAdapter.ToggleLikePosts().execute(post.getPk_id().toString());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -159,6 +142,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             @Override
             public void onClick(View view) {
                 toSave(post.isSaved(), holder.saveButton,holder.itemView.getContext());
+                    try {
+                        currentUser = new Usuario();
+                        currentUser.setEmail(currentEmail);
+                        new PostAdapter.ToggleSavePosts().execute(post.getPk_id().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 post.setSaved(!post.isSaved());
             }
         });
@@ -201,8 +191,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     {
         Drawable drawable
                 = isSaved
-                ?  context.getDrawable(R.drawable.perfil_saved_icon)
-                :  context.getDrawable(R.drawable.post_save_icon_empty);
+                ?  context.getDrawable(R.drawable.post_save_icon_empty)
+                :  context.getDrawable(R.drawable.perfil_saved_icon);
         img.setImageDrawable(drawable);
         int purple =  ContextCompat.getColor(context, R.color.saved_icon_purple);
         img.setColorFilter(purple, PorterDuff.Mode.SRC_IN);
@@ -261,12 +251,33 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         @Override
         protected void onPostExecute(Boolean success) {
+        }
+    }
 
-            if (success) {
-                Toast.makeText(context, "Sucesso!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "Problemas ao realizar sua ação", Toast.LENGTH_SHORT).show();
+    private class ToggleSavePosts extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... params) {
+            if (params.length != 1) {
+                return false;
             }
+
+            String pk_id_post = params[0];
+
+            try {
+                Response responseToggle = new ToggleSavePost().toggleSave(Long.valueOf(pk_id_post), currentUser.getEmail());
+                if (responseToggle != null) {
+                    if (responseToggle.isSuccessful()) {
+                        return true;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
         }
     }
 }

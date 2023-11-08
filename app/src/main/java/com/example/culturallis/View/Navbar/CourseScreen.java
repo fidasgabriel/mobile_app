@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Controller.Queries.GetCoursesHome;
 import com.example.culturallis.Controller.Queries.GetPostsRandomly;
+import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.CoursesHome.CoursesHome;
 import com.example.culturallis.Model.Entity.CourseCard;
 import com.example.culturallis.Model.Entity.PostCard;
@@ -39,10 +40,9 @@ public class CourseScreen extends AppCompatActivity {
     List<CourseCard> listCourseC;
 
     CourseAdapter courseAdapter;
-
     LoadingSettings loadingDialog;
     Usuario currentUser;
-
+    UserDAO userDAO = new UserDAO(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +86,8 @@ public class CourseScreen extends AppCompatActivity {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
+            String currentEmail = userDAO.getCurrentEmail();
+            currentUser.setEmail(currentEmail);
             new CourseScreen.GetCoursesRandonly().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,5 +134,10 @@ public class CourseScreen extends AppCompatActivity {
                 Toast.makeText(CourseScreen.this, "Ocorreu um erro ao pegar os cursos", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void resetRV(){
+        finish();
+        startActivity(getIntent());
     }
 }

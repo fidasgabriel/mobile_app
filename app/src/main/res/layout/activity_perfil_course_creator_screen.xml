@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayoutt"
+        android:id="@+id/parentScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.core.widget.NestedScrollView
@@ -83,12 +83,13 @@
                     </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/perfilDescription"
                         android:layout_width="320dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
                         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
+                        android:textAlignment="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.494"
                         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +103,7 @@
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView13">
+                        app:layout_constraintTop_toBottomOf="@+id/perfilDescription">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -155,6 +156,12 @@
                     android:layout_height="wrap_content">
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/notFoundLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </RelativeLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/chgContent"
                     android:layout_width="match_parent"
@@ -162,17 +169,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="64dp"
                     android:paddingHorizontal="24dp"
-                    />
-
-                <TextView
-                    android:id="@+id/linkCarregar"
-                    android:layout_width="match_parent"
-                    android:textAlignment="center"
-                    android:textSize="14dp"
-                    android:layout_height="wrap_content"
-                    android:text="Carregar Mais"
-                    android:layout_marginBottom="64dp"
-                    android:textColor="@color/base_blue"
                     />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

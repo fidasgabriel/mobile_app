@@ -66,10 +66,6 @@ public class CourseCard {
         return liked;
     }
 
-    public void setLiked(boolean option) {
-        this.liked = option;
-    }
-
     public void setPerfilImage(String perfilImage) {
         this.perfilImage = perfilImage;
     }

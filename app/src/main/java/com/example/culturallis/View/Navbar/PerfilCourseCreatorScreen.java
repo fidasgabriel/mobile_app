@@ -1,6 +1,7 @@
 package com.example.culturallis.View.Navbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,41 +16,36 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Controller.Adapter.PostAdapter;
+import com.example.culturallis.Controller.Queries.GetAcquiredCoursesRamdonly;
+import com.example.culturallis.Controller.Queries.GetOwnCoursesRamdonly;
+import com.example.culturallis.Controller.Queries.GetSavedPostsRamdonly;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.CoursesHome.CoursesHome;
 import com.example.culturallis.Model.Entity.CourseCard;
 import com.example.culturallis.Model.Entity.PostCard;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Fragments.BlankPerfilRecycle;
 import com.example.culturallis.View.Fragments.FilterPerfil;
 
 import com.example.culturallis.Controller.Queries.GetOwnPostsRamdonly;
-import com.example.culturallis.Controller.Queries.GetPostsRandomly;
 import com.example.culturallis.Controller.Queries.GetUserInfo;
-import com.example.culturallis.Model.Entity.CourseCard;
-import com.example.culturallis.Model.Entity.PostCard;
 import com.example.culturallis.Model.PostsHome.PostsHome;
 import com.example.culturallis.Model.Usuario.Usuario;
-import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.PerfilEdit;
-import com.example.culturallis.View.Fragments.FilterPerfil;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -64,49 +60,42 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
     public List<CourseCard> listCreatedCourseC;
     private boolean isListCourseCReversed = false;
     private boolean savedIsPost = true;
-
+    private UserDAO userDAO = new UserDAO(this);
+    RelativeLayout parentScreen;
     LoadingSettings loadingDialog;
     Usuario currentUser;
     List<PostCard> listPostC;
     PostAdapter postAdapter;
-
+    CourseAdapter courseAdapter;
     TextView txtUsername;
-
     TextView txtUserBio;
-
     ImageView imgUserPhoto;
+    FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_course_creator_screen);
 
+//        parentScreen = findViewById(R.id.parentScreen);
+//        LinearLayout.LayoutParams layoutParamsHeightMatchParent = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//        LinearLayout.LayoutParams layoutParamsHeightWrapContent = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
+//        parentScreen.setLayoutParams(layoutParamsHeightMatchParent);
 
         Random rand = new Random();
 
         DownNavbar downNav = new DownNavbar().newInstance(3);
         TopNavbar topNav = new TopNavbar();
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.topNav, topNav);
         transaction.replace(R.id.downNav, downNav);
         transaction.commit();
 
-        txtUserBio = findViewById(R.id.textView13);
+        txtUserBio = findViewById(R.id.perfilDescription);
         txtUsername = findViewById(R.id.userName);
         imgUserPhoto = findViewById(R.id.perfilImage);
-        SpannableString underline = new SpannableString("Carregar mais");
-        UnderlineSpan underlineSpan = new UnderlineSpan();
-        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        TextView linkLogon = findViewById(R.id.linkCarregar);
-        linkLogon.setText(underline);
-
-        linkLogon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Colocar aqui a lógica para carregar mais 5 cards
-            }
-        });
 
         ImageView left_arrow = findViewById(R.id.leftArrow);
         left_arrow.setOnClickListener(new View.OnClickListener() {
@@ -137,11 +126,12 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
         Picasso.with(imgUserPhoto.getContext()).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
 
+        String currentEmail = userDAO.getCurrentEmail();
         try {
             loadingDialog = new LoadingSettings(PerfilCourseCreatorScreen.this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
+            currentUser.setEmail(currentEmail);
             new PerfilCourseCreatorScreen.GetUserProfileTask().execute(currentUser.getEmail());
             new PerfilCourseCreatorScreen.GetOwnPostsHomeScreen().execute(currentUser.getEmail());
         } catch (Exception e) {
@@ -150,8 +140,8 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
         postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
 
-        postAdapter.setData(listPostC, false);
-        rv.setAdapter(postAdapter);
+//        postAdapter.setData(listPostC, false);
+//        rv.setAdapter(postAdapter);
 
 
         perfilHome.setOnClickListener(new View.OnClickListener() {
@@ -169,25 +159,21 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
-                 listPostC = new ArrayList<>();
+                listPostC = new ArrayList<>();
 
                 try {
                     loadingDialog = new LoadingSettings(PerfilCourseCreatorScreen.this);
                     loadingDialog.show();
                     currentUser = new Usuario();
-                    currentUser.setEmail("ana.damasceno@gmail.com");
+                    currentUser.setEmail(currentEmail);
                     new PerfilCourseCreatorScreen.GetOwnPostsHomeScreen().execute(currentUser.getEmail());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                 postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
+                postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
 
-                postAdapter.setData(listPostC, false);
-                rv.setAdapter(postAdapter);
-
-
-                if(fragment != null) {
+                if (fragment != null) {
                     transaction = fragmentManager.beginTransaction();
                     transaction.remove(fragment);
                     transaction.commit();
@@ -209,25 +195,26 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 perfilSaved.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
 
                 listCourseC = new ArrayList<>();
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
 
-                CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
+                try {
+                    loadingDialog = new LoadingSettings(PerfilCourseCreatorScreen.this);
+                    loadingDialog.show();
+                    currentUser = new Usuario();
+                    currentUser.setEmail(currentEmail);
+                    new PerfilCourseCreatorScreen.GetAcquiredCourses().execute(currentUser.getEmail());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                courseAdapter.setData(listCourseC, false);
-                rv.setAdapter(courseAdapter);
+                courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
 
-                Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
+                Fragment fragmentFilter = fragmentManager.findFragmentById(R.id.filterLayout);
 
-                if (fragment == null) {
+                if (fragmentFilter == null) {
                     transaction = fragmentManager.beginTransaction();
                     transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(1));
                     transaction.commit();
                 }
-//                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
-//                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);
-//                perfilCourseTransaction.commit();
             }
         });
 
@@ -244,14 +231,19 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 perfilCourseCreated.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
                 perfilSaved.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
 
-                listCreatedCourseC = new ArrayList<>();
+                listCourseC = new ArrayList<>();
 
+                try {
+                    loadingDialog = new LoadingSettings(PerfilCourseCreatorScreen.this);
+                    loadingDialog.show();
+                    currentUser = new Usuario();
+                    currentUser.setEmail(currentEmail);
+                    new PerfilCourseCreatorScreen.GetOwnCourses().execute(currentUser.getEmail());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
-
-                courseAdapter.setData(listCreatedCourseC, false);
-                rv.setAdapter(courseAdapter);
-
+                courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
                 if (fragment == null) {
@@ -259,10 +251,6 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                     transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(2));
                     transaction.commit();
                 }
-
-//                FragmentTransaction perfilCourseTransaction = getSupportFragmentManager().beginTransaction();
-//                perfilCourseTransaction.replace(R.id.chgContent, coursesScroll);
-//                perfilCourseTransaction.commit();
             }
         });
 
@@ -279,51 +267,49 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 perfilCourseCreated.setColorFilter(blackColor, PorterDuff.Mode.SRC_IN);
                 perfilSaved.setColorFilter(cianColor, PorterDuff.Mode.SRC_IN);
 
-                if(savedIsPost){
-                    List<PostCard> listPostC = new ArrayList<>();
-//                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
-//                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
-//                    listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
+                listPostC = new ArrayList<>();
 
-                    PostAdapter postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
-
-                    postAdapter.setData(listPostC, true);
-                    rv.setAdapter(postAdapter);
-                }else{
-                    listCourseC = new ArrayList<>();
-//                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
-//                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
-//                    listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
-
-                    CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
-
-                    courseAdapter.setData(listCourseC, false);
-                    rv.setAdapter(courseAdapter);
+                try {
+                    loadingDialog = new LoadingSettings(PerfilCourseCreatorScreen.this);
+                    loadingDialog.show();
+                    currentUser = new Usuario();
+                    currentUser.setEmail(currentEmail);
+                    new PerfilCourseCreatorScreen.GetOwnSavedPosts().execute(currentUser.getEmail());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
+                postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
 
                 Fragment fragment = fragmentManager.findFragmentById(R.id.filterLayout);
 
-                if (fragment == null) {
+                if (fragment != null) {
                     transaction = fragmentManager.beginTransaction();
-                    transaction.add(R.id.filterLayout, new FilterPerfil().newInstance(3));
+                    transaction.remove(fragment);
                     transaction.commit();
                 }
             }
         });
 
-        ImageView header =  findViewById(R.id.header);
+        ImageView header = findViewById(R.id.header);
         Integer type = rand.nextInt(4);
         Integer color = 0;
-        switch (type){
-            case 1: color = R.color.blue_perfil; break;
-            case 2: color = R.color.violet_perfil; break;
-            case 3: color = R.color.yellow_perfil; break;
+        switch (type) {
+            case 1:
+                color = R.color.blue_perfil;
+                break;
+            case 2:
+                color = R.color.violet_perfil;
+                break;
+            case 3:
+                color = R.color.yellow_perfil;
+                break;
         }
-        if(color != 0) header.setImageResource(color);
+        if (color != 0) header.setImageResource(color);
     }
 
-    public void addFilterRecycleView(int type, int option){
-        if(type <= 2) {
+    public void addFilterRecycleView(int type, int option) {
+        if (type <= 2) {
             if (option == 0 && !isListCourseCReversed) {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 linearLayoutManager.setReverseLayout(true);
@@ -338,23 +324,17 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                 rv.setLayoutManager(linearLayoutManager);
                 isListCourseCReversed = false;
             }
-        }else if (type == 3){ // Para conteúdo Salvo
-            if (option == 0 && !savedIsPost){
+        } else if (type == 3) { // Para conteúdo Salvo
+            if (option == 0 && !savedIsPost) {
                 List<PostCard> listPostC = new ArrayList<>();
-//                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas",false, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
-//                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas2",false,true,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
-//                listPostC.add(new PostCard( R.drawable.culture_example,R.drawable.perfil_example,"Dr. Fidas3",true, false,"Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula mattis tellus"));
 
                 PostAdapter postAdapter = new PostAdapter(PerfilCourseCreatorScreen.this);
 
                 postAdapter.setData(listPostC, true);
                 rv.setAdapter(postAdapter);
                 savedIsPost = true;
-            }else if(option == 1 && savedIsPost){
+            } else if (option == 1 && savedIsPost) {
                 listCourseC = new ArrayList<>();
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título chamativo","Dr. Fidas",340, false));
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título super chamativo","Dr. Fidas2",1234, false));
-//                listCourseC.add(new CourseCard( R.drawable.culture_example,R.drawable.perfil_example,"título HIPER MEGA ULTRA chamativo","Dr. Fidas3",5678910, true));
 
                 CourseAdapter courseAdapter = new CourseAdapter(PerfilCourseCreatorScreen.this);
 
@@ -388,11 +368,24 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
             }
 
             if (postsHome != null) {
-                for(PostsHome pthm : postsHome){
-                    listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(), pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getCurtido(), pthm.getDescricao()));
-                    postAdapter.notifyDataSetChanged();
+                for (PostsHome pthm : postsHome) {
+                    listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(), pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getSalvo(), pthm.getDescricao()));
                 }
-            }else{
+                if(listPostC.size() != 0){
+                    Fragment fragment = fragmentManager.findFragmentById(R.id.notFoundLayout);
+                    if (fragment != null) {
+                        transaction = fragmentManager.beginTransaction();
+                        transaction.remove(fragment);
+                        transaction.commit();
+                    }
+                }else{
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.notFoundLayout, new BlankPerfilRecycle().newInstance("Não há suas postagens por aqui"));
+                    transaction.commit();
+                }
+                postAdapter.setData(listPostC, false);
+                rv.setAdapter(postAdapter);
+            } else {
                 startActivity(new Intent(PerfilCourseCreatorScreen.this, SkeletonBlank.class));
                 Toast.makeText(PerfilCourseCreatorScreen.this, "Ocorreu um erro ao pegar seus próprios posts", Toast.LENGTH_SHORT).show();
             }
@@ -417,13 +410,13 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario user) {
             if (user != null) {
-                if(user.getNome_usuario() != null){
-                    txtUsername.setText("@"+user.getNome_usuario().toString());
+                if (user.getNome_usuario() != null) {
+                    txtUsername.setText("@" + user.getNome_usuario().toString());
 
-                }else{
+                } else {
                     txtUsername.setText("");
                 }
-                if(user.getUrl_foto()!= null && !user.getUrl_foto().isEmpty()){
+                if (user.getUrl_foto() != null && !user.getUrl_foto().isEmpty()) {
                     byte[] decodedImage = Base64.decode(user.getUrl_foto(), Base64.DEFAULT);
 
                     Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
@@ -431,20 +424,182 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                     Glide.with(PerfilCourseCreatorScreen.this)
                             .load(imageBitmap)
                             .into(imgUserPhoto);
-                }else{
+                } else {
                     Picasso.with(PerfilCourseCreatorScreen.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
                 }
-                if(user.getBio() != null){
+                if (user.getBio() != null && !user.getBio().equals("null")) {
                     txtUserBio.setText(user.getBio().toString());
-                }else{
+                } else {
                     txtUserBio.setText("");
                 }
 
                 currentUser = user;
-            }else{
+            } else {
                 startActivity(new Intent(PerfilCourseCreatorScreen.this, SkeletonBlank.class));
                 Toast.makeText(PerfilCourseCreatorScreen.this, "Ocorreu um erro ao pegar seus dados", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private class GetOwnCourses extends AsyncTask<String, Void, List<CoursesHome>> {
+        @Override
+        protected List<CoursesHome> doInBackground(String... params) {
+            if (params.length == 1) {
+
+                String email = params[0];
+
+                try {
+                    return new GetOwnCoursesRamdonly().getOwnCoursesRamdonly(email);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<CoursesHome> courseHome) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+
+            if (courseHome != null) {
+                for (CoursesHome crhm : courseHome) {
+                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido()));
+                }
+                if(listCourseC.size() != 0){
+                    Fragment fragment = fragmentManager.findFragmentById(R.id.notFoundLayout);
+                    if (fragment != null) {
+                        transaction = fragmentManager.beginTransaction();
+                        transaction.remove(fragment);
+                        transaction.commit();
+                    }
+                }else{
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.notFoundLayout, new BlankPerfilRecycle().newInstance("Não há seus cursos criados por aqui"));
+                    transaction.commit();
+
+                    Fragment filterFragment = fragmentManager.findFragmentById(R.id.filterLayout);
+                    if (filterFragment != null) {
+                        transaction = fragmentManager.beginTransaction();
+                        transaction.remove(filterFragment);
+                        transaction.commit();
+                    }
+                }
+                courseAdapter.setData(listCourseC, false);
+                rv.setAdapter(courseAdapter);
+            } else {
+                startActivity(new Intent(PerfilCourseCreatorScreen.this, SkeletonBlank.class));
+                Toast.makeText(PerfilCourseCreatorScreen.this, "Ocorreu um erro ao pegar seus próprios cursos", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class GetAcquiredCourses extends AsyncTask<String, Void, List<CoursesHome>> {
+        @Override
+        protected List<CoursesHome> doInBackground(String... params) {
+            if (params.length == 1) {
+
+                String email = params[0];
+
+                try {
+                    return new GetAcquiredCoursesRamdonly().getAcquiredCoursesRamdonly(email);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<CoursesHome> courseHome) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+
+            if (courseHome != null) {
+                for (CoursesHome crhm : courseHome) {
+                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido()));
+                }
+                if(listCourseC.size() != 0){
+                    Fragment fragment = fragmentManager.findFragmentById(R.id.notFoundLayout);
+                    if (fragment != null) {
+                        transaction = fragmentManager.beginTransaction();
+                        transaction.remove(fragment);
+                        transaction.commit();
+                    }
+                }else{
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.notFoundLayout, new BlankPerfilRecycle().newInstance("Não há seus cursos concluidos por aqui"));
+                    transaction.commit();
+
+                    Fragment filterFragment = fragmentManager.findFragmentById(R.id.filterLayout);
+                    if (filterFragment != null) {
+                        transaction = fragmentManager.beginTransaction();
+                        transaction.remove(filterFragment);
+                        transaction.commit();
+                    }
+                }
+                courseAdapter.setData(listCourseC, false);
+                rv.setAdapter(courseAdapter);
+            } else {
+                startActivity(new Intent(PerfilCourseCreatorScreen.this, SkeletonBlank.class));
+                Toast.makeText(PerfilCourseCreatorScreen.this, "Ocorreu um erro ao pegar seus cursos adquiridos", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class GetOwnSavedPosts extends AsyncTask<String, Void, List<PostsHome>> {
+        @Override
+        protected List<PostsHome> doInBackground(String... params) {
+            if (params.length == 1) {
+
+                String email = params[0];
+
+                try {
+                    return new GetSavedPostsRamdonly().getSavedPostsRandomly(email);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<PostsHome> postsHome) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+
+            if (postsHome != null) {
+                for (PostsHome pthm : postsHome) {
+                    listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(), pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getSalvo(), pthm.getDescricao()));
+                }
+
+                if(listPostC.size() != 0){
+                    Fragment fragment = fragmentManager.findFragmentById(R.id.notFoundLayout);
+                    if (fragment != null) {
+                        transaction = fragmentManager.beginTransaction();
+                        transaction.remove(fragment);
+                        transaction.commit();
+                    }
+                }else{
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.notFoundLayout, new BlankPerfilRecycle().newInstance("Não há posts salvos por aqui"));
+                    transaction.commit();
+                }
+
+                postAdapter.setData(listPostC, true);
+                rv.setAdapter(postAdapter);
+            } else {
+                startActivity(new Intent(PerfilCourseCreatorScreen.this, SkeletonBlank.class));
+                Toast.makeText(PerfilCourseCreatorScreen.this, "Ocorreu um erro ao pegar seus próprios posts", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void resetRV(){
+        finish();
+        startActivity(getIntent());
     }
 }

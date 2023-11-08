@@ -1,12 +1,13 @@
 package com.example.culturallis.Model.CoursesHome;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class CoursesHome {
     private long pk_id;
-
+    @JsonProperty("fk_cul_usuarios_id")
     private long fk_cul_usuarios_id;
-
     private String titulo;
 
     private String url_midia;
@@ -24,11 +25,12 @@ public class CoursesHome {
     private Boolean curtido;
 
     private Integer numCursados;
+    private boolean adquiriu;
 
     public CoursesHome() {
     }
 
-    public CoursesHome(long pk_id, long fk_cul_usuarios_id, String titulo, String url_midia, Date data_criacao, Date data_mudanca, Date data_desativacao, String postsOwnerFoto, String postsOwnerName, Boolean curtido, Integer numCursados) {
+    public CoursesHome(long pk_id, long fk_cul_usuarios_id, String titulo, String url_midia, Date data_criacao, Date data_mudanca, Date data_desativacao, String postsOwnerFoto, String postsOwnerName, Boolean curtido, Integer numCursados, boolean adquiriu) {
         this.pk_id = pk_id;
         this.fk_cul_usuarios_id = fk_cul_usuarios_id;
         this.titulo = titulo;
@@ -40,6 +42,7 @@ public class CoursesHome {
         this.postsOwnerName = postsOwnerName;
         this.curtido = curtido;
         this.numCursados = numCursados;
+        this.adquiriu = adquiriu;
     }
 
     public long getPk_id() {
@@ -50,11 +53,11 @@ public class CoursesHome {
         this.pk_id = pk_id;
     }
 
-    public long getFk_cul_usuarios_id() {
+    public long getFkCulUsuariosId() {
         return fk_cul_usuarios_id;
     }
 
-    public void setFk_cul_usuarios_id(long fk_cul_usuarios_id) {
+    public void setFkCulUsuariosId(long fk_cul_usuarios_id) {
         this.fk_cul_usuarios_id = fk_cul_usuarios_id;
     }
 
@@ -128,6 +131,14 @@ public class CoursesHome {
 
     public void setNumCursados(Integer numCursados) {
         this.numCursados = numCursados;
+    }
+
+    public boolean isAdquiriu() {
+        return adquiriu;
+    }
+
+    public void setAdquiriu(boolean adquiriu) {
+        this.adquiriu = adquiriu;
     }
 
     @Override

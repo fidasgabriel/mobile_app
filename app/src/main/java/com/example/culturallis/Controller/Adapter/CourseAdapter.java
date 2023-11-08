@@ -20,6 +20,7 @@
 
     import com.bumptech.glide.Glide;
     import com.example.culturallis.Controller.Mutations.ToggleLikeCourse;
+    import com.example.culturallis.Controller.SqLite.UserDAO;
     import com.example.culturallis.Model.Entity.CourseCard;
     import com.example.culturallis.Model.Usuario.Usuario;
     import com.example.culturallis.R;
@@ -35,11 +36,13 @@
         private List<CourseCard> coursesCards;
         private boolean havePerfilImage;
         Usuario currentUser;
+        private UserDAO userDAO;
         private Context context; // Adicione um campo para armazenar o contexto
-
         public CourseAdapter(Context context) {
             this.context = context;
+            userDAO = new UserDAO(context);
         }
+
 
         public void setData(List<CourseCard> coursesCards, boolean havePerfilImage) {
             this.coursesCards = coursesCards;
@@ -113,7 +116,8 @@
 
                     try {
                         currentUser = new Usuario();
-                        currentUser.setEmail("ana.damasceno@gmail.com");
+                        String currentEmail = userDAO.getCurrentEmail();
+                        currentUser.setEmail(currentEmail);
                         new CourseAdapter.ToggleLikeCourses().execute(course.getPk_id().toString());
                     } catch (Exception e) {
                         e.printStackTrace();

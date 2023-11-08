@@ -34,6 +34,7 @@ import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Mutations.CreatePost;
 import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Mutations.UpdateUser;
+import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
@@ -61,7 +62,7 @@ public class PostPublication extends ModelAppScreens {
     private EditText txtDescription;
     private View layout;
     private ImageView img;
-
+    private UserDAO userDAO = new UserDAO(this);
     private String selectedImagePath;
     private AppCompatButton btn;
     String base64Image;
@@ -113,7 +114,8 @@ public class PostPublication extends ModelAppScreens {
                     }else{
                         base64Image = currentUser.getUrl_foto();
                     }
-                    currentUser.setEmail("ana.damasceno@gmail.com");
+                    String currentEmail = userDAO.getCurrentEmail();
+                    currentUser.setEmail(currentEmail);
                     new CreatePostUser().execute(
                             currentUser.getEmail(),
                             base64Image,

@@ -29,7 +29,6 @@ public class UserDAO {
     public LoginUserEntity salvar(LoginUserEntity user){
         open();
         ContentValues info = new ContentValues();
-        info.put("posit", 1);
         info.put("email", user.getEmail());
         info.put("senha", user.getPassword());
         database.insert("login", null, info);
@@ -38,38 +37,36 @@ public class UserDAO {
         return user;
     }
 
-    public LoginUserEntity getLogin(){
+    public boolean validateLogin(String email, String senha){
         open();
-        LoginUserEntity login = null;
-        Cursor cursor = database.rawQuery("SELECT email, senha FROM login WHERE posit = 1", null);
-        if (cursor.moveToFirst()) {
-            login = new LoginUserEntity(
-                    cursor.getString(0),
-                    cursor.getString(1));
-        }
+        Cursor cursor = database.rawQuery("SELECT email, senha FROM login WHERE email = '" + email + "' AND senha = '" + senha + "'", null);
+        boolean isNotEmpty = cursor.moveToFirst();
         close();
-        return login;
+        return isNotEmpty;
     }
 
-    public void deletar(){
+    public String getCurrentEmail(){
         open();
-        database.delete("login", "posit=?", new String[]{"1"});
+        Cursor cursor = database.rawQuery("SELECT email FROM currentUser WHERE posit = 1", null);
+        cursor.moveToFirst();
+        String currentEmail = cursor.getString(0);
         close();
+        return currentEmail;
     }
 
-    public void changeEmail(String email){
+    public void setCurrentUser(String email){
         ContentValues info = new ContentValues();
         info.put("email", email);
         open();
-        database.update("login", info, "posit=?", new String[]{"1"});
+        database.update("currentUser", info, "posit=?", new String[]{"1"});
         close();
     }
 
-    public void changePassword(String password){
+    public void changePassword(String email, String password){
         ContentValues info = new ContentValues();
         info.put("password", password);
         open();
-        database.update("login", info, "posit=?", new String[]{"1"});
+        database.update("login", info, "email=?", new String[]{email});
         close();
     }
 }

@@ -88,16 +88,16 @@ public class PerfilEdit extends ModelAppScreens {
 
         Picasso.with(this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
 
-        LoginUserEntity user = userDAO.getLogin();
-        try {
-            loadingDialog = new LoadingSettings(this);
-            loadingDialog.show();
-            currentUser = new Usuario();
-            currentUser.setEmail(user.getEmail());
-            new GetUserProfileTask().execute(currentUser.getEmail());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        LoginUserEntity user = userDAO.getLogin();
+//        try {
+//            loadingDialog = new LoadingSettings(this);
+//            loadingDialog.show();
+//            currentUser = new Usuario();
+//            currentUser.setEmail(user.getEmail());
+//            new GetUserProfileTask().execute(currentUser.getEmail());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

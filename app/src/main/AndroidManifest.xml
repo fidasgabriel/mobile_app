@@ -34,23 +34,23 @@
         <activity
             android:name=".View.Navbar.PerfilFriendScreen"
             android:exported="false"
-            android:launchMode="singleInstancePerTask" />
+            android:launchMode="singleInstance" />
         <activity
             android:name=".View.Navbar.PerfilCourseCreatorScreen"
             android:exported="false"
-            android:launchMode="singleInstancePerTask" />
+            android:launchMode="singleInstance" />
         <activity
             android:name=".View.Navbar.PerfilScreen"
             android:exported="false"
-            android:launchMode="singleInstancePerTask" />
+            android:launchMode="singleInstance" />
         <activity
             android:name=".View.Navbar.CourseScreen"
             android:exported="false"
-            android:launchMode="singleInstancePerTask" />
+            android:launchMode="singleInstance" />
         <activity
             android:name=".View.Navbar.HomeScreen"
             android:exported="false"
-            android:launchMode="singleInstancePerTask" />
+            android:launchMode="singleInstance" />
         <activity
             android:name=".View.Configuration.Security"
             android:exported="false" />
