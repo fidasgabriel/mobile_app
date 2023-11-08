@@ -59,7 +59,7 @@ public class Security extends ModelAppScreens {
         toolbar.setNavigationIcon(R.drawable.left_arrow);
 
         TextView titleTextView = findViewById(R.id.tbTitle);
-        titleTextView.setText("Segurança");
+        titleTextView.setText("Dados Pessoais");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

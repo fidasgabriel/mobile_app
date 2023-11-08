@@ -18,6 +18,7 @@ import com.example.culturallis.Model.CoursesHome.CoursesHome;
 import com.example.culturallis.Model.Entity.CourseCard;
 import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.Usuario.Usuario;
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
@@ -29,7 +30,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class SkeletonCourseDetails extends AppCompatActivity {
+public class SkeletonCourseDetails extends ModelAppScreens {
 
     CourseDetailsScreenAdquired paymentCourse;
 
@@ -56,12 +57,12 @@ public class SkeletonCourseDetails extends AppCompatActivity {
     }
 
     public void changeCoursesHome(View view){
-        finish();
+        back(view);
     }
 
-    public void changeMainSettings(View view){
+    public void changeMainSettings(View v){
         startActivity(new Intent(this, MainSettingsScreen.class));
-        finish();
+        back(v);
     }
 
     public void concludeModule(View view) {

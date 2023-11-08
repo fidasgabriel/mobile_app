@@ -253,7 +253,6 @@
             protected void onPostExecute(Boolean success) {
 
                 if (success) {
-                    Toast.makeText(context, "Sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Problemas ao realizar sua ação", Toast.LENGTH_SHORT).show();
                 }

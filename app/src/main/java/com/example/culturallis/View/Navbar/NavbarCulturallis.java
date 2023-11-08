@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.culturallis.Controller.GlobalUtilization;
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
@@ -35,7 +36,7 @@ import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 import com.example.culturallis.View.Fragments.CoursesScroll;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class NavbarCulturallis extends AppCompatActivity {
+public class NavbarCulturallis extends ModelAppScreens {
 
     protected AppCompatButton postsHomeBtn;
     protected AppCompatButton coursesHomeBtn;
@@ -117,8 +118,7 @@ public class NavbarCulturallis extends AppCompatActivity {
     }
 
     public void finishErrorScreen(View view){
-        finish();
-        startActivity(new Intent(this, NavbarCulturallis.class));
+        back(view);
         isConnected();
     }
 

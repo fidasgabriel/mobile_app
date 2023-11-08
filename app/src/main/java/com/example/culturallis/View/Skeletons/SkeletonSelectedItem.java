@@ -23,12 +23,14 @@ import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.CourseDetails.CourseDetails;
 import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.Usuario.Usuario;
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
 import com.example.culturallis.View.Configuration.Security;
 import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenAdquired;
 import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenNotAdquired;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Navbar.CourseScreen;
 import com.example.culturallis.View.Navbar.HomeScreen;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbar;
@@ -40,7 +42,7 @@ import java.util.Random;
 
 import okhttp3.Response;
 
-public class SkeletonSelectedItem extends AppCompatActivity {
+public class SkeletonSelectedItem extends ModelAppScreens {
 
     LoadingSettings loadingDialog;
 
@@ -68,7 +70,6 @@ public class SkeletonSelectedItem extends AppCompatActivity {
 
     private LoginUserEntity user;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +77,8 @@ public class SkeletonSelectedItem extends AppCompatActivity {
 
         user = userDAO.getLogin();
 
-
         CourseDetailsScreenNotAdquired fragment = new CourseDetailsScreenNotAdquired();
         TopNavbar topNavbar = new TopNavbar();
-
 
         Bundle b = getIntent().getExtras();
 
@@ -89,7 +88,7 @@ public class SkeletonSelectedItem extends AppCompatActivity {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             new SkeletonSelectedItem.GetCourseDetails().execute(b.getString("idCourse"));
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -129,65 +128,62 @@ public class SkeletonSelectedItem extends AppCompatActivity {
                 R.drawable.tag_category_purple,
         };
 
-
         Random random = new Random();
         int randomIdx;
         randomIdx = random.nextInt(colorBorderSelected.length);
 
-
         int randomBorderSelected = colorBorderSelected[randomIdx];
         int randomAvatarBorder = colorAvatarBorder[randomIdx];
         int randomTagColor = colorTagCategory[randomIdx];
-
 
         imgView.setBackground(getResources().getDrawable(randomBorderSelected));
         txtDescriptionCourse.setBackground(getResources().getDrawable(randomTagColor));
         txtCategory.setBackground(getResources().getDrawable(randomTagColor));
         cardView.setCardBackgroundColor(getResources().getColor(randomAvatarBorder));
 
-
         txtCategory.setTextColor(getResources().getColor(R.color.white));
-
 
         txtCategory.setText("Python");
         txtTitleCourse.setText("Título Chamativo");
         txtPriceCourse.setText("R$89,99");
         txtCategory.setClickable(false);
         txtUserNameCourseOwner.setText("Culturallis");
-        txtDescriptionCourse.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.");
+        txtDescriptionCourse.setText(
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.");
     }
 
-    public void changeMainSettings(View view){
+    public void changeMainSettings(View v) {
         startActivity(new Intent(this, MainSettingsScreen.class));
-        finish();
+        back(v);
     }
 
-    public void changeCoursesHome(View view){
-        startActivity(new Intent(this, NavbarCulturallis.class));
-        finish();
+    public void changeCoursesHome(View v) {
+        startActivity(new Intent(this, HomeScreen.class));
+        back(v);
     }
 
-    public void adquireCourse(View view){
-        if(price > 0){
+    public void adquireCourse(View view) {
+        if (price > 0) {
             Intent intent = new Intent(this, SkeletonPaymentCourse.class);
             Bundle bundle = new Bundle();
             bundle.putDouble("preco", price);
             bundle.putInt("curso", courseId);
             intent.putExtras(bundle);
             startActivity(intent);
-        } else{
+        } else {
             try {
-                loadingDialog = new LoadingSettings(this);
+                loadingDialog = new LoadingSettings(SkeletonSelectedItem.this);
                 loadingDialog.show();
-                new AquireCourse().execute(String.valueOf(courseId), user.getEmail());
-            } catch (Exception e){
+                new AdquireCourses().execute(String.valueOf(courseId), user.getEmail());
+                back(view);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
     }
 
-    private class AquireCourse extends AsyncTask<String, Void, Boolean> {
+    private class AdquireCourses extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... params) {
             if (params.length != 2) {
@@ -195,7 +191,7 @@ public class SkeletonSelectedItem extends AppCompatActivity {
             }
 
             String courseId = params[0];
-            String email= params[1];
+            String email = params[1];
 
             try {
                 AdquireCourse mutations = new AdquireCourse();
@@ -208,18 +204,29 @@ public class SkeletonSelectedItem extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean success) {
-            if (loadingDialog.isShowing()) {
-                loadingDialog.dismiss();
+            if (isFinishing() || isDestroyed()) {
+                return;
             }
 
-            if (success) {
-                Toast.makeText(SkeletonSelectedItem.this, "Curso adquirido!", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                startActivity(new Intent(SkeletonSelectedItem.this, SkeletonBlank.class));
-                Toast.makeText(SkeletonSelectedItem.this, "Ocorreu um erro ao adquirir o curso", Toast.LENGTH_SHORT).show();
-            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (loadingDialog.isShowing()) {
+                        loadingDialog.dismiss();
+                    }
+
+                    if (success) {
+                        Toast.makeText(SkeletonSelectedItem.this, "Curso adquirido!", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(SkeletonSelectedItem.this, CourseScreen.class));
+                    } else {
+                        startActivity(new Intent(SkeletonSelectedItem.this, SkeletonBlank.class));
+                        Toast.makeText(SkeletonSelectedItem.this, "Ocorreu um erro ao adquirir o curso", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
+
     }
 
     private class GetCourseDetails extends AsyncTask<String, Void, CourseDetails> {
@@ -258,15 +265,16 @@ public class SkeletonSelectedItem extends AppCompatActivity {
 
                 txtUserNameCourseOwner.setText(courseSelected.getCourseOwner());
                 txtTitleCourse.setText(courseSelected.getNome());
-                if(!courseSelected.getCourseOwnerFoto().startsWith("http")){
+                if (!courseSelected.getCourseOwnerFoto().startsWith("http")) {
                     byte[] decodedImagePost = Base64.decode(courseSelected.getCourseOwnerFoto(), Base64.DEFAULT);
-                    Bitmap imageBitmapPost = BitmapFactory.decodeByteArray(decodedImagePost, 0, decodedImagePost.length);
+                    Bitmap imageBitmapPost = BitmapFactory.decodeByteArray(decodedImagePost, 0,
+                            decodedImagePost.length);
 
                     Glide.with(SkeletonSelectedItem.this)
                             .load(imageBitmapPost)
                             .into(imgProfile);
 
-                }else{
+                } else {
                     Picasso.get().load(courseSelected.getCourseOwnerFoto()).into(imgProfile);
                 }
 
@@ -276,15 +284,16 @@ public class SkeletonSelectedItem extends AppCompatActivity {
                 txtPriceCourse.setText("R$" + String.valueOf(courseSelected.getPreco()));
                 txtDescriptionCourse.setText(courseSelected.getDescricao());
 
-                if(!courseSelected.getUrl_midia().startsWith("http")){
+                if (!courseSelected.getUrl_midia().startsWith("http")) {
                     byte[] decodedImagePost = Base64.decode(courseSelected.getUrl_midia(), Base64.DEFAULT);
-                    Bitmap imageBitmapPost = BitmapFactory.decodeByteArray(decodedImagePost, 0, decodedImagePost.length);
+                    Bitmap imageBitmapPost = BitmapFactory.decodeByteArray(decodedImagePost, 0,
+                            decodedImagePost.length);
 
                     Glide.with(SkeletonSelectedItem.this)
                             .load(imageBitmapPost)
                             .into(imgView);
 
-                }else{
+                } else {
                     Picasso.get().load(courseSelected.getUrl_midia()).into(imgView);
                 }
             }

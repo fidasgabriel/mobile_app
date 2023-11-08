@@ -1,9 +1,13 @@
 package com.example.culturallis.Controller.Mutations;
 
+import android.util.Log;
+
 import com.example.culturallis.Model.Global.Global;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -22,6 +26,13 @@ public class CreateCourse {
     public Response createCourse(String email, String nome, String fotoPost, String descricao, String categoria, Double preco, List<String> conteudosList) throws Exception {
         String url = global.getBaseUrl() + "/inserirCurso/";
 
+        List<String> list = new ArrayList<>();
+
+        for (String text : conteudosList) {
+            if (text != null) {
+                list.add(text);
+            }
+        }
 
         JSONObject json = new JSONObject();
         json.put("nome", nome);
@@ -29,7 +40,16 @@ public class CreateCourse {
         json.put("descricao", descricao);
         json.put("categoria", categoria);
         json.put("preco", preco);
-        json.put("conteudosList", conteudosList);
+
+        JSONArray conteudosArray = new JSONArray();
+        for (String text : conteudosList) {
+            if (text != null) {
+                conteudosArray.put(text);
+            }
+        }
+
+        json.put("conteudosList", conteudosArray);
+
 
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
@@ -40,9 +60,8 @@ public class CreateCourse {
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 return response;
-            } else {
+            }else{
                 throw new Exception();
             }
-        }
-    }
+        }}
 }

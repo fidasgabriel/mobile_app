@@ -5,12 +5,14 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.SuccessScreens.CompleteModuleSuccess;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbarNoSettings;
 
-public class SkeletonSuccessModuleComplete extends AppCompatActivity {
+public class SkeletonSuccessModuleComplete extends ModelAppScreens {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +28,12 @@ public class SkeletonSuccessModuleComplete extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void changeCoursesHome(View view){
-        startActivity(new Intent(this, NavbarCulturallis.class));
-        finish();
+    public void changeCoursesHome(View v){
+        back(v);
     }
 
-    public void nextModule(View view){
+    public void nextModule(View v){
         startActivity(new Intent(this, SkeletonCourseDetails.class));
-        finish();
+        back(v);
     }
 }

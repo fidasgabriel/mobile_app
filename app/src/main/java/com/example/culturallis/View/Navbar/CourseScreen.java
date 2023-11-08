@@ -6,21 +6,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Controller.Queries.GetCoursesHome;
 import com.example.culturallis.Controller.Queries.GetPostsRandomly;
+import com.example.culturallis.Controller.Queries.GetUserInfo;
 import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.CoursesHome.CoursesHome;
 import com.example.culturallis.Model.Entity.CourseCard;
@@ -36,6 +41,7 @@ import com.example.culturallis.View.Post.PostCourse;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +55,7 @@ public class CourseScreen extends AppCompatActivity {
 
     LoadingSettings loadingDialog;
 
-    private UserDAO userDAO = new UserDAO(this);
+    Boolean hasCpf = false;
 
     protected FloatingActionButton floatingActionButton;
     @Override
@@ -58,6 +64,8 @@ public class CourseScreen extends AppCompatActivity {
         setContentView(R.layout.activity_course_screen);
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
+        UserDAO userDAO = new UserDAO(this);
+
         SpannableString underline = new SpannableString("Carregar mais");
         UnderlineSpan underlineSpan = new UnderlineSpan();
         underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -65,10 +73,26 @@ public class CourseScreen extends AppCompatActivity {
         TextView linkLogon = findViewById(R.id.linkCarregar);
         linkLogon.setText(underline);
 
+        try {
+            loadingDialog = new LoadingSettings(this);
+            loadingDialog.show();
+            LoginUserEntity user = userDAO.getLogin();
+            new CourseScreen.GetUserCpf().execute(user.getEmail());
+            new CourseScreen.GetCoursesRandonly().execute(user.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CourseScreen.this, PostCourse.class));
+                if(hasCpf != null ){
+                    if(hasCpf){
+                        startActivity(new Intent(CourseScreen.this, PostCourse.class));
+                    }else {
+                        Toast.makeText(CourseScreen.this, "Para criar um curso é necessário cadastrar um CPF/CNPJ", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -99,14 +123,7 @@ public class CourseScreen extends AppCompatActivity {
         courseAdapter.setData(listCourseC, true);
         rv.setAdapter(courseAdapter);
 
-        try {
-            loadingDialog = new LoadingSettings(this);
-            loadingDialog.show();
-            LoginUserEntity user = userDAO.getLogin();
-            new CourseScreen.GetCoursesRandonly().execute(user.getEmail());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
 
 //        rv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -148,6 +165,35 @@ public class CourseScreen extends AppCompatActivity {
             }else{
                 startActivity(new Intent(CourseScreen.this, SkeletonBlank.class));
                 Toast.makeText(CourseScreen.this, "Ocorreu um erro ao pegar os cursos", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class GetUserCpf extends AsyncTask<String, Void, Usuario> {
+        @Override
+        protected Usuario doInBackground(String... params) {
+            if (params.length == 1) {
+                String email = params[0];
+                try {
+                    return new GetUserInfo().getInfoUser(email);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Usuario usuarios) {
+            if (usuarios != null) {
+                if(usuarios.getCpf() == null  || usuarios.getCpf() == "" || usuarios.getCpf() == " " || usuarios.getCpf() == "null"){
+                    hasCpf = false;
+                }else{
+                    hasCpf = true;
+                }
+            }else{
+                hasCpf = false;
             }
         }
     }

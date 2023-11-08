@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -207,21 +208,24 @@ public class PostCourse extends ModelAppScreens {
                 if(title.getText().toString().trim().length() == 0 || desc.getText().toString().trim().length() == 0 || category.getText().toString().trim().length() == 0){
                     Toast.makeText(PostCourse.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 }else{
-                    loadingDialog = new LoadingSettings(PostCourse.this);
-                    loadingDialog.show();
-                    if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
-                        base64Image = encodeImage(selectedImagePath);
-                        if (base64Image.length() > 60000){
-                            Toast.makeText(PostCourse.this, "Foto muito grande", Toast.LENGTH_SHORT).show();
+                    try {
+                        loadingDialog = new LoadingSettings(PostCourse.this);
+                        loadingDialog.show();
+                        if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
+                            base64Image = encodeImage(selectedImagePath);
+                            if (base64Image.length() > 100000){
+                                Toast.makeText(PostCourse.this, "Foto muito grande", Toast.LENGTH_SHORT).show();
+                            }
                         }
+                        new CreateCourseUser().execute(user.getEmail(),
+                                title.getText().toString().trim(),
+                                base64Image,
+                                desc.getText().toString().trim(),
+                                category.getText().toString().trim(),
+                                "0");
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-//                    new CreateCourseUser().execute(user.getEmail(),
-//                            title.getText().toString().trim(),
-//                            base64Image,
-//                            desc.getText().toString().trim(),
-//                            category.getText().toString().trim(),
-//                            "0",
-//                            moduleTextsList);
                 }
             }
         });
@@ -283,12 +287,19 @@ public class PostCourse extends ModelAppScreens {
             public void onClick(View v) {
                 String text = editTextInModal.getText().toString();
 
+                for(int i = 0; i < maxModules; i++){
+                    moduleTextsList.add(null);
+                }
+
                 if (lastModule > 0 && lastModule <= maxModules) {
                     moduleEditTexts[index].setText(text);
-                    moduleTextsList.set(index, text);
+                    if(moduleTextsList.get(index) == null){
+                        moduleTextsList.add(text);
+                    }else {
+                        moduleTextsList.set(index, text);
+                    }
                 }
                 dialog.dismiss();
-                Toast.makeText(context, "" + index, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -313,18 +324,21 @@ public class PostCourse extends ModelAppScreens {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
 
             byte[] byteArray = byteArrayOutputStream.toByteArray();
-            return Base64.encodeToString(byteArray, Base64.DEFAULT);
+            String base64Image = Base64.encodeToString(byteArray, Base64.NO_WRAP);
+
+            return base64Image;
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Foto muito grande", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error encoding image", Toast.LENGTH_SHORT).show();
             return null;
         }
     }
 
+
     private class CreateCourseUser extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... params) {
-            if (params.length != 7) {
+            if (params.length != 6) {
                 return false;
             }
 
@@ -334,11 +348,10 @@ public class PostCourse extends ModelAppScreens {
             String descricao = params[3];
             String categoria = params[4];
             Double preco = Double.valueOf(params[5]);
-            List<String> conteudosList = Collections.singletonList(params[6]);
 
             try {
                 CreateCourse mutations = new CreateCourse();
-                Response response = mutations.createCourse(email, nome, fotoPost, descricao, categoria, preco, conteudosList);
+                Response response = mutations.createCourse(email, nome, fotoPost, descricao, categoria, preco, moduleTextsList);
                 return response.isSuccessful();
             } catch (Exception e) {
                 return false;
