@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.PaymentScreens.PaymentCourse;
+import com.example.culturallis.View.Navbar.HomeScreen;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbarNoSettings;
 
@@ -23,8 +24,15 @@ public class SkeletonPaymentCourse extends ModelAppScreens {
         TopNavbarNoSettings topNavbar = new TopNavbarNoSettings();
         PaymentCourse paymentCourse = new PaymentCourse();
 
+        Bundle bundle = new Bundle();
+        Bundle b = getIntent().getExtras();
+
+        bundle.putDouble("preco", b.getDouble("preco"));
+        bundle.putInt("curso", b.getInt("curso"));
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.navbar, topNavbar);
+        paymentCourse.setArguments(bundle);
         transaction.replace(R.id.content, paymentCourse);
         transaction.commit();
     }
@@ -35,7 +43,7 @@ public class SkeletonPaymentCourse extends ModelAppScreens {
     }
 
     public void changeCoursesHome(View v){
-        startActivity(new Intent(this, NavbarCulturallis.class));
+        startActivity(new Intent(this, HomeScreen.class));
         back(v);
     }
 

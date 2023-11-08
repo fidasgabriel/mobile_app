@@ -5,7 +5,7 @@ public class Global {
     private String baseUrl;
 
     public Global(){
-        this.baseUrl = "https://cult2.onrender.com/api/culturallis"; //"https://api-culturallis.onrender.com/api/culturallis"
+        this.baseUrl = "https://api-culturallis.onrender.com/api/culturallis"; // "https://cult2.onrender.com/api/culturallis"
     }
 
     public String getBaseUrl() {

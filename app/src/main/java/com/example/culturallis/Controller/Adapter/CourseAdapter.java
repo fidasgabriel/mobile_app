@@ -6,7 +6,9 @@
     import android.graphics.BitmapFactory;
     import android.graphics.drawable.AnimatedVectorDrawable;
     import android.os.AsyncTask;
+    import android.os.Bundle;
     import android.util.Base64;
+    import android.util.Log;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
@@ -20,25 +22,43 @@
 
     import com.bumptech.glide.Glide;
     import com.example.culturallis.Controller.Mutations.ToggleLikeCourse;
+    import com.example.culturallis.Controller.Queries.GetCoursesAdquired;
+    import com.example.culturallis.Controller.Queries.GetCoursesHome;
+    import com.example.culturallis.Controller.SqLite.UserDAO;
+    import com.example.culturallis.Model.CoursesHome.CoursesHome;
     import com.example.culturallis.Model.Entity.CourseCard;
+    import com.example.culturallis.Model.Entity.LoginUserEntity;
     import com.example.culturallis.Model.Usuario.Usuario;
     import com.example.culturallis.R;
+    import com.example.culturallis.View.Fragments.LoadingSettings;
+    import com.example.culturallis.View.Navbar.CourseScreen;
+    import com.example.culturallis.View.Skeletons.SkeletonBlank;
     import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
+    import com.example.culturallis.View.Skeletons.SkeletonPaymentCourse;
+    import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
     import com.squareup.picasso.Picasso;
 
     import java.text.DecimalFormat;
+    import java.util.ArrayList;
     import java.util.List;
 
     import okhttp3.Response;
+
 
     public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
         private List<CourseCard> coursesCards;
         private boolean havePerfilImage;
         Usuario currentUser;
-        private Context context; // Adicione um campo para armazenar o contexto
+        LoadingSettings loadingDialog;
 
+        private List<CourseCard> listCourses = new ArrayList<>();
+
+        private Context context;
+
+        private UserDAO userDAO;
         public CourseAdapter(Context context) {
             this.context = context;
+            userDAO = new UserDAO(context);
         }
 
         public void setData(List<CourseCard> coursesCards, boolean havePerfilImage) {
@@ -111,9 +131,10 @@
                     course.setLiked();
 
                     try {
+                        LoginUserEntity user = userDAO.getLogin();
                         currentUser = new Usuario();
-                        currentUser.setEmail("ana.damasceno@gmail.com");
-                        new CourseAdapter.ToggleLikeCourses().execute(course.getPk_id().toString());
+                        currentUser.setEmail(user.getEmail());
+                        new ToggleLikeCourses().execute(course.getPk_id().toString());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -130,8 +151,32 @@
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, SkeletonCourseDetails.class);
-                    context.startActivity(intent);
+                    try {
+                        currentUser = new Usuario();
+                        LoginUserEntity user = userDAO.getLogin();
+                        currentUser.setEmail(user.getEmail());
+                        loadingDialog = new LoadingSettings(context);
+                        loadingDialog.show();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("idCourse", String.valueOf(course.getPk_id()));
+
+                        if(course.isAdquired()){
+                            Intent intent = new Intent(context, SkeletonCourseDetails.class);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(context, SkeletonSelectedItem.class);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                        }
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
+
+
                 }
             });
         }
@@ -208,10 +253,10 @@
             protected void onPostExecute(Boolean success) {
 
                 if (success) {
-                    Toast.makeText(context, "Sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Problemas ao realizar sua ação", Toast.LENGTH_SHORT).show();
                 }
             }
         }
+
     }

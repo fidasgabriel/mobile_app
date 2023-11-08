@@ -43,7 +43,7 @@ public class MainSettingsScreen extends ModelAppScreens {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainSettingsScreen.this, NavbarCulturallis.class));
+                back(view);
             }
         });
 

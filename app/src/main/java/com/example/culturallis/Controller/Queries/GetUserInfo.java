@@ -41,6 +41,7 @@ public class GetUserInfo {
                 usuario.setNome_usuario(jsonObject.getString("nomeUsuario"));
                 usuario.setUrl_foto(jsonObject.getString("urlFoto"));
                 usuario.setEmail(jsonObject.getString("email"));
+                usuario.setCpf(jsonObject.getString("cpf"));
 
                 String dateOfBirthStr = jsonObject.optString("dataNasc");
 

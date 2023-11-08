@@ -2,12 +2,19 @@ package com.example.culturallis.View.Post;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +27,23 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.example.culturallis.Controller.Mutations.CreateCourse;
+import com.example.culturallis.Controller.Mutations.CreatePost;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
+import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Navbar.HomeScreen;
+import com.example.culturallis.View.Skeletons.SkeletonBlank;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Response;
 
 public class PostCourse extends ModelAppScreens {
     private int lastModule = 0;
@@ -43,15 +61,26 @@ public class PostCourse extends ModelAppScreens {
     private EditText title;
     private Button post;
     private EditText desc;
+    String base64Image;
     private boolean isPhotoLoaded = false;
 
     private List<String> moduleTextsList = new ArrayList<>();
     private EditText[] moduleEditTexts;
 
+    LoadingSettings loadingDialog;
+
+    private String selectedImagePath;
+
+    private UserDAO userDAO = new UserDAO(this);
+
+    private LoginUserEntity user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_course);
+
+        user = userDAO.getLogin();
 
         moduleContainer = findViewById(R.id.moduleContainer);
         addButton = findViewById(R.id.addButton);
@@ -172,19 +201,62 @@ public class PostCourse extends ModelAppScreens {
         }
 
         moduleEditTexts[lastModule - 1] = new EditText(this);
+
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(title.getText().toString().trim().length() == 0 || desc.getText().toString().trim().length() == 0 || category.getText().toString().trim().length() == 0){
+                    Toast.makeText(PostCourse.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
+                        loadingDialog = new LoadingSettings(PostCourse.this);
+                        loadingDialog.show();
+                        if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
+                            base64Image = encodeImage(selectedImagePath);
+                            if (base64Image.length() > 100000){
+                                Toast.makeText(PostCourse.this, "Foto muito grande", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        new CreateCourseUser().execute(user.getEmail(),
+                                title.getText().toString().trim(),
+                                base64Image,
+                                desc.getText().toString().trim(),
+                                category.getText().toString().trim(),
+                                "0");
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == GALERIA_IMAGENS && resultCode == RESULT_OK && data != null) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            photo.setImageURI(selectedImage);
-            icon.setAlpha(0.0f);
-            isPhotoLoaded = true;
-            verifyFields();
+
+            String[] projection = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, projection, null, null, null);
+
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                    selectedImagePath = cursor.getString(columnIndex);
+                }
+                cursor.close();
+            }
+
+            if (selectedImagePath != null) {
+                icon.setAlpha(0.0f);
+                photo.setImageURI(selectedImage);
+            }
         }
+        verifyFields();
+        isPhotoLoaded = true;
+
     }
 
     public void ModalButton(View view, Integer index) {
@@ -215,15 +287,91 @@ public class PostCourse extends ModelAppScreens {
             public void onClick(View v) {
                 String text = editTextInModal.getText().toString();
 
+                for(int i = 0; i < maxModules; i++){
+                    moduleTextsList.add(null);
+                }
+
                 if (lastModule > 0 && lastModule <= maxModules) {
                     moduleEditTexts[index].setText(text);
-//                    Toast.makeText(context, "Texto salvo: " + text, Toast.LENGTH_SHORT).show();
+                    if(moduleTextsList.get(index) == null){
+                        moduleTextsList.add(text);
+                    }else {
+                        moduleTextsList.set(index, text);
+                    }
                 }
                 dialog.dismiss();
-                Toast.makeText(context, "" + index, Toast.LENGTH_SHORT).show();
             }
         });
 
+
         dialog.show();
+    }
+
+    private String encodeImage(String imagePath) {
+        try {
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+            int maxWidth = 480;
+            int maxHeight = 500;
+            if (bitmap.getWidth() > maxWidth || bitmap.getHeight() > maxHeight) {
+                float scale = Math.min(((float) maxWidth / bitmap.getWidth()), ((float) maxHeight / bitmap.getHeight()));
+                Matrix matrix = new Matrix();
+                matrix.postScale(scale, scale);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            }
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            String base64Image = Base64.encodeToString(byteArray, Base64.NO_WRAP);
+
+            return base64Image;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error encoding image", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+    }
+
+
+    private class CreateCourseUser extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... params) {
+            if (params.length != 6) {
+                return false;
+            }
+
+            String email = params[0];
+            String nome = params[1];
+            String fotoPost = params[2];
+            String descricao = params[3];
+            String categoria = params[4];
+            Double preco = Double.valueOf(params[5]);
+
+            try {
+                CreateCourse mutations = new CreateCourse();
+                Response response = mutations.createCourse(email, nome, fotoPost, descricao, categoria, preco, moduleTextsList);
+                return response.isSuccessful();
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+
+            if (success) {
+                Toast.makeText(PostCourse.this, "Curso criado", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PostCourse.this, HomeScreen.class));
+                finish();
+            } else {
+                startActivity(new Intent(PostCourse.this, SkeletonBlank.class));
+                Toast.makeText(PostCourse.this, "Ocorreu um erro ao criar seu curso", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

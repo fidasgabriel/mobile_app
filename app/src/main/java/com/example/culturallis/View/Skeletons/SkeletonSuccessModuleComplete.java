@@ -29,7 +29,6 @@ public class SkeletonSuccessModuleComplete extends ModelAppScreens {
     }
 
     public void changeCoursesHome(View v){
-        startActivity(new Intent(this, NavbarCulturallis.class));
         back(v);
     }
 

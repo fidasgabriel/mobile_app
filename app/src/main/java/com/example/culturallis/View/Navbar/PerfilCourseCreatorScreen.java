@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -43,6 +44,7 @@ import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.PerfilEdit;
 import com.example.culturallis.View.Fragments.FilterPerfil;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 
@@ -447,4 +449,5 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
             }
         }
     }
+
 }
