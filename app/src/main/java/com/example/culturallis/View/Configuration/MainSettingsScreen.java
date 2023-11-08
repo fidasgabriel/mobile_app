@@ -19,6 +19,8 @@ import com.example.culturallis.R;
 import android.net.Uri;
 import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Navbar.NavbarCulturallis;
+import com.example.culturallis.View.Post.PostCourse;
+import com.example.culturallis.View.Post.PostPublication;
 
 public class MainSettingsScreen extends ModelAppScreens {
 
@@ -34,9 +36,6 @@ public class MainSettingsScreen extends ModelAppScreens {
 
         TextView titleTextView = findViewById(R.id.tbTitle);
         titleTextView.setText("Configurações");
-
-
-
 
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -96,7 +95,9 @@ public class MainSettingsScreen extends ModelAppScreens {
         startActivity(new Intent(this, PerfilEdit.class));
     }
     public void changeToHelpCenter(View view){
-        Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, PostCourse.class);
+        startActivity(intent);
+//        Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
     }
     public void changeToLanding(View view){
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://culturallis.onrender.com/")));
