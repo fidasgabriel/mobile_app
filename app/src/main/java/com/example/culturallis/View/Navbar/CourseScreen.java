@@ -20,8 +20,10 @@ import android.widget.TextView;
 import com.example.culturallis.Controller.Adapter.CourseAdapter;
 import com.example.culturallis.Controller.Queries.GetCoursesHome;
 import com.example.culturallis.Controller.Queries.GetPostsRandomly;
+import com.example.culturallis.Controller.SqLite.UserDAO;
 import com.example.culturallis.Model.CoursesHome.CoursesHome;
 import com.example.culturallis.Model.Entity.CourseCard;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.Entity.PostCard;
 import com.example.culturallis.Model.PostsHome.PostsHome;
 import com.example.culturallis.Model.Usuario.Usuario;
@@ -41,7 +43,8 @@ public class CourseScreen extends AppCompatActivity {
     CourseAdapter courseAdapter;
 
     LoadingSettings loadingDialog;
-    Usuario currentUser;
+
+    private UserDAO userDAO = new UserDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +88,8 @@ public class CourseScreen extends AppCompatActivity {
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
-            currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
-            new CourseScreen.GetCoursesRandonly().execute(currentUser.getEmail());
+            LoginUserEntity user = userDAO.getLogin();
+            new CourseScreen.GetCoursesRandonly().execute(user.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,7 +127,7 @@ public class CourseScreen extends AppCompatActivity {
 
             if (courseCards != null) {
                 for(CoursesHome crhm : courseCards){
-                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido()));
+                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido(), crhm.getAdquiriu()));
                     courseAdapter.notifyDataSetChanged();
                 }
             }else{

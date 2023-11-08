@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -26,11 +27,14 @@ import okhttp3.Response;
 public class GetPostsRandomly {
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private OkHttpClient client = new OkHttpClient();
+    private OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(2, TimeUnit.MINUTES).writeTimeout(2, TimeUnit.MINUTES).readTimeout(3, TimeUnit.MINUTES).build();
 
     Global global = new Global();
 
     public List<PostsHome> getPostsRandomly(String email) throws Exception {
+
+
+
         String url = global.getBaseUrl() + "/listarPosts/";
 
         Request request = new Request.Builder()

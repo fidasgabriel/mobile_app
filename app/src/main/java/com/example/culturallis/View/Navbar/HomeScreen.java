@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Adapter.PostAdapter;
 import com.example.culturallis.Controller.Queries.GetPostsRandomly;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.Entity.PostCard;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.PostsHome.PostsHome;
@@ -57,6 +59,8 @@ public class HomeScreen extends ModelAppScreens {
     List<PostCard> listPostC;
     PostAdapter postAdapter;
 
+    private UserDAO userDAO = new UserDAO(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +84,8 @@ public class HomeScreen extends ModelAppScreens {
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
-            currentUser = new Usuario();
-            currentUser.setEmail("ana.damasceno@gmail.com");
-            new GetPostsHomeScreen().execute(currentUser.getEmail());
+            LoginUserEntity user = userDAO.getLogin();
+            new GetPostsHomeScreen().execute(user.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,7 +145,7 @@ public class HomeScreen extends ModelAppScreens {
             if (postsHome != null) {
                 for (PostsHome pthm : postsHome) {
                     listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(),
-                            pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getCurtido(), pthm.getDescricao()));
+                            pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getSalvo(), pthm.getDescricao()));
                     postAdapter.notifyDataSetChanged();
                 }
             } else {
