@@ -9,6 +9,7 @@
     android:padding="16dp"
     tools:context=".View.Entrance.LogIn">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -39,40 +40,49 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/emailEdt" android:hint="e-mail" android:padding="16sp" android:textColor="#707070"
             android:textColorHint="#707070" android:textColorLink="#707070" android:textColorHighlight="#404040"
             android:textSize="18sp" android:textStyle="bold" android:background="@drawable/border_edittext"
             android:layout_marginBottom="16dp" android:layout_gravity="center"
-            android:fontFamily="@font/ubounded_regular"/>
+            android:fontFamily="@font/unbounded_regular"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textVisiblePassword|textPersonName|textPassword"
             android:ems="10"
-            android:id="@+id/pswEdt" android:hint="senha" android:padding="16sp" android:textColor="#707070"
-            android:textColorHint="#707070" android:textColorLink="#707070" android:textColorHighlight="#404040"
-            android:textSize="18sp" android:textStyle="bold" android:background="@drawable/border_edittext"
-            android:drawableEnd="@drawable/eye_open" android:layout_marginBottom="16dp"
-            android:layout_gravity="center" android:fontFamily="@font/ubounded_regular"/>
+            android:id="@+id/pswEdt"
+            android:hint="senha"
+            android:padding="16sp"
+            android:textColor="#707070"
+            android:textColorHint="#707070"
+            android:textColorLink="#707070"
+            android:textColorHighlight="#404040"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/border_edittext"
+            android:drawableEnd="@drawable/eye_open"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/unbounded_regular"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:text="Entrar"
-            android:layout_width="224dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLogin"
-            android:textSize="28sp"
-            android:padding="10sp"
-            android:textColor="@color/white_base"
-            android:gravity="center"
-            android:background="@drawable/disabled_button_background"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/inter"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            />
+                android:text="Entrar"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnLogin"
+                android:textSize="22sp"
+                android:padding="10sp"
+                android:textColor="@color/white_base"
+                android:gravity="center"
+                android:background="@drawable/disabled_button_background"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:onClick="login"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -105,5 +115,4 @@
             android:onClick="changeToLogon"
             android:fontFamily="@font/inter"/>
     </LinearLayout>
-
 </LinearLayout>

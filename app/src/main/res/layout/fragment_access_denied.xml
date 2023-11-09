@@ -6,34 +6,42 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    tools:context=".View.Fragments.access_denied">
+    tools:context=".View.Fragments.AccessDenied">
 
+    <TextView
+        android:id="@+id/error_oops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/unbounded_regular"
+        android:text="O"
+        android:textAlignment="center"
+        android:textSize="45dp" />
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="196dp"
+        android:layout_height="390dp"
         android:layout_marginBottom="27dp"
         android:src="@drawable/access_denied" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/unbounded_bold"
-        android:text="Oops..."
-        android:textAlignment="center"
-        android:textSize="20dp"
-
-        />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/unbounded_bold"
         android:text="Acesso negado"
         android:textAlignment="center"
         android:textColor="#000"
-        android:textSize="35dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:onClick="finishErrorScreen"
+        android:text="Voltar"
+        android:backgroundTint="@color/base_blue"/>
 </LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             tools:context=".View.Fragments.DetailsScreen.CourseDetailsScreenNotAdquired"
+             android:id="@+id/teacherCourseName">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ScrollView
+                android:paddingBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fadeScrollbars="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                          android:orientation="vertical">
+                <ImageView
+                        android:src="@drawable/left_arrow"
+                        android:layout_width="wrap_content"
+                        android:onClick="changeCoursesHome"
+                android:layout_height="wrap_content" android:id="@+id/backButton"
+                        android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingTop="4dp"/>
+                <LinearLayout
+                        android:paddingTop="8dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:layout_weight="1" android:paddingRight="32dp"
+                        android:paddingLeft="32dp">
+                    <ImageView
+                            android:background="@drawable/border_image_blue"
+                            android:layout_width="match_parent"
+                            android:maxHeight="380dp"
+                            android:layout_height="wrap_content" tools:src="@drawable/logo"
+                            android:id="@+id/courseMainImage" android:cropToPadding="false" android:padding="4dp"
+                            android:layout_marginBottom="8dp"/>
+                    <TextView
+                            android:text="TextView"
+                            android:textSize="22sp"
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/unbounded_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/titleCourse"/>
+
+                    <LinearLayout
+                            android:layout_marginBottom="24dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|center_horizontal|center_vertical">
+                        <androidx.cardview.widget.CardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="16dp"
+                                app:cardCornerRadius="250dp"
+                                android:id="@+id/cardProf"
+                        >
+
+                            <androidx.cardview.widget.CardView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    app:cardCornerRadius="250dp"
+                                    android:padding="2dp"
+                                    android:layout_gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/perfilImage"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/profile_icon" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                                android:text="TextView"
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter"
+                                android:layout_height="wrap_content" android:id="@+id/useNameTxt"
+                                android:layout_weight="1"/>
+
+                </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" android:id="@+id/moduleContainer">
+
+                        <ListView
+                            android:id="@+id/listModules"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</FrameLayout>

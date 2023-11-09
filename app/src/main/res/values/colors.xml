@@ -7,9 +7,11 @@
     <color name="teal_700">#0A9337</color>
     <color name="black">#131313</color>
     <color name="base_black">#090909</color>
+    <color name="light_black">#1A1A1A</color>
     <color name="white">#FFFFFFFF</color>
     <color name="base_green">#0A9337</color>
     <color name="base_red">#E72929</color>
+    <color name="base_violet">#B25580</color>
     <color name="base_purple">#8802C7</color>
     <color name="base_blue">#0680D7</color>
     <color name="base_yellow">#FFC700</color>
@@ -19,4 +21,16 @@
     <color name="base_gray">#CCCCCC</color>
     <color name="blue_button">#1E84BF</color>
     <color name="gray_disabled">#707070</color>
+    <color name="base_orange">#F56B28</color>
+    <color name="cian_base">#0F9584</color>
+    <color name="blue_course">#1374ba</color>
+    <color name="purple_course">#7c13ad</color>
+    <color name="yellow_course">#e8bd25</color>
+    <color name="orange_course">#e06f38</color>
+    <color name="cian_perfil">#0F9584</color>
+    <color name="yellow_perfil">#F4B413</color>
+    <color name="violet_perfil">#982EAC</color>
+    <color name="blue_perfil">#1E84BF</color>
+    <color name="saved_icon_purple">#6253B5</color>
+    <color name="icon_home">#374957</color>
 </resources>

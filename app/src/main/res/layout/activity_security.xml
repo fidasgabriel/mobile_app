@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:id="@+id/layout"
     tools:context=".View.Configuration.Security">
     <include
         android:id="@+id/mytoolbar"
@@ -21,6 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -38,8 +40,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
-                android:hint="antigo@email.com"
+                android:fontFamily="@font/unbounded_regular"
+                android:hint="Ex: seu@email.com"
                 android:inputType="textPersonName"
                 android:padding="16sp"
                 android:textColor="#707070"
@@ -69,8 +71,8 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:background="@drawable/border_edittext"
-            android:fontFamily="@font/ubounded_regular"
-            android:hint="+55 11 99999-8888"
+            android:fontFamily="@font/unbounded_regular"
+            android:hint="Ex: +55 11 99999-8888"
             android:inputType="phone"
             android:padding="16sp"
             android:textColor="#707070"
@@ -100,8 +102,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
-                android:hint="111.111.111-11"
+                android:fontFamily="@font/unbounded_regular"
+                android:hint="Ex: 111.111.111-11"
                 android:inputType="text"
                 android:padding="16dp"
                 android:textColor="#707070"
@@ -131,7 +133,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:hint="senha antiga"
                 android:inputType="textVisiblePassword|textPersonName|textPassword"
                 android:padding="16sp"
@@ -149,7 +151,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:hint="nova senha"
                 android:inputType="textVisiblePassword|textPersonName|textPassword"
                 android:padding="16sp"
@@ -166,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/border_edittext"
-                android:fontFamily="@font/ubounded_regular"
+                android:fontFamily="@font/unbounded_regular"
                 android:hint="confirmar senha"
                 android:inputType="textVisiblePassword|textPersonName|textPassword"
                 android:padding="16sp"
@@ -186,7 +188,7 @@
                 android:textStyle="bold"
                 android:paddingLeft="16sp"
                 android:layout_gravity="center"
-                android:fontFamily="@font/ubounded_regular"/>
+                android:fontFamily="@font/unbounded_regular"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -208,6 +210,7 @@
             android:gravity="center"
             android:padding="10sp"
             android:text="Salvar"
+            android:onClick="updateInfoUserSensibility"
             android:textAllCaps="false"
             android:textColor="@color/white_base"
             android:textSize="16dp"
