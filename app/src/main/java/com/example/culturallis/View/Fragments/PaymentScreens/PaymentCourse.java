@@ -3,15 +3,15 @@ package com.example.culturallis.View.Fragments.PaymentScreens;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ImageView;
-
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 
 import com.example.culturallis.Controller.Mutations.AdquireCourse;
 import com.example.culturallis.Controller.SqLite.UserDAO;
@@ -19,7 +19,6 @@ import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
-import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
 
 import okhttp3.Response;
 
@@ -79,8 +78,6 @@ public class PaymentCourse extends Fragment {
         View view = inflater.inflate(R.layout.fragment_payment_course, container, false);
 
         UserDAO userDAO = new UserDAO(view.getContext());
-
-        user = userDAO.getLogin();
 
         ImageView im = view.findViewById(R.id.pixImage);
         TextView txtPrice = view.findViewById(R.id.textView8);

@@ -8,7 +8,6 @@
     import android.os.AsyncTask;
     import android.os.Bundle;
     import android.util.Base64;
-    import android.util.Log;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
@@ -22,24 +21,17 @@
 
     import com.bumptech.glide.Glide;
     import com.example.culturallis.Controller.Mutations.ToggleLikeCourse;
-    import com.example.culturallis.Controller.Queries.GetCoursesAdquired;
-    import com.example.culturallis.Controller.Queries.GetCoursesHome;
     import com.example.culturallis.Controller.SqLite.UserDAO;
-    import com.example.culturallis.Model.CoursesHome.CoursesHome;
     import com.example.culturallis.Model.Entity.CourseCard;
     import com.example.culturallis.Model.Entity.LoginUserEntity;
     import com.example.culturallis.Model.Usuario.Usuario;
     import com.example.culturallis.R;
     import com.example.culturallis.View.Fragments.LoadingSettings;
-    import com.example.culturallis.View.Navbar.CourseScreen;
-    import com.example.culturallis.View.Skeletons.SkeletonBlank;
     import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
-    import com.example.culturallis.View.Skeletons.SkeletonPaymentCourse;
     import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
     import com.squareup.picasso.Picasso;
 
     import java.text.DecimalFormat;
-    import java.util.ArrayList;
     import java.util.List;
 
     import okhttp3.Response;
@@ -49,17 +41,13 @@
         private List<CourseCard> coursesCards;
         private boolean havePerfilImage;
         Usuario currentUser;
-        LoadingSettings loadingDialog;
-
-        private List<CourseCard> listCourses = new ArrayList<>();
-
-        private Context context;
-
         private UserDAO userDAO;
+        private Context context; // Adicione um campo para armazenar o contexto
         public CourseAdapter(Context context) {
             this.context = context;
             userDAO = new UserDAO(context);
         }
+
 
         public void setData(List<CourseCard> coursesCards, boolean havePerfilImage) {
             this.coursesCards = coursesCards;
@@ -122,19 +110,20 @@
 
             if (course.isLiked()){
                 animate(false, holder.likeButton, holder.itemView.getContext());
+                course.setLiked(true);
             }
 
             holder.likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     animate(course.isLiked(), holder.likeButton,holder.itemView.getContext());
-                    course.setLiked();
+                    course.setLiked(!course.isLiked());
 
                     try {
-                        LoginUserEntity user = userDAO.getLogin();
                         currentUser = new Usuario();
-                        currentUser.setEmail(user.getEmail());
-                        new ToggleLikeCourses().execute(course.getPk_id().toString());
+                        String currentEmail = userDAO.getCurrentEmail();
+                        currentUser.setEmail(currentEmail);
+                        new CourseAdapter.ToggleLikeCourses().execute(course.getPk_id().toString());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -153,9 +142,9 @@
                 public void onClick(View v) {
                     try {
                         currentUser = new Usuario();
-                        LoginUserEntity user = userDAO.getLogin();
-                        currentUser.setEmail(user.getEmail());
-                        loadingDialog = new LoadingSettings(context);
+                        String currentEmail = userDAO.getCurrentEmail();
+                        currentUser.setEmail(currentEmail);
+                        LoadingSettings loadingDialog = new LoadingSettings(context);
                         loadingDialog.show();
                         Bundle bundle = new Bundle();
                         bundle.putString("idCourse", String.valueOf(course.getPk_id()));
@@ -173,10 +162,15 @@
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                }
+            });
 
-
-
-
+            holder.courseImage.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    animate(false, holder.likeButton, holder.itemView.getContext());
+                    course.setLiked(true);
+                    return false;
                 }
             });
         }

@@ -80,8 +80,6 @@ public class PostCourse extends ModelAppScreens {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_course);
 
-        user = userDAO.getLogin();
-
         moduleContainer = findViewById(R.id.moduleContainer);
         addButton = findViewById(R.id.addButton);
         icon = findViewById(R.id.icon);

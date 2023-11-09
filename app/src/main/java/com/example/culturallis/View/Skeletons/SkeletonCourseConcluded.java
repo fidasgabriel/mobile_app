@@ -11,7 +11,6 @@ import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.SuccessScreens.CompleteCourseSuccess;
 import com.example.culturallis.View.Navbar.HomeScreen;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbarNoSettings;
 
 public class SkeletonCourseConcluded extends ModelAppScreens {

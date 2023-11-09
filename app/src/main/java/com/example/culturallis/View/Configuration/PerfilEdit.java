@@ -33,20 +33,16 @@ import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Entrance.LogIn;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Fragments.NotConnected;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 import okhttp3.Response;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class PerfilEdit extends ModelAppScreens {
     private EditText edtTxtUserName;
@@ -92,12 +88,12 @@ public class PerfilEdit extends ModelAppScreens {
 
         Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
 
-        LoginUserEntity user = userDAO.getLogin();
+        String currentEmail = userDAO.getCurrentEmail();
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             currentUser = new Usuario();
-            currentUser.setEmail(user.getEmail());
+            currentUser.setEmail(currentEmail);
             new GetUserProfileTask().execute(currentUser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
@@ -173,9 +169,7 @@ public class PerfilEdit extends ModelAppScreens {
             }
 
             if (selectedImagePath != null) {
-                Glide.with(this)
-                        .load(selectedImagePath)
-                        .into(imgUser);
+               imgUser.setImageURI(imageUri);
             }
         }
     }
@@ -234,7 +228,7 @@ public class PerfilEdit extends ModelAppScreens {
     }
 
     public void updateUser(View view) {
-        if (edtTxtUserName.getText().toString().trim().length() > 0 && (editTextBio.getText().toString().trim().length() > 0 ||  edtTxtBirthdayDay.getText().toString().trim().length() > 0)) {
+        if (edtTxtUserName.getText().toString().trim().length() > 0 && edtTxtBirthdayDay.getText().toString().trim().length() > 0) {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
@@ -248,7 +242,7 @@ public class PerfilEdit extends ModelAppScreens {
                     edtTxtBirthdayDay.getText().toString(),
                     editTextBio.getText().toString());
         }else{
-            Toast.makeText(PerfilEdit.this, "Preencha ao menos o nome de usuário", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PerfilEdit.this, "Preencha ao menos o nome de usuário e data de nascimento", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -275,7 +269,7 @@ public class PerfilEdit extends ModelAppScreens {
 
             if (user != null) {
                 if(user.getNome_usuario() != null){
-                    edtTxtUserName.setText(user.getNome_usuario().toString());
+                    edtTxtUserName.setText(user.getNome_usuario());
 
                 }else{
                     edtTxtUserName.setText("");

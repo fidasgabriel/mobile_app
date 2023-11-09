@@ -8,9 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Fragments.Loading;
 import com.example.culturallis.View.Fragments.ServerError;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
 public class SkeletonBlank extends ModelAppScreens {
 

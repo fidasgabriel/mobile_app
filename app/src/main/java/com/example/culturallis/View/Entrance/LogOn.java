@@ -66,7 +66,6 @@
             linkLogin.setText(underline);
             btnLogon.setText("Cadastrar-se");
 
-
             edtTxtPassword = findViewById(R.id.pswEdt);
             edtTxtConfirmPassword = findViewById(R.id.confirmPswEdt);
             edtTxtUserName = findViewById(R.id.userNameEdt);

@@ -1,7 +1,6 @@
 package com.example.culturallis.Controller.Queries;
 
-import android.util.Log;
-
+import com.example.culturallis.Model.CoursesHome.CoursesHome;
 import com.example.culturallis.Model.Global.Global;
 import com.example.culturallis.Model.PostsHome.PostsHome;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -9,22 +8,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetOwnPostsRamdonly {
-
+public class GetAcquiredCoursesRamdonly {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(2, TimeUnit.MINUTES).writeTimeout(2, TimeUnit.MINUTES).readTimeout(3, TimeUnit.MINUTES).build();
-
+    private OkHttpClient client = new OkHttpClient();
     Global global = new Global();
 
-    public List<PostsHome> getOwnPostsRandomly(String email) throws Exception {
-        String url = global.getBaseUrl() + "/meusPosts/";
+    public List<CoursesHome> getAcquiredCoursesRamdonly(String email) throws Exception {
+        String url = global.getBaseUrl() + "/meusCursosAdquiridos/";
 
         Request request = new Request.Builder()
                 .url(url + email)
@@ -41,10 +37,10 @@ public class GetOwnPostsRamdonly {
                 }
 
                 ObjectMapper objectMapper = new ObjectMapper();
-                List<PostsHome> posts = objectMapper.readValue(responseData, new TypeReference<List<PostsHome>>() {});
+                List<CoursesHome> posts = objectMapper.readValue(responseData, new TypeReference<List<CoursesHome>>() {});
                 return posts;
             } else {
-                throw new Exception("Falha ao pegar posts do próprio usuário");
+                throw new Exception("Falha ao pegar cursos adquiridos do usuário");
             }
         }
     }

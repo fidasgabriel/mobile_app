@@ -40,7 +40,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/emailEdt" android:hint="e-mail" android:padding="16sp" android:textColor="#707070"
             android:textColorHint="#707070" android:textColorLink="#707070" android:textColorHighlight="#404040"

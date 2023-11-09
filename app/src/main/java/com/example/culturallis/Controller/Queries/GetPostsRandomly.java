@@ -28,7 +28,6 @@ public class GetPostsRandomly {
 
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(2, TimeUnit.MINUTES).writeTimeout(2, TimeUnit.MINUTES).readTimeout(3, TimeUnit.MINUTES).build();
-
     Global global = new Global();
 
     public List<PostsHome> getPostsRandomly(String email) throws Exception {

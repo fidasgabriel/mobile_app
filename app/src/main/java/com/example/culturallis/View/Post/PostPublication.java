@@ -63,16 +63,11 @@ public class PostPublication extends ModelAppScreens {
     private EditText txtDescription;
     private View layout;
     private ImageView img;
-
+    private UserDAO userDAO = new UserDAO(this);
     private String selectedImagePath;
     private AppCompatButton btn;
     String base64Image;
     Usuario currentUser;
-
-    Response responseCreatePost;
-
-    private UserDAO userDAO = new UserDAO(this);
-
     private LoginUserEntity user;
 
     @Override
@@ -86,9 +81,6 @@ public class PostPublication extends ModelAppScreens {
         txtDescription = findViewById(R.id.desc);
         btn = findViewById(R.id.btnPostPublication);
         currentUser = new Usuario();
-
-        user = userDAO.getLogin();
-
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +113,8 @@ public class PostPublication extends ModelAppScreens {
                     }else{
                         base64Image = currentUser.getUrl_foto();
                     }
-                    currentUser.setEmail(user.getEmail());
+                    String currentEmail = userDAO.getCurrentEmail();
+                    currentUser.setEmail(currentEmail);
                     new CreatePostUser().execute(
                             currentUser.getEmail(),
                             base64Image,

@@ -26,13 +26,10 @@ import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Configuration.MainSettingsScreen;
-import com.example.culturallis.View.Configuration.Security;
-import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenAdquired;
 import com.example.culturallis.View.Fragments.DetailsScreen.CourseDetailsScreenNotAdquired;
 import com.example.culturallis.View.Fragments.LoadingSettings;
 import com.example.culturallis.View.Navbar.CourseScreen;
 import com.example.culturallis.View.Navbar.HomeScreen;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 import com.example.culturallis.View.Navbar.TopNavbar;
 import com.example.culturallis.View.Post.PostPublication;
 import com.google.gson.Gson;
@@ -74,8 +71,6 @@ public class SkeletonSelectedItem extends ModelAppScreens {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skeleton_selected_item);
-
-        user = userDAO.getLogin();
 
         CourseDetailsScreenNotAdquired fragment = new CourseDetailsScreenNotAdquired();
         TopNavbar topNavbar = new TopNavbar();
@@ -219,7 +214,7 @@ public class SkeletonSelectedItem extends ModelAppScreens {
                         Toast.makeText(SkeletonSelectedItem.this, "Curso adquirido!", Toast.LENGTH_SHORT).show();
                         finish();
                         startActivity(new Intent(SkeletonSelectedItem.this, CourseScreen.class));
-                    } else {
+                } else {
                         startActivity(new Intent(SkeletonSelectedItem.this, SkeletonBlank.class));
                         Toast.makeText(SkeletonSelectedItem.this, "Ocorreu um erro ao adquirir o curso", Toast.LENGTH_SHORT).show();
                     }

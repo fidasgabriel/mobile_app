@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.example.culturallis.Controller.GlobalUtilization;
 import com.example.culturallis.R;
-import com.example.culturallis.View.Configuration.MainSettingsScreen;
-import com.example.culturallis.View.Navbar.NavbarCulturallis;
 
 import java.util.ArrayList;
 import java.util.List;

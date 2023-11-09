@@ -1,22 +1,19 @@
 package com.example.culturallis.View.Fragments.DetailsScreen;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.culturallis.Controller.Adapter.ListModulesAdapter;
@@ -28,9 +25,6 @@ import com.example.culturallis.Model.Modules.Modules;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.LoadingSettings;
-import com.example.culturallis.View.Skeletons.SkeletonCourseConcluded;
-import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
-import com.example.culturallis.View.Skeletons.SkeletonSuccessModuleComplete;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -38,11 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CourseDetailsScreenAdquired#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CourseDetailsScreenAdquired extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -58,15 +47,6 @@ public class CourseDetailsScreenAdquired extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CourseDetailsScreenAdquired.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CourseDetailsScreenAdquired newInstance(String param1, String param2) {
         CourseDetailsScreenAdquired fragment = new CourseDetailsScreenAdquired();
         Bundle args = new Bundle();
@@ -104,8 +84,7 @@ public class CourseDetailsScreenAdquired extends Fragment {
         try {
             UserDAO userDAO = new UserDAO(view.getContext());
             currentUser = new Usuario();
-            LoginUserEntity user = userDAO.getLogin();
-            currentUser.setEmail(user.getEmail());
+            currentUser.setEmail(userDAO.getCurrentEmail());
             loadingDialog = new LoadingSettings(view.getContext());
             loadingDialog.show();
             Bundle b = getArguments();
