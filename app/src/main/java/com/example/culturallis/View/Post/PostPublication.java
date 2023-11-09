@@ -35,6 +35,7 @@ import com.example.culturallis.Controller.Mutations.CreatePost;
 import com.example.culturallis.Controller.Mutations.LogonUser;
 import com.example.culturallis.Controller.Mutations.UpdateUser;
 import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
@@ -67,8 +68,7 @@ public class PostPublication extends ModelAppScreens {
     private AppCompatButton btn;
     String base64Image;
     Usuario currentUser;
-
-    Response responseCreatePost;
+    private LoginUserEntity user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,6 @@ public class PostPublication extends ModelAppScreens {
         txtDescription = findViewById(R.id.desc);
         btn = findViewById(R.id.btnPostPublication);
         currentUser = new Usuario();
-
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

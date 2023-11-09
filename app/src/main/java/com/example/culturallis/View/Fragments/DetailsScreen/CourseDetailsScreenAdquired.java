@@ -1,28 +1,37 @@
 package com.example.culturallis.View.Fragments.DetailsScreen;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.culturallis.R;
-import com.example.culturallis.View.Skeletons.SkeletonCourseConcluded;
-import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
-import com.example.culturallis.View.Skeletons.SkeletonSuccessModuleComplete;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.example.culturallis.Controller.Adapter.ListModulesAdapter;
+import com.example.culturallis.Controller.Queries.GetCourseInfo;
+import com.example.culturallis.Controller.SqLite.UserDAO;
+import com.example.culturallis.Model.CourseDetails.CourseDetails;
+import com.example.culturallis.Model.Entity.LoginUserEntity;
+import com.example.culturallis.Model.Modules.Modules;
+import com.example.culturallis.Model.Usuario.Usuario;
+import com.example.culturallis.R;
+import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CourseDetailsScreenAdquired#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CourseDetailsScreenAdquired extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -38,15 +47,6 @@ public class CourseDetailsScreenAdquired extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CourseDetailsScreenAdquired.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CourseDetailsScreenAdquired newInstance(String param1, String param2) {
         CourseDetailsScreenAdquired fragment = new CourseDetailsScreenAdquired();
         Bundle args = new Bundle();
@@ -65,22 +65,41 @@ public class CourseDetailsScreenAdquired extends Fragment {
         }
     }
 
+    Usuario currentUser;
+    LoadingSettings loadingDialog;
+
+    CourseDetails courseSelected;
+
+    TextView textView;
+    TextView txtUser;
+    ImageView img;
+    ListView listView;
+    ImageView imgUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_course_details_screen_adquired, container, false);
 
-        TextView textView = view.findViewById(R.id.titleCourse);
-        ImageView img = view.findViewById(R.id.courseMainImage);
-        TextView txtUser = view.findViewById(R.id.useNameTxt);
+        try {
+            UserDAO userDAO = new UserDAO(view.getContext());
+            currentUser = new Usuario();
+            currentUser.setEmail(userDAO.getCurrentEmail());
+            loadingDialog = new LoadingSettings(view.getContext());
+            loadingDialog.show();
+            Bundle b = getArguments();
+            new CourseDetailsScreenAdquired.GetCourseDetails().execute(b.getString("idCourse"));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        listView = view.findViewById(R.id.listModules);
+
+        textView = view.findViewById(R.id.titleCourse);
+        img = view.findViewById(R.id.courseMainImage);
+        txtUser = view.findViewById(R.id.useNameTxt);
         CardView cardView = view.findViewById(R.id.cardProf);
-        AppCompatButton txtModule1Title = view.findViewById(R.id.modulo1);
-        AppCompatButton txtModule2Title = view.findViewById(R.id.modulo2);
-        AppCompatButton txtModule3Title = view.findViewById(R.id.modulo3);
-        AppCompatButton txtModule4Title = view.findViewById(R.id.modulo4);
-        AppCompatButton txtModule5Title = view.findViewById(R.id.modulo5);
-        AppCompatButton txtModule6Title = view.findViewById(R.id.modulo6);
+        imgUser = view.findViewById(R.id.perfilImage);
 
         int[] colorBorderSelected = {
                 R.drawable.border_image_blue,
@@ -113,17 +132,79 @@ public class CourseDetailsScreenAdquired extends Fragment {
 
         img.setBackground(getResources().getDrawable(randomBorderSelected));
         cardView.setCardBackgroundColor(getResources().getColor(randomAvatarBorder));
-        txtModule1Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule2Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule3Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule4Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule5Title.setBackground(getResources().getDrawable(randomTagColor));
-        txtModule6Title.setBackground(getResources().getDrawable(randomTagColor));
-
-        txtUser.setText("Culturallis");
-        img.setImageResource(R.drawable.logo);
-        textView.setText("Título Chamativo");
 
         return view;
+    }
+
+    private class GetCourseDetails extends AsyncTask<String, Void, CourseDetails> {
+        @Override
+        protected CourseDetails doInBackground(String... params) {
+            if (params.length == 1) {
+
+                String courseId = params[0];
+
+                try {
+                    return new GetCourseInfo().getCoursesDetails(Long.parseLong(courseId));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(CourseDetails courseDetails) {
+            if (loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
+
+            if (courseDetails != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString("nome", courseDetails.getNome());
+                bundle.putString("courseOwner", courseDetails.getCourseOwner());
+                bundle.putString("courseOwnerFoto", courseDetails.getCourseOwnerFoto());
+                bundle.putString("categoria", courseDetails.getCategoria());
+                bundle.putString("descricao", courseDetails.getDescricao());
+                bundle.putString("preco", String.valueOf(courseDetails.getPreco()));
+                bundle.putString("modulos", new Gson().toJson(courseDetails.getModulos()));
+
+                courseSelected = courseDetails;
+
+                txtUser.setText(courseSelected.getCourseOwner());
+                textView.setText(courseSelected.getNome());
+                if(!courseSelected.getCourseOwnerFoto().startsWith("http")){
+                    byte[] decodedImagePost = Base64.decode(courseSelected.getCourseOwnerFoto(), Base64.DEFAULT);
+                    Bitmap imageBitmapPost = BitmapFactory.decodeByteArray(decodedImagePost, 0, decodedImagePost.length);
+
+                    Glide.with(getContext())
+                            .load(imageBitmapPost)
+                            .into(imgUser);
+
+                }else{
+                    Picasso.get().load(courseSelected.getCourseOwnerFoto()).into(imgUser);
+                }
+                if(!courseSelected.getUrl_midia().startsWith("http")){
+                    byte[] decodedImagePost = Base64.decode(courseSelected.getUrl_midia(), Base64.DEFAULT);
+                    Bitmap imageBitmapPost = BitmapFactory.decodeByteArray(decodedImagePost, 0, decodedImagePost.length);
+
+                    Glide.with(getContext())
+                            .load(imageBitmapPost)
+                            .into(img);
+
+                }else{
+                    Picasso.get().load(courseSelected.getUrl_midia()).into(img);
+                }
+
+                List<String> ls = new ArrayList<>();
+
+                for(Modules modules : courseSelected.getModulos()){
+                    ls.add(modules.getUrl_material());
+                }
+
+                ListModulesAdapter listModulesAdapter = new ListModulesAdapter(requireContext(), R.layout.activity_layout_modules_list, ls);
+                listView.setAdapter(listModulesAdapter);
+
+            }
+        }
     }
 }

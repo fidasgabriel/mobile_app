@@ -22,6 +22,7 @@ import com.example.culturallis.Model.PostsHome.PostsHome;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Post.PostPublication;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -109,6 +110,7 @@ public class HomeScreen extends ModelAppScreens {
                 for (PostsHome pthm : postsHome) {
                     listPostC.add(new PostCard(pthm.getPk_id(), pthm.getUrl_midia(), pthm.getPostsOwnerFoto(),
                             pthm.getPostsOwnerName(), pthm.getCurtido(), pthm.getSalvo(), pthm.getDescricao()));
+                    postAdapter.notifyDataSetChanged();
                 }
                 postAdapter.setData(listPostC, true);
                 rv.setAdapter(postAdapter);

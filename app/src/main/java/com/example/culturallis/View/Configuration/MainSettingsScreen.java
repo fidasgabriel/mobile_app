@@ -3,19 +3,17 @@ package com.example.culturallis.View.Configuration;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
-import android.os.Bundle;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.culturallis.Model.ModelAppScreens;
 import com.example.culturallis.R;
 import com.example.culturallis.View.Entrance.LogIn;
-import com.example.culturallis.View.Navbar.HomeScreen;
 
 public class MainSettingsScreen extends ModelAppScreens {
 
@@ -33,13 +31,10 @@ public class MainSettingsScreen extends ModelAppScreens {
         titleTextView.setText("Configurações");
 
 
-
-
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainSettingsScreen.this, HomeScreen.class));
+                back(view);
             }
         });
 
@@ -90,7 +85,9 @@ public class MainSettingsScreen extends ModelAppScreens {
         startActivity(new Intent(this, PerfilEdit.class));
     }
     public void changeToHelpCenter(View view){
-        Toast.makeText(this, "Central de ajuda aqui!!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("mailto:" + "apoliz.cultura@gmail.com"));
+        startActivity(intent);
     }
     public void changeToLanding(View view){
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://culturallis.onrender.com/")));

@@ -26,7 +26,6 @@ public class CoursesHome {
 
     private Integer numCursados;
     private boolean adquiriu;
-
     public CoursesHome() {
     }
 
@@ -143,7 +142,7 @@ public class CoursesHome {
 
     @Override
     public String toString() {
-        return "ReturnCoursesHome{" +
+        return "CoursesHome{" +
                 "pk_id=" + pk_id +
                 ", fk_cul_usuarios_id=" + fk_cul_usuarios_id +
                 ", titulo='" + titulo + '\'' +
@@ -155,6 +154,7 @@ public class CoursesHome {
                 ", postsOwnerName='" + postsOwnerName + '\'' +
                 ", curtido=" + curtido +
                 ", numCursados=" + numCursados +
+                ", adquiriu=" + adquiriu +
                 '}';
     }
 }

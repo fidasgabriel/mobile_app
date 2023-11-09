@@ -6,6 +6,7 @@
     import android.graphics.BitmapFactory;
     import android.graphics.drawable.AnimatedVectorDrawable;
     import android.os.AsyncTask;
+    import android.os.Bundle;
     import android.util.Base64;
     import android.view.LayoutInflater;
     import android.view.View;
@@ -22,15 +23,19 @@
     import com.example.culturallis.Controller.Mutations.ToggleLikeCourse;
     import com.example.culturallis.Controller.SqLite.UserDAO;
     import com.example.culturallis.Model.Entity.CourseCard;
+    import com.example.culturallis.Model.Entity.LoginUserEntity;
     import com.example.culturallis.Model.Usuario.Usuario;
     import com.example.culturallis.R;
+    import com.example.culturallis.View.Fragments.LoadingSettings;
     import com.example.culturallis.View.Skeletons.SkeletonCourseDetails;
+    import com.example.culturallis.View.Skeletons.SkeletonSelectedItem;
     import com.squareup.picasso.Picasso;
 
     import java.text.DecimalFormat;
     import java.util.List;
 
     import okhttp3.Response;
+
 
     public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
         private List<CourseCard> coursesCards;
@@ -73,7 +78,7 @@
                         .into(holder.courseImage);
 
             }else{
-                Picasso.with(holder.courseImage.getContext()).load(course.getCourseImage()).into(holder.courseImage);
+                Picasso.get().load(course.getCourseImage()).into(holder.courseImage);
             }
 
             if(!course.getPerfilImage().startsWith("http")){
@@ -85,7 +90,7 @@
                         .into(holder.perfilImage);
 
             }else{
-                Picasso.with(holder.perfilImage.getContext()).load(course.getPerfilImage()).into(holder.perfilImage);
+                Picasso.get().load(course.getPerfilImage()).into(holder.perfilImage);
             }
 
             String title = course.getCourseTitle();
@@ -135,8 +140,28 @@
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, SkeletonCourseDetails.class);
-                    context.startActivity(intent);
+                    try {
+                        currentUser = new Usuario();
+                        String currentEmail = userDAO.getCurrentEmail();
+                        currentUser.setEmail(currentEmail);
+                        LoadingSettings loadingDialog = new LoadingSettings(context);
+                        loadingDialog.show();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("idCourse", String.valueOf(course.getPk_id()));
+
+                        if(course.isAdquired()){
+                            Intent intent = new Intent(context, SkeletonCourseDetails.class);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(context, SkeletonSelectedItem.class);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                        }
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
 
@@ -222,10 +247,10 @@
             protected void onPostExecute(Boolean success) {
 
                 if (success) {
-                    Toast.makeText(context, "Sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Problemas ao realizar sua ação", Toast.LENGTH_SHORT).show();
                 }
             }
         }
+
     }

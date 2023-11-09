@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -42,6 +43,7 @@ import com.example.culturallis.Controller.Queries.GetUserInfo;
 import com.example.culturallis.Model.PostsHome.PostsHome;
 import com.example.culturallis.Model.Usuario.Usuario;
 import com.example.culturallis.View.Fragments.LoadingSettings;
+import com.example.culturallis.View.Fragments.NotConnected;
 import com.example.culturallis.View.Skeletons.SkeletonBlank;
 import com.squareup.picasso.Picasso;
 
@@ -124,7 +126,7 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
         listPostC = new ArrayList<>();
 
-        Picasso.with(imgUserPhoto.getContext()).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
+        Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
 
         String currentEmail = userDAO.getCurrentEmail();
         try {
@@ -424,8 +426,8 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
                     Glide.with(PerfilCourseCreatorScreen.this)
                             .load(imageBitmap)
                             .into(imgUserPhoto);
-                } else {
-                    Picasso.with(PerfilCourseCreatorScreen.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
+                }else{
+                    Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUserPhoto);
                 }
                 if (user.getBio() != null && !user.getBio().equals("null")) {
                     txtUserBio.setText(user.getBio().toString());
@@ -465,7 +467,7 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
             if (courseHome != null) {
                 for (CoursesHome crhm : courseHome) {
-                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido()));
+                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido(), crhm.isAdquiriu()));
                 }
                 if(listCourseC.size() != 0){
                     Fragment fragment = fragmentManager.findFragmentById(R.id.notFoundLayout);
@@ -519,7 +521,7 @@ public class PerfilCourseCreatorScreen extends AppCompatActivity {
 
             if (courseHome != null) {
                 for (CoursesHome crhm : courseHome) {
-                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido()));
+                    listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido(), crhm.isAdquiriu()));
                 }
                 if(listCourseC.size() != 0){
                     Fragment fragment = fragmentManager.findFragmentById(R.id.notFoundLayout);

@@ -86,18 +86,18 @@ public class PerfilEdit extends ModelAppScreens {
         imgUser = findViewById(R.id.chgPerfil);
         txtChangePhotoProfile = findViewById(R.id.chgPerfilButton);
 
-        Picasso.with(this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
+        Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
 
-//        LoginUserEntity user = userDAO.getLogin();
-//        try {
-//            loadingDialog = new LoadingSettings(this);
-//            loadingDialog.show();
-//            currentUser = new Usuario();
-//            currentUser.setEmail(user.getEmail());
-//            new GetUserProfileTask().execute(currentUser.getEmail());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        String currentEmail = userDAO.getCurrentEmail();
+        try {
+            loadingDialog = new LoadingSettings(this);
+            loadingDialog.show();
+            currentUser = new Usuario();
+            currentUser.setEmail(currentEmail);
+            new GetUserProfileTask().execute(currentUser.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,9 +169,7 @@ public class PerfilEdit extends ModelAppScreens {
             }
 
             if (selectedImagePath != null) {
-                Glide.with(this)
-                        .load(selectedImagePath)
-                        .into(imgUser);
+                Glide.with(this).load(Uri.parse(selectedImagePath)).into(imgUser);
             }
         }
     }
@@ -271,7 +269,7 @@ public class PerfilEdit extends ModelAppScreens {
 
             if (user != null) {
                 if(user.getNome_usuario() != null){
-                    edtTxtUserName.setText(user.getNome_usuario().toString());
+                    edtTxtUserName.setText(user.getNome_usuario());
 
                 }else{
                     edtTxtUserName.setText("");
@@ -284,8 +282,10 @@ public class PerfilEdit extends ModelAppScreens {
                     Glide.with(PerfilEdit.this)
                             .load(imageBitmap)
                             .into(imgUser);
-                }else{
-                    Picasso.with(PerfilEdit.this).load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
+                }
+                else{
+                    android.widget.Toast.makeText(PerfilEdit.this, "ok", Toast.LENGTH_SHORT).show();
+                    Picasso.get().load("https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914_1280.png").into(imgUser);
                 }
                 if(user.getBio() != null){
                     editTextBio.setText(user.getBio().toString());

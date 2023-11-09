@@ -10,8 +10,9 @@ public class CourseCard {
     private String courseAuthor;
     private int viewsCount;
     private boolean liked;
+    private boolean adquired;
 
-    public CourseCard(Long pk_id, String perfilImage, String courseImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked) {
+    public CourseCard(Long pk_id, String perfilImage, String courseImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked, boolean adquired) {
         this.pk_id = pk_id;
         this.perfilImage = perfilImage;
         this.courseImage = courseImage;
@@ -19,15 +20,17 @@ public class CourseCard {
         this.courseAuthor = courseAuthor;
         this.viewsCount = viewsCount;
         this.liked = liked;
+        this.adquired = adquired;
     }
 
-    public CourseCard(String courseImage, String perfilImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked) {
+    public CourseCard(String courseImage, String perfilImage, String courseTitle, String courseAuthor, int viewsCount, boolean liked, boolean adquired) {
         this.courseImage = courseImage;
         this.perfilImage = perfilImage;
         this.courseTitle = courseTitle;
         this.courseAuthor = courseAuthor;
         this.viewsCount = viewsCount;
         this.liked = liked;
+        this.adquired = adquired;
     }
 
     public Long getPk_id() {
@@ -86,15 +89,26 @@ public class CourseCard {
         this.viewsCount = viewsCount;
     }
 
+
+    public boolean isAdquired() {
+        return adquired;
+    }
+
+    public void setAdquired(boolean adquired) {
+        this.adquired = adquired;
+    }
+
     @Override
     public String toString() {
         return "CourseCard{" +
-                "perfilImage=" + perfilImage +
-                ", courseImage=" + courseImage +
+                "pk_id=" + pk_id +
+                ", perfilImage='" + perfilImage + '\'' +
+                ", courseImage='" + courseImage + '\'' +
                 ", courseTitle='" + courseTitle + '\'' +
                 ", courseAuthor='" + courseAuthor + '\'' +
                 ", viewsCount=" + viewsCount +
                 ", liked=" + liked +
+                ", adquired=" + adquired +
                 '}';
     }
 }

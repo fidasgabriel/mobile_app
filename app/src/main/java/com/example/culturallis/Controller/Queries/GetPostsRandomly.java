@@ -31,6 +31,9 @@ public class GetPostsRandomly {
     Global global = new Global();
 
     public List<PostsHome> getPostsRandomly(String email) throws Exception {
+
+
+
         String url = global.getBaseUrl() + "/listarPosts/";
 
         Request request = new Request.Builder()
