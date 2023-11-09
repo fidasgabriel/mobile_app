@@ -169,7 +169,7 @@ public class PerfilEdit extends ModelAppScreens {
             }
 
             if (selectedImagePath != null) {
-                Glide.with(this).load(Uri.parse(selectedImagePath)).into(imgUser);
+               imgUser.setImageURI(imageUri);
             }
         }
     }
@@ -228,7 +228,7 @@ public class PerfilEdit extends ModelAppScreens {
     }
 
     public void updateUser(View view) {
-        if (edtTxtUserName.getText().toString().trim().length() > 0 && (editTextBio.getText().toString().trim().length() > 0 ||  edtTxtBirthdayDay.getText().toString().trim().length() > 0)) {
+        if (edtTxtUserName.getText().toString().trim().length() > 0 && edtTxtBirthdayDay.getText().toString().trim().length() > 0) {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
             if (selectedImagePath != null && !selectedImagePath.isEmpty()) {
@@ -242,7 +242,7 @@ public class PerfilEdit extends ModelAppScreens {
                     edtTxtBirthdayDay.getText().toString(),
                     editTextBio.getText().toString());
         }else{
-            Toast.makeText(PerfilEdit.this, "Preencha ao menos o nome de usuário", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PerfilEdit.this, "Preencha ao menos o nome de usuário e data de nascimento", Toast.LENGTH_SHORT).show();
         }
     }
 
