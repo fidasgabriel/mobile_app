@@ -3,11 +3,7 @@ package com.example.culturallis.View.Navbar;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.UnderlineSpan;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +34,6 @@ public class CourseScreen extends AppCompatActivity {
 
     CourseAdapter courseAdapter;
     LoadingSettings loadingDialog;
-    Usuario currentUser;
     UserDAO userDAO = new UserDAO(this);
 
     Boolean hasCpf = false;
@@ -52,19 +47,9 @@ public class CourseScreen extends AppCompatActivity {
 
         UserDAO userDAO = new UserDAO(this);
 
-        SpannableString underline = new SpannableString("Carregar mais");
-        UnderlineSpan underlineSpan = new UnderlineSpan();
-        underline.setSpan(underlineSpan, 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        TextView linkLogon = findViewById(R.id.linkCarregar);
-        linkLogon.setText(underline);
-
         try {
-            loadingDialog = new LoadingSettings(this);
-            loadingDialog.show();
             String currentEmail = userDAO.getCurrentEmail();
             new CourseScreen.GetUserCpf().execute(currentEmail);
-            new CourseScreen.GetCoursesRandonly().execute(currentEmail);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,13 +64,6 @@ public class CourseScreen extends AppCompatActivity {
                         Toast.makeText(CourseScreen.this, "Para criar um curso é necessário cadastrar um CPF/CNPJ", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-        });
-
-        linkLogon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Colocar aqui a lógica para carregar mais 5 cards
             }
         });
 
@@ -106,16 +84,11 @@ public class CourseScreen extends AppCompatActivity {
 
         courseAdapter = new CourseAdapter(this);
 
-        courseAdapter.setData(listCourseC, true);
-        rv.setAdapter(courseAdapter);
-
         try {
             loadingDialog = new LoadingSettings(this);
             loadingDialog.show();
-            currentUser = new Usuario();
             String currentEmail = userDAO.getCurrentEmail();
-            currentUser.setEmail(currentEmail);
-            new CourseScreen.GetCoursesRandonly().execute(currentUser.getEmail());
+            new CourseScreen.GetCoursesRandonly().execute(currentEmail);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,7 +98,6 @@ public class CourseScreen extends AppCompatActivity {
         @Override
         protected List<CoursesHome> doInBackground(String... params) {
             if (params.length == 1) {
-
                 String email = params[0];
 
                 try {
@@ -146,15 +118,16 @@ public class CourseScreen extends AppCompatActivity {
             if (courseCards != null) {
                 for(CoursesHome crhm : courseCards){
                     listCourseC.add(new CourseCard(crhm.getPk_id(), crhm.getPostsOwnerFoto(), crhm.getUrl_midia(), crhm.getTitulo(), crhm.getPostsOwnerName(), crhm.getNumCursados(), crhm.getCurtido(), crhm.isAdquiriu()));
-                    courseAdapter.notifyDataSetChanged();
                 }
+
+                courseAdapter.setData(listCourseC, true);
+                rv.setAdapter(courseAdapter);
             }else{
                 startActivity(new Intent(CourseScreen.this, SkeletonBlank.class));
                 Toast.makeText(CourseScreen.this, "Ocorreu um erro ao pegar os cursos", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
     public void resetRV(){
         finish();
         startActivity(getIntent());
